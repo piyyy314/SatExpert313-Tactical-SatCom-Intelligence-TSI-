@@ -62,6 +62,7 @@ import { RemoteAccessTerminal } from './components/RemoteAccessTerminal.tsx';
 import { Sentinel } from './components/Sentinel.tsx';
 import { Infrastructure } from './components/Infrastructure.tsx';
 import { MaritimeFireMonitor } from './components/MaritimeFireMonitor.tsx';
+import { ModuleExportToolbar } from './components/ModuleExportToolbar.tsx';
 import { HormuzFireAlert } from './components/TacticalHUD.tsx';
 import { audioController } from './services/audioService.ts';
 import { calculateLookAngles } from './utils/geoUtils.ts';
@@ -614,18 +615,40 @@ export const App: React.FC = () => {
               <span>AZ: <strong className="text-slate-200">{lookAngles ? `${lookAngles.azimuth}°` : '--'}</strong></span>
               <span className="text-slate-700">|</span>
               <span>LINK: <strong className={telemetry.status === 'NOMINAL' ? 'text-emerald-400' : 'text-amber-400'}>{telemetry.status}</strong></span>
+              
+              <div className="ml-1 border-l border-slate-800 pl-2 hidden md:block">
+                <ModuleExportToolbar 
+                  compact={true}
+                  moduleTitle={view.replace(/_/g, ' ').toUpperCase()}
+                  moduleSubtitle={`Category: ${currentCategoryObj.name} | Node: ${selectedSat.name} (${selectedSat.orbitalSlot})`}
+                  classification={isStealthMode ? 'TOP SECRET // NOFORN' : 'SECRET // REL TO NATO'}
+                  metadata={{
+                    'Target Orbital Node': `${selectedSat.name} (${selectedSat.orbitalSlot})`,
+                    'Ground Terminal Loc': `${userLoc.lat.toFixed(4)}°N, ${userLoc.lng.toFixed(4)}°E`,
+                    'DEFCON Readiness': defcon,
+                    'Telemetry State': telemetry.status,
+                    'SNR Ratio': `${telemetry.snr} dB`,
+                    'Rx Signal Power': `${telemetry.rxPower} dBW`,
+                    'Atmospheric Attenuation': weather,
+                    'Stealth Low-Observable': isStealthMode ? 'Active' : 'Offline',
+                    'RF Jamming Countermeasure': isJamming ? `Engaged (${jammingPower}%)` : 'Inactive'
+                  }}
+                  summaryText={`Tactical C2 operational brief extracted for ${view.replace(/_/g, ' ')} module viewport under DEFCON ${defcon} readiness status.`}
+                />
+              </div>
+
               <button
                 onClick={() => setIsReportModalOpen(true)}
-                className="ml-2 text-[9px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition-colors flex items-center space-x-1"
-                title="Export Tactical Report as PDF"
+                className="ml-1 text-[9px] uppercase font-mono px-2 py-1 rounded bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition-colors flex items-center space-x-1"
+                title="Full Classified PDF Dossier"
               >
                 <FileText className="w-2.5 h-2.5 text-cyan-400" />
-                <span>Export PDF</span>
+                <span>Full PDF Dossier</span>
               </button>
               {view !== 'tactical' && (
                 <button
                   onClick={() => setView('tactical')}
-                  className="ml-2 text-[9px] uppercase font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-400 hover:bg-cyan-500 hover:text-slate-950 transition-colors"
+                  className="ml-1 text-[9px] uppercase font-mono px-2 py-1 rounded bg-slate-900 border border-slate-800 text-cyan-400 hover:bg-cyan-500 hover:text-slate-950 transition-colors"
                 >
                   Return to Base
                 </button>

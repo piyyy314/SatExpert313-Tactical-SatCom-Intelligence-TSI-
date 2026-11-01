@@ -5,11 +5,10 @@ import {
 } from 'lucide-react';
 import { Coordinates, LookAngles, Satellite, TacticalEvent, WeatherCondition } from '../types.ts';
 import { 
-  exportTacticalReportPDF, 
-  generateTacticalReport, 
+  exportService, 
   formatCoordinates, 
   ReportClassification 
-} from '../utils/tacticalReportGenerator.ts';
+} from '../services/exportService.ts';
 import { audioController } from '../services/audioService.ts';
 
 interface TacticalReportModalProps {
@@ -65,7 +64,7 @@ export const TacticalReportModal: React.FC<TacticalReportModalProps> = ({
     setIsExporting(true);
     try {
       audioController.playBeep(880, 0.08); // tactical chirp
-      const { filename } = exportTacticalReportPDF({
+      const { filename } = exportService.exportTacticalReportPDF({
         classification,
         defcon,
         isStealthMode,
@@ -97,7 +96,7 @@ export const TacticalReportModal: React.FC<TacticalReportModalProps> = ({
   const handlePrintPDF = () => {
     try {
       audioController.playBeep(660, 0.08);
-      const doc = generateTacticalReport({
+      const doc = exportService.generateTacticalReport({
         classification,
         defcon,
         isStealthMode,

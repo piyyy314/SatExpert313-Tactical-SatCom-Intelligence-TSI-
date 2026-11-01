@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Target, RefreshCw, Radio, Zap, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { ModuleExportToolbar } from './ModuleExportToolbar.tsx';
 
 interface ThreatVector {
   id: string;
@@ -141,6 +142,28 @@ export const AegisC2: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Module Export Toolbar */}
+      <ModuleExportToolbar
+        moduleTitle="AEGIS AIR SHIELD & C2 DEFENSE GRID"
+        moduleSubtitle="Space-Assisted Interceptor Tracking & Air Shield Grid"
+        classification="TOP SECRET // NOFORN"
+        metadata={{
+          'Aegis Shield State': shieldActive ? 'ACTIVE_LOCKED' : 'INACTIVE',
+          'Tracked Ballistic Vectors': threats.length,
+          'Active Interceptors': 'SM-3 Block IIA / THAAD System Link'
+        }}
+        summaryText="Space-Assisted C2 ballistic threat tracking matrix. Real-time intercept telemetry verified."
+        columns={[
+          { header: 'Threat ID', key: 'source' },
+          { header: 'Altitude (km)', key: 'altitude' },
+          { header: 'Speed (Mach)', key: 'speed' },
+          { header: 'Impact ETA (s)', key: 'impactEta' },
+          { header: 'Status', key: 'status' }
+        ]}
+        rows={threats}
+        filenamePrefix="Aegis_C2_Air_Shield"
+      />
     </div>
   );
 };

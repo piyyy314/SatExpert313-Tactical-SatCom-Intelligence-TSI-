@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Target, ShieldCheck, Cpu, Play, Pause, RefreshCw, KeyRound, Wifi, Radio } from 'lucide-react';
+import { ModuleExportToolbar } from './ModuleExportToolbar.tsx';
 
 interface DroneUnit {
   id: string;
@@ -161,6 +162,28 @@ export const DroneSwarmCommand: React.FC<SwarmProps> = ({ addMissionLog }) => {
         </div>
 
       </div>
+
+      {/* Module Export Toolbar */}
+      <ModuleExportToolbar
+        moduleTitle="DRONE SWARM MESH COMMAND"
+        moduleSubtitle="Quadcopter Mesh Network & Telemetry Matrix"
+        classification="TOP SECRET // NOFORN"
+        metadata={{
+          'Swarm Operational Mode': swarmMode,
+          'Active Quadcopters': drones.length,
+          'Mesh Frequency': '2.485 GHz ISM / Sat-Relay Link'
+        }}
+        summaryText="Autonomous drone swarm mesh telemetry. Real-time signal strength, battery levels, and flight vector positions logged."
+        columns={[
+          { header: 'Drone Name', key: 'name' },
+          { header: 'Battery (%)', key: 'battery' },
+          { header: 'Altitude (m)', key: 'altitude' },
+          { header: 'Signal (dBm)', key: 'signalStrength' },
+          { header: 'Status', key: 'status' }
+        ]}
+        rows={drones}
+        filenamePrefix="Drone_Swarm_Mesh"
+      />
     </div>
   );
 };

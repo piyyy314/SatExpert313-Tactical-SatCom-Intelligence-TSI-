@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Shield, Radio, KeyRound, RefreshCw, AlertTriangle, Play, Pause, FastForward } from 'lucide-react';
+import { ModuleExportToolbar } from './ModuleExportToolbar.tsx';
 
 interface ElectronicWarfareProps {
   isStealthMode: boolean;
@@ -193,6 +194,21 @@ export const ElectronicWarfare: React.FC<ElectronicWarfareProps> = ({
         </div>
 
       </div>
+
+      {/* Module Export Toolbar */}
+      <ModuleExportToolbar
+        moduleTitle="ELECTRONIC WARFARE & ECCM SPECTRUM CMD"
+        moduleSubtitle="RF Jamming, Carrier Sweep & Countermeasure Matrix"
+        classification="SECRET // REL TO NATO"
+        metadata={{
+          'RF Intrusion Jamming': isJamming ? `ENGAGED (${jammingPower} mW/MHz)` : 'OFFLINE',
+          'Carrier Sweep Center': `${carrierSweep} GHz`,
+          'Pulse Width Interval': `${pulseWidth} µs`,
+          'Stealth Emission Grid': isStealthMode ? 'ACTIVE' : 'NORMAL'
+        }}
+        summaryText="Electronic Warfare & ECCM spectrum telemetry. Noise injection power density and carrier sweep metrics recorded."
+        filenamePrefix="Electronic_Warfare_ECCM"
+      />
     </div>
   );
 };
