@@ -22,7 +22,9 @@ interface AITechnicianProps {
   isNeuralCleaning: boolean;
   onToggleNeuralCleaning: () => void;
   isDecoyActive: boolean;
+  onToggleDecoy: () => void;
   isZPEActive: boolean;
+  onToggleZPE: () => void;
 }
 
 interface Message {
@@ -40,7 +42,9 @@ export const AITechnician: React.FC<AITechnicianProps> = ({
   isNeuralCleaning,
   onToggleNeuralCleaning,
   isDecoyActive,
-  isZPEActive
+  onToggleDecoy,
+  isZPEActive,
+  onToggleZPE
 }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -371,10 +375,10 @@ If Stealth Mode is active, prepend your responses with "[ENC_MASKED] Tactical si
   };
 
   return (
-    <div className={`flex flex-col h-full rounded-[24px] border-2 transition-all duration-300 relative overflow-hidden ${
+    <div className={`flex flex-col rounded-[24px] border-2 transition-all duration-300 relative overflow-hidden shadow-2xl ${
       isStealthMode 
         ? 'bg-black/95 border-purple-900/50 shadow-[0_0_40px_rgba(147,51,234,0.1)]' 
-        : 'bg-slate-950/90 border-slate-800 shadow-2xl'
+        : 'bg-slate-950/90 border-slate-800'
     }`}>
       {/* Visual scanning line for tactical vibe */}
       <div className={`absolute top-0 left-0 w-full h-[2px] opacity-10 pointer-events-none z-10 animate-scan ${
@@ -524,7 +528,7 @@ If Stealth Mode is active, prepend your responses with "[ENC_MASKED] Tactical si
       {/* Scrollable Conversation Terminal */}
       <div 
         ref={scrollRef}
-        className="flex-grow overflow-y-auto p-4 space-y-4 min-h-[300px] max-h-[480px] scrollbar-thin"
+        className="flex-1 overflow-y-auto p-4 space-y-3.5 min-h-[300px] max-h-[460px] scrollbar-thin"
       >
         {messages.map((msg) => (
           <div 
@@ -604,57 +608,69 @@ If Stealth Mode is active, prepend your responses with "[ENC_MASKED] Tactical si
 
       {/* Hardware Overclocking Quick Action Controls */}
       <div className={`p-3.5 border-t grid grid-cols-1 md:grid-cols-3 gap-3 ${
-        isStealthMode ? 'border-purple-950 bg-purple-950/5' : 'border-slate-800 bg-slate-900/10'
+        isStealthMode ? 'border-purple-950 bg-purple-950/10' : 'border-slate-800 bg-slate-900/40'
       }`}>
-        <div className="flex flex-col space-y-2">
+        {/* Tool 1: Neural Cleanup Filter */}
+        <div className="flex flex-col space-y-2 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/60">
           <div className="flex items-center justify-between">
-            <span className="text-[8px] font-black text-slate-500 uppercase tracking-wider">Neural Cleanup Filter</span>
+            <span className="text-[8px] font-black text-slate-400 uppercase tracking-wider">Neural Cleanup Filter</span>
             <span className={`text-[8px] font-mono font-bold ${isNeuralCleaning ? 'text-emerald-400' : 'text-slate-500'}`}>
-              {isNeuralCleaning ? "ACTIVE" : "STANDBY"}
+              {isNeuralCleaning ? "ACTIVE [+4.5dB]" : "STANDBY"}
             </span>
           </div>
           <button 
+            type="button"
             onClick={onToggleNeuralCleaning}
-            className={`w-full py-1.5 rounded-lg text-[9px] font-mono font-black border transition-all ${
+            className={`w-full py-2 px-2 rounded-lg text-[8.5px] font-mono font-black border transition-all active:scale-95 ${
               isNeuralCleaning 
-                ? 'bg-emerald-950/60 border-emerald-500 text-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.15)]' 
-                : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-emerald-950/70 border-emerald-500 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.25)]' 
+                : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
             }`}
           >
-            {isNeuralCleaning ? "SHUTDOWN_FILTER [-4.5dB]" : "ENGAGE_NEURAL_FILTER [+4.5dB]"}
+            {isNeuralCleaning ? "DISENGAGE_FILTER [-4.5dB]" : "ENGAGE_NEURAL_FILTER [+4.5dB]"}
           </button>
         </div>
 
-        <div className="flex flex-col space-y-2">
+        {/* Tool 2: Decoy Broadcaster */}
+        <div className="flex flex-col space-y-2 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/60">
           <div className="flex items-center justify-between">
-            <span className="text-[8px] font-black text-slate-500 uppercase tracking-wider">Decoy Broadcaster</span>
-            <span className={`text-[8px] font-mono font-bold ${isDecoyActive ? 'text-purple-400' : 'text-slate-500'}`}>
-              {isDecoyActive ? "DEPLOYED" : "OFFLINE"}
+            <span className="text-[8px] font-black text-slate-400 uppercase tracking-wider">Decoy Broadcaster</span>
+            <span className={`text-[8px] font-mono font-bold ${isDecoyActive ? 'text-purple-400 animate-pulse' : 'text-slate-500'}`}>
+              {isDecoyActive ? "TRANSMITTING" : "OFFLINE"}
             </span>
           </div>
-          <div className={`w-full text-center py-1.5 rounded-lg text-[9px] font-mono font-black border select-none ${
-            isDecoyActive 
-              ? 'bg-purple-950/60 border-purple-500 text-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.15)] animate-pulse' 
-              : 'bg-slate-900/40 border-slate-800/40 text-slate-600'
-          }`}>
-            {isDecoyActive ? "DECOY ACTIVE" : "DECOY ON STANDBY"}
-          </div>
+          <button 
+            type="button"
+            onClick={onToggleDecoy}
+            className={`w-full py-2 px-2 rounded-lg text-[8.5px] font-mono font-black border transition-all active:scale-95 ${
+              isDecoyActive 
+                ? 'bg-purple-950/70 border-purple-500 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.3)] animate-pulse' 
+                : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
+            }`}
+          >
+            {isDecoyActive ? "TERMINATE_DECOY" : "DEPLOY_RF_DECOYS"}
+          </button>
         </div>
 
-        <div className="flex flex-col space-y-2">
+        {/* Tool 3: Zero-Point Energy */}
+        <div className="flex flex-col space-y-2 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/60">
           <div className="flex items-center justify-between">
-            <span className="text-[8px] font-black text-slate-500 uppercase tracking-wider">Zero-Point energy</span>
+            <span className="text-[8px] font-black text-slate-400 uppercase tracking-wider">Zero-Point energy</span>
             <span className={`text-[8px] font-mono font-bold ${isZPEActive ? 'text-cyan-400' : 'text-slate-500'}`}>
               {isZPEActive ? "ENGAGED" : "OFFLINE"}
             </span>
           </div>
-          <div className={`w-full text-center py-1.5 rounded-lg text-[9px] font-mono font-black border select-none ${
-            isZPEActive 
-              ? 'bg-cyan-950/60 border-cyan-500 text-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.15)]' 
-              : 'bg-slate-900/40 border-slate-800/40 text-slate-600'
-          }`}>
-            {isZPEActive ? "ZPE GROUNDING ENGAGED" : "ZPE DISENGAGED"}
-          </div>
+          <button 
+            type="button"
+            onClick={onToggleZPE}
+            className={`w-full py-2 px-2 rounded-lg text-[8.5px] font-mono font-black border transition-all active:scale-95 ${
+              isZPEActive 
+                ? 'bg-cyan-950/70 border-cyan-500 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.3)]' 
+                : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
+            }`}
+          >
+            {isZPEActive ? "DISENGAGE_ZPE" : "ENGAGE_ZPE_GROUNDING"}
+          </button>
         </div>
       </div>
 

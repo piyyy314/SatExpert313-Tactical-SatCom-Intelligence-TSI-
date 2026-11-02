@@ -703,63 +703,52 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                   onMouseEnter={() => setHoveredHeatItem({ type: 'fire', data: fire })}
                   onMouseLeave={() => setHoveredHeatItem(null)}
                 >
-                  {/* Maritime Thermal Dispersion Ocean Bloom */}
+                  {/* Clean Tactical Maritime Position Ring (Flare Removed, Alert Kept) */}
                   <circle 
                     cx={svgPos.x} 
                     cy={svgPos.y} 
-                    r={heatRadius * 1.3} 
-                    fill="url(#maritime-ship-glow)" 
-                    className="animate-pulse"
-                    style={{ transformOrigin: `${svgPos.x}px ${svgPos.y}px` }}
+                    r={0.9 * zoomScale} 
+                    fill="#0284c7" 
+                    fillOpacity="0.25"
+                    stroke={isSelected || isHovered ? "#38bdf8" : "#0284c7"} 
+                    strokeWidth={0.12 * zoomScale}
                   />
 
-                  {/* Pulsing nautical ring */}
-                  <circle 
-                    cx={svgPos.x} 
-                    cy={svgPos.y} 
-                    r={heatRadius * (isSelected || isHovered ? 1.6 : 1.3)} 
-                    fill="none" 
-                    stroke="#0284c7" 
-                    strokeWidth={strokeW} 
-                    strokeDasharray={`${0.6 * zoomScale},${0.4 * zoomScale}`}
-                    className="animate-spin-slow"
-                    style={{ transformOrigin: `${svgPos.x}px ${svgPos.y}px` }}
-                  />
-
-                  {/* Ship Vessel Diamond Center Point */}
+                  {/* Clean Tactical Diamond Center Point */}
                   <polygon 
                     points={`${svgPos.x},${svgPos.y - diamondSize} ${svgPos.x + diamondSize * 0.8},${svgPos.y} ${svgPos.x},${svgPos.y + diamondSize} ${svgPos.x - diamondSize * 0.8},${svgPos.y}`} 
-                    fill="#38bdf8" 
+                    fill={isSelected || isHovered ? "#38bdf8" : "#0284c7"} 
                     stroke="#ffffff" 
                     strokeWidth={0.08 * zoomScale} 
                   />
                   <circle cx={svgPos.x} cy={svgPos.y} r={0.25 * zoomScale} fill="#fef08a" />
 
-                  {/* Ship Name & FRP Label */}
-                  <text 
-                    x={svgPos.x} 
-                    y={svgPos.y + heatRadius + fontSize * 1.05} 
-                    textAnchor="middle" 
-                    fill="#38bdf8" 
-                    fontSize={fontSize} 
-                    fontWeight="bold"
-                    fontFamily="monospace"
-                    className="pointer-events-none select-none drop-shadow"
-                  >
-                    🚢 {fire.vesselDetails?.vesselName.split(' ')[0] || 'VESSEL'} [{fire.frp}MW]
-                  </text>
-                  {theaterView !== 'GLOBAL' && fire.vesselDetails && (
-                    <text 
-                      x={svgPos.x} 
-                      y={svgPos.y + heatRadius + fontSize * 2.1} 
-                      textAnchor="middle" 
-                      fill="#bae6fd" 
-                      fontSize={fontSize * 0.78} 
-                      fontFamily="monospace"
-                      className="pointer-events-none select-none drop-shadow"
-                    >
-                      MMSI: {fire.vesselDetails.mmsi || 'N/A'} • {fire.confidence}% Conf
-                    </text>
+                  {/* Ship Name & FRP Label (Only shown on hover, selection, or chokepoint zoom to prevent clutter) */}
+                  {(isSelected || isHovered || theaterView === 'HORMUZ_CHOKEPOINT') && (
+                    <g className="pointer-events-none select-none">
+                      <rect
+                        x={svgPos.x - (3.8 * zoomScale)}
+                        y={svgPos.y + diamondSize + (0.3 * zoomScale)}
+                        width={7.6 * zoomScale}
+                        height={fontSize * 1.5}
+                        fill="#020617"
+                        fillOpacity="0.9"
+                        stroke="#0284c7"
+                        strokeWidth={0.06 * zoomScale}
+                        rx={0.3 * zoomScale}
+                      />
+                      <text 
+                        x={svgPos.x} 
+                        y={svgPos.y + diamondSize + fontSize * 1.15} 
+                        textAnchor="middle" 
+                        fill="#38bdf8" 
+                        fontSize={fontSize * 0.95} 
+                        fontWeight="bold"
+                        fontFamily="monospace"
+                      >
+                        🚢 {fire.vesselDetails?.vesselName.split(' ')[0] || 'VESSEL'} [{fire.frp}MW]
+                      </text>
+                    </g>
                   )}
                 </g>
               );
@@ -798,30 +787,32 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                 <circle cx={svgPos.x} cy={svgPos.y} r={0.35 * zoomScale} fill="#ffffff" />
                 <circle cx={svgPos.x} cy={svgPos.y} r={0.2 * zoomScale} fill="#fef08a" />
 
-                <text 
-                  x={svgPos.x} 
-                  y={svgPos.y + heatRadius + fontSize * 1.05} 
-                  textAnchor="middle" 
-                  fill="#fbbf24" 
-                  fontSize={fontSize} 
-                  fontWeight="bold"
-                  fontFamily="monospace"
-                  className="pointer-events-none select-none drop-shadow"
-                >
-                  🔥 {fire.name.split('-')[0].trim().slice(0, 16)} [{fire.frp}MW]
-                </text>
-                {theaterView !== 'GLOBAL' && (
-                  <text 
-                    x={svgPos.x} 
-                    y={svgPos.y + heatRadius + fontSize * 2.1} 
-                    textAnchor="middle" 
-                    fill="#fde68a" 
-                    fontSize={fontSize * 0.78} 
-                    fontFamily="monospace"
-                    className="pointer-events-none select-none drop-shadow"
-                  >
-                    {fire.countryOrWaterBody.split('(')[0].trim()} ({fire.landFacilityDetails?.facilityType?.slice(0, 16) || 'Flare'})
-                  </text>
+                {/* Land Fire Label (Only shown on hover or selection to prevent overlapping cluster clutter) */}
+                {(isSelected || isHovered) && (
+                  <g className="pointer-events-none select-none">
+                    <rect
+                      x={svgPos.x - (4.2 * zoomScale)}
+                      y={svgPos.y + heatRadius + (0.3 * zoomScale)}
+                      width={8.4 * zoomScale}
+                      height={fontSize * 1.5}
+                      fill="#020617"
+                      fillOpacity="0.9"
+                      stroke="#f97316"
+                      strokeWidth={0.06 * zoomScale}
+                      rx={0.3 * zoomScale}
+                    />
+                    <text 
+                      x={svgPos.x} 
+                      y={svgPos.y + heatRadius + fontSize * 1.15} 
+                      textAnchor="middle" 
+                      fill="#fbbf24" 
+                      fontSize={fontSize * 0.95} 
+                      fontWeight="bold"
+                      fontFamily="monospace"
+                    >
+                      🔥 {fire.name.split('-')[0].trim().slice(0, 14)} [{fire.frp}MW]
+                    </text>
+                  </g>
                 )}
               </g>
             );
@@ -858,18 +849,34 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                 <line x1={svgPos.x - 0.7 * zoomScale} y1={svgPos.y} x2={svgPos.x + 0.7 * zoomScale} y2={svgPos.y} stroke="#f87171" strokeWidth={0.12 * zoomScale} />
                 <line x1={svgPos.x} y1={svgPos.y - 0.7 * zoomScale} x2={svgPos.x} y2={svgPos.y + 0.7 * zoomScale} stroke="#f87171" strokeWidth={0.12 * zoomScale} />
                 <circle cx={svgPos.x} cy={svgPos.y} r={0.35 * zoomScale} fill="#ef4444" />
-                <text 
-                  x={svgPos.x} 
-                  y={svgPos.y - c2Radius - 0.5 * zoomScale} 
-                  textAnchor="middle" 
-                  fill="#fca5a5" 
-                  fontSize={fontSize} 
-                  fontWeight="bold"
-                  fontFamily="monospace"
-                  className="pointer-events-none select-none drop-shadow"
-                >
-                  ⚡ {c2.malwareFamily.split(' ')[0]}
-                </text>
+                
+                {/* C2 Node Label (Only on hover or select) */}
+                {(isSelected || isHovered) && (
+                  <g className="pointer-events-none select-none">
+                    <rect
+                      x={svgPos.x - (3.5 * zoomScale)}
+                      y={svgPos.y - c2Radius - (fontSize * 1.6)}
+                      width={7.0 * zoomScale}
+                      height={fontSize * 1.4}
+                      fill="#020617"
+                      fillOpacity="0.9"
+                      stroke="#ef4444"
+                      strokeWidth={0.06 * zoomScale}
+                      rx={0.3 * zoomScale}
+                    />
+                    <text 
+                      x={svgPos.x} 
+                      y={svgPos.y - c2Radius - (fontSize * 0.4)} 
+                      textAnchor="middle" 
+                      fill="#fca5a5" 
+                      fontSize={fontSize * 0.95} 
+                      fontWeight="bold"
+                      fontFamily="monospace"
+                    >
+                      ⚡ {c2.malwareFamily.split(' ')[0]}
+                    </text>
+                  </g>
+                )}
               </g>
             );
           })}
@@ -936,11 +943,11 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
         </svg>
 
         {/* Floating telemetry, slot, & Heatmap Legend */}
-        <div className="absolute left-2.5 bottom-2.5 pointer-events-none font-mono text-[7px] text-slate-400 uppercase space-y-0.5 z-20">
-          <div>SAT STRAW SLOT: {satellite.orbitalSlot}</div>
-          <div>EST_RADIAL: {(Math.abs(userLoc.lng - satellite.longitude)).toFixed(1)}° Offset</div>
+        <div className="absolute left-2.5 bottom-2.5 pointer-events-none font-mono text-[7px] text-slate-300 uppercase space-y-0.5 z-20 bg-slate-950/85 backdrop-blur-sm border border-slate-800/80 px-2 py-1.5 rounded-xl shadow-lg">
+          <div className="text-cyan-400 font-bold">SAT ORBITAL SLOT: {satellite.orbitalSlot}</div>
+          <div className="text-slate-400">EST_RADIAL: {(Math.abs(userLoc.lng - satellite.longitude)).toFixed(1)}° Offset</div>
           {isHeatmapEnabled && (
-            <div className="flex items-center space-x-2 text-cyan-300 font-bold pt-0.5">
+            <div className="flex items-center space-x-2 text-cyan-300 font-bold pt-0.5 border-t border-slate-800/60 mt-1">
               <span>NASA FIRMS: {HORMUZ_MARITIME_FIRES.length} HORMUZ SHIPS</span>
               <span>•</span>
               <span className="text-amber-400">{MIDDLE_EAST_LAND_FIRES.length} MIDEAST LAND</span>

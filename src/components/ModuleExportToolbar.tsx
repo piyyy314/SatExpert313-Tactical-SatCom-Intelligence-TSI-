@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FileText, FileSpreadsheet, Download, Check, FileCheck, Layers } from 'lucide-react';
-import { exportService, ModuleExportColumn } from '../services/exportService.ts';
+import { exportService, exportToPDF, ModuleExportColumn } from '../services/exportService.ts';
 import { audioController } from '../services/audioService.ts';
 
 interface ModuleExportToolbarProps {
@@ -30,7 +30,7 @@ export const ModuleExportToolbar: React.FC<ModuleExportToolbarProps> = ({
 
   const handleExportPDF = () => {
     audioController.playBeep(880, 0.08);
-    const filename = exportService.exportModulePDF({
+    const filename = exportToPDF({
       moduleTitle,
       moduleSubtitle,
       classification,

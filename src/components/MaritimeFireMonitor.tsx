@@ -659,24 +659,15 @@ export const MaritimeFireMonitor: React.FC<MaritimeFireMonitorProps> = ({
                         onMouseEnter={() => setHoveredEntity({ type: 'fire', data: fire })}
                         onMouseLeave={() => setHoveredEntity(null)}
                       >
-                        {/* Thermal Emission Dispersion Gradient */}
+                        {/* Clean Tactical Fire Position Boundary (Flare Removed) */}
                         <circle
                           cx={x}
                           cy={y}
-                          r={radius}
-                          fill="url(#vessel-fire-bloom)"
-                          className="animate-pulse"
-                        />
-                        {/* Concentric Flame Pulse Ring */}
-                        <circle
-                          cx={x}
-                          cy={y}
-                          r={radius * (isSelected ? 1.5 : 1.2)}
-                          fill="none"
+                          r={1.5}
+                          fill={isMaritime ? '#ef4444' : '#f97316'}
+                          fillOpacity={isSelected ? "0.4" : "0.2"}
                           stroke={isMaritime ? '#ef4444' : '#f97316'}
-                          strokeWidth="0.3"
-                          strokeDasharray="0.8,0.8"
-                          className="animate-spin-slow"
+                          strokeWidth="0.25"
                         />
                         {/* Core hotspot center point */}
                         <circle

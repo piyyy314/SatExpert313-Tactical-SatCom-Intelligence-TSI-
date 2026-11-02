@@ -62,6 +62,7 @@ import { RemoteAccessTerminal } from './components/RemoteAccessTerminal.tsx';
 import { Sentinel } from './components/Sentinel.tsx';
 import { Infrastructure } from './components/Infrastructure.tsx';
 import { MaritimeFireMonitor } from './components/MaritimeFireMonitor.tsx';
+import { ThreatHeatmap } from './components/ThreatHeatmap.tsx';
 import { ModuleExportToolbar } from './components/ModuleExportToolbar.tsx';
 import { HormuzFireAlert } from './components/TacticalHUD.tsx';
 import { audioController } from './services/audioService.ts';
@@ -223,8 +224,15 @@ export const App: React.FC = () => {
       packetLoss *= 0.2;
     }
     
+    if (isDecoyActive && isJamming) {
+      // Decoy broadcaster radiates phantom transponders, attenuating hostile EW jamming impact
+      snr += (jammingPower / 8);
+      packetLoss *= 0.5;
+    }
+
     if (isZPEActive) {
-      bucTemp -= 42.0;
+      bucTemp = Math.max(32.0, bucTemp - 14.0);
+      snr += 1.8;
     }
     
     if (defcon <= 2) bucTemp += 8.0;
@@ -240,7 +248,7 @@ export const App: React.FC = () => {
       packetLoss: Math.min(100, packetLoss + (Math.random() * 0.2)).toFixed(2),
       status: snr > 10 ? "NOMINAL" : (snr > 4 ? "DEGRADED" : "CRITICAL")
     };
-  }, [weather, isJamming, jammingPower, defcon, isStealthMode, isNeuralCleaning]);
+  }, [weather, isJamming, jammingPower, defcon, isStealthMode, isNeuralCleaning, isDecoyActive, isZPEActive]);
 
   useEffect(() => {
     if (!process.env.GEMINI_API_KEY) {
@@ -314,8 +322,8 @@ export const App: React.FC = () => {
       id: 'TACTICAL_BASE',
       name: 'Tactical Base',
       icon: Orbit,
-      tagline: 'Look angles, constellation orbits, hardware specs & mesh',
-      views: ['tactical', 'constellation', 'satellite_detail', 'mesh', 'weather', 'geolocator'] as MainView[]
+      tagline: 'Look angles, constellation orbits, hardware specs, threat heatmap & mesh',
+      views: ['tactical', 'constellation', 'satellite_detail', 'threat_heatmap', 'mesh', 'weather', 'geolocator'] as MainView[]
     },
     { 
       id: 'SIGINT_SUITE',
@@ -658,57 +666,106 @@ export const App: React.FC = () => {
 
           <div className="min-h-[70vh]">
             {view === 'tactical' && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in slide-in-from-bottom-4">
-                <div className="lg:col-span-5 xl:col-span-4 space-y-6">
-                  <TacticalHUD 
-                    loc={userLoc} 
-                    sat={selectedSat} 
-                    satellites={satellites} 
-                    onLocChange={setUserLoc} 
-                    onSatChange={setSelectedSat} 
-                    onSatellitesUpdate={setSatellites} 
-                    isTracking={isTracking} 
-                    onTrackingChange={setIsTracking} 
-                    isJamming={isJamming} 
-                    setIsJamming={setIsJamming} 
-                    jammingPower={jammingPower} 
-                    setJammingPower={setJammingPower} 
-                    isDecoyActive={isDecoyActive}
-                    setIsDecoyActive={setIsDecoyActive}
-                    isZPEActive={isZPEActive}
-                    setIsZPEActive={setIsZPEActive}
-                    weather={weather} 
-                    setWeather={setWeather} 
-                    isStealthMode={isStealthMode}
-                    telemetry={telemetry} 
-                    eventLogs={eventLogs}
-                    setEventLogs={setEventLogs}
-                    hasNewLogs={hasNewLogs}
-                    setHasNewLogs={setHasNewLogs}
-                    hormuzFireAlert={hormuzFireAlert}
-                    onDismissHormuzAlert={() => setHormuzFireAlert(null)}
-                    onOpenMaritimeMonitor={() => setView('maritime_fire_monitor')}
-                    onFocusHormuzChokepoint={() => {
-                      setUserLoc({ lat: 26.50, lng: 56.40 });
-                      addMissionLog('OPERATOR ACTION: Focused ground station coordinates to Strait of Hormuz Chokepoint (26.50°N, 56.40°E)', 'INFO');
-                    }}
-                  />
-                  <TacticalMap 
-                    userLoc={userLoc} 
-                    satellite={selectedSat} 
-                    isTracking={isTracking} 
-                    isStealthMode={isStealthMode} 
-                    onLocChange={setUserLoc} 
-                    telemetry={telemetry}
-                    isJamming={isJamming}
-                    jammingPower={jammingPower}
-                    weather={weather}
-                    onSelectSatellite={setSelectedSat}
-                    onOpenC4ISR={() => setView('c4isr_terminal')}
-                    onOpenMaritimeMonitor={() => setView('maritime_fire_monitor')}
-                  />
-                  <div className="grid grid-cols-1 gap-6">
-                    <WeatherDashboard weather={weather} loc={userLoc} satName={selectedSat.name} />
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+                {/* 1. Master Command HUD across top */}
+                <TacticalHUD 
+                  loc={userLoc} 
+                  sat={selectedSat} 
+                  satellites={satellites} 
+                  onLocChange={setUserLoc} 
+                  onSatChange={setSelectedSat} 
+                  onSatellitesUpdate={setSatellites} 
+                  isTracking={isTracking} 
+                  onTrackingChange={setIsTracking} 
+                  isJamming={isJamming} 
+                  setIsJamming={setIsJamming} 
+                  jammingPower={jammingPower} 
+                  setJammingPower={setJammingPower} 
+                  isDecoyActive={isDecoyActive}
+                  setIsDecoyActive={setIsDecoyActive}
+                  isZPEActive={isZPEActive}
+                  setIsZPEActive={setIsZPEActive}
+                  weather={weather} 
+                  setWeather={setWeather} 
+                  isStealthMode={isStealthMode}
+                  telemetry={telemetry} 
+                  eventLogs={eventLogs}
+                  setEventLogs={setEventLogs}
+                  hasNewLogs={hasNewLogs}
+                  setHasNewLogs={setHasNewLogs}
+                  hormuzFireAlert={hormuzFireAlert}
+                  onDismissHormuzAlert={() => setHormuzFireAlert(null)}
+                  onOpenMaritimeMonitor={() => setView('maritime_fire_monitor')}
+                  onFocusHormuzChokepoint={() => {
+                    setUserLoc({ lat: 26.50, lng: 56.40 });
+                    addMissionLog('OPERATOR ACTION: Focused ground station coordinates to Strait of Hormuz Chokepoint (26.50°N, 56.40°E)', 'INFO');
+                  }}
+                />
+
+                {/* 2. Main Operational Workspace (Balanced 7 / 5 Grid) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                  {/* Primary Geospatial & RF Radar Column (Wide, Uncluttered) */}
+                  <div className="lg:col-span-7 xl:col-span-7 space-y-6">
+                    <TacticalMap 
+                      userLoc={userLoc} 
+                      satellite={selectedSat} 
+                      isTracking={isTracking} 
+                      isStealthMode={isStealthMode} 
+                      onLocChange={setUserLoc} 
+                      telemetry={telemetry}
+                      isJamming={isJamming}
+                      jammingPower={jammingPower}
+                      weather={weather}
+                      onSelectSatellite={setSelectedSat}
+                      onOpenC4ISR={() => setView('c4isr_terminal')}
+                      onOpenMaritimeMonitor={() => setView('maritime_fire_monitor')}
+                    />
+
+                    {/* RF Analysis & Positioning Instruments */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {lookAngles && <LookAngleCard angles={lookAngles} satellite={selectedSat} />}
+                      <SignalVisualizer 
+                        quality={lookAngles?.elevation && lookAngles.elevation > 0 ? 85 : 0} 
+                        isJamming={isJamming} 
+                        jammingPower={jammingPower} 
+                        rainFade={weather === 'CLEAR' ? 0.5 : 5.0} 
+                        isStealthMode={isStealthMode} 
+                        snr={telemetry.snr}
+                        packetLoss={telemetry.packetLoss}
+                        satelliteName={selectedSat.name}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Secondary AI C2 Technician & Telemetry Column */}
+                  <div className="lg:col-span-5 xl:col-span-5 space-y-6">
+                    <AITechnician 
+                      context={{ lat: userLoc.lat, lng: userLoc.lng, satName: selectedSat.name, defcon, weather, isJamming }} 
+                      telemetry={telemetry} 
+                      isStealthMode={isStealthMode}
+                      isNeuralCleaning={isNeuralCleaning}
+                      onToggleNeuralCleaning={() => {
+                        const next = !isNeuralCleaning;
+                        setIsNeuralCleaning(next);
+                        audioController.playBeep(next ? 880 : 440, 0.08);
+                        addMissionLog(`NEURAL_FILTER_${next ? 'ENGAGED' : 'STANDBY'}: +4.5dB gain filter ${next ? 'activated' : 'reverted'}.`, next ? 'success' : 'info');
+                      }}
+                      isDecoyActive={isDecoyActive}
+                      onToggleDecoy={() => {
+                        const next = !isDecoyActive;
+                        setIsDecoyActive(next);
+                        audioController.playBeep(next ? 960 : 380, 0.08);
+                        addMissionLog(`DECOY_BROADCASTER_${next ? 'DEPLOYED' : 'OFFLINE'}: Synthetic RF decoy transponders ${next ? 'radiating' : 'disabled'}.`, next ? 'warning' : 'info');
+                      }}
+                      isZPEActive={isZPEActive}
+                      onToggleZPE={() => {
+                        const next = !isZPEActive;
+                        setIsZPEActive(next);
+                        audioController.playBeep(next ? 1040 : 320, 0.08);
+                        addMissionLog(`ZERO_POINT_ENERGY_${next ? 'ENGAGED' : 'OFFLINE'}: Sub-harmonic quantum grounding ${next ? 'locked' : 'offline'}.`, next ? 'success' : 'info');
+                      }}
+                    />
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
                       <SitrepBoard 
                         selectedSatellite={selectedSat} 
@@ -717,29 +774,9 @@ export const App: React.FC = () => {
                       />
                       <QuantumEntropy />
                     </div>
+
+                    <WeatherDashboard weather={weather} loc={userLoc} satName={selectedSat.name} />
                   </div>
-                  {lookAngles && <LookAngleCard angles={lookAngles} satellite={selectedSat} />}
-                  <SignalVisualizer 
-                    quality={lookAngles?.elevation && lookAngles.elevation > 0 ? 85 : 0} 
-                    isJamming={isJamming} 
-                    jammingPower={jammingPower} 
-                    rainFade={weather === 'CLEAR' ? 0.5 : 5.0} 
-                    isStealthMode={isStealthMode} 
-                    snr={telemetry.snr}
-                    packetLoss={telemetry.packetLoss}
-                    satelliteName={selectedSat.name}
-                  />
-                </div>
-                <div className="lg:col-span-7 xl:col-span-8">
-                  <AITechnician 
-                    context={{ lat: userLoc.lat, lng: userLoc.lng, satName: selectedSat.name, defcon, weather, isJamming }} 
-                    telemetry={telemetry} 
-                    isStealthMode={isStealthMode}
-                    isNeuralCleaning={isNeuralCleaning}
-                    onToggleNeuralCleaning={() => setIsNeuralCleaning(!isNeuralCleaning)}
-                    isDecoyActive={isDecoyActive}
-                    isZPEActive={isZPEActive}
-                  />
                 </div>
               </div>
             )}
@@ -767,6 +804,16 @@ export const App: React.FC = () => {
                 isJamming={isJamming} 
                 jammingPower={jammingPower}
                 weather={weather}
+              />
+            )}
+
+            {view === 'threat_heatmap' && (
+              <ThreatHeatmap 
+                userLoc={userLoc}
+                selectedSatellite={selectedSat}
+                isStealthMode={isStealthMode}
+                onSelectCoordinates={setUserLoc}
+                onMissionLog={addMissionLog}
               />
             )}
 

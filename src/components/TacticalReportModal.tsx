@@ -114,12 +114,25 @@ export const TacticalReportModal: React.FC<TacticalReportModalProps> = ({
       });
       const blob = doc.output('blob');
       const blobUrl = URL.createObjectURL(blob);
-      const printWindow = window.open(blobUrl, '_blank');
-      if (printWindow) {
-        printWindow.focus();
-      }
+      const printIframe = document.createElement('iframe');
+      printIframe.style.position = 'fixed';
+      printIframe.style.right = '0';
+      printIframe.style.bottom = '0';
+      printIframe.style.width = '0';
+      printIframe.style.height = '0';
+      printIframe.style.border = '0';
+      printIframe.src = blobUrl;
+      document.body.appendChild(printIframe);
+      printIframe.onload = () => {
+        try {
+          printIframe.contentWindow?.focus();
+          printIframe.contentWindow?.print();
+        } catch {
+          doc.save(`TSI_Tactical_Report_${Date.now()}.pdf`);
+        }
+      };
       if (onMissionLog) {
-        onMissionLog(`TACTICAL_REPORT_PREVIEWED: Print stream opened for ${selectedSatellite.name}`, 'info');
+        onMissionLog(`TACTICAL_REPORT_PREVIEWED: Print stream initiated for ${selectedSatellite.name}`, 'info');
       }
     } catch (err) {
       console.error('Failed to preview/print report:', err);

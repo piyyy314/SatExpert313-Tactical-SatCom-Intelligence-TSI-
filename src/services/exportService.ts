@@ -97,7 +97,11 @@ class ExportService {
     const textMuted: [number, number, number] = [100, 116, 139];
 
     const drawPageHeadersAndFooters = () => {
-      const pageCount = (doc.internal as any).getNumberOfPages ? (doc.internal as any).getNumberOfPages() : 1;
+      const pageCount = typeof doc.getNumberOfPages === 'function' 
+        ? doc.getNumberOfPages() 
+        : (doc.internal as any).getNumberOfPages 
+          ? (doc.internal as any).getNumberOfPages() 
+          : 1;
       for (let i = 1; i <= pageCount; i++) {
         doc.setPage(i);
 
@@ -548,7 +552,11 @@ class ExportService {
       });
     }
 
-    const pageCount = (doc.internal as any).getNumberOfPages ? (doc.internal as any).getNumberOfPages() : 1;
+    const pageCount = typeof doc.getNumberOfPages === 'function'
+      ? doc.getNumberOfPages()
+      : (doc.internal as any).getNumberOfPages 
+        ? (doc.internal as any).getNumberOfPages() 
+        : 1;
     for (let i = 1; i <= pageCount; i++) {
       doc.setPage(i);
 
@@ -705,6 +713,13 @@ class ExportService {
   }
 
   /**
+   * Generic 'Export to PDF' function utilized across all app modules
+   */
+  public exportToPDF(data: ModuleExportData): string {
+    return this.exportModulePDF(data);
+  }
+
+  /**
    * Safe helper for triggering Blob file downloads
    */
   private triggerBlobDownload(blob: Blob, filename: string): void {
@@ -727,3 +742,10 @@ class ExportService {
 }
 
 export const exportService = new ExportService();
+
+/**
+ * Generic 'Export to PDF' function utilized by ModuleExportToolbar across all app modules
+ */
+export function exportToPDF(data: ModuleExportData): string {
+  return exportService.exportToPDF(data);
+}
