@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import type { Request, Response } from 'express';
 import cors from 'cors';
 import http from 'http';
 import path from 'path';
@@ -227,7 +228,7 @@ async function startServer() {
   } else {
     const distPath = path.resolve(__dirname, 'dist');
     app.use(express.static(distPath));
-    app.get('*', (req: Request, res: Response) => {
+    app.use((req: Request, res: Response) => {
       res.sendFile(path.resolve(distPath, 'index.html'));
     });
     console.log(`[SatExpert TSI] Serving production static files from ${distPath}`);
