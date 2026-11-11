@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Send, Cpu, ShieldAlert, Sparkles, AlertCircle, RefreshCw, Layers, CheckCircle2, Sliders } from 'lucide-react';
-import { GoogleGenAI } from '@google/genai';
 
 interface AITechnicianProps {
   context: {
@@ -71,16 +70,27 @@ How would you like to proceed with diagnostics today? You can select any structu
   const [apiKeyDetected, setApiKeyDetected] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Check if GEMINI_API_KEY is available in the compiled env
+  // Check if server-side Gemini proxy is available via /api/health
   useEffect(() => {
-    const key = process.env.GEMINI_API_KEY;
-    if (key && key !== 'undefined' && key !== '') {
-      setApiKeyDetected(true);
-      setUseLocalFallback(false);
-    } else {
-      setApiKeyDetected(false);
-      setUseLocalFallback(true);
-    }
+    let isMounted = true;
+    fetch('/api/health')
+      .then(res => res.json())
+      .then(data => {
+        if (!isMounted) return;
+        if (data.hasGeminiKey) {
+          setApiKeyDetected(true);
+          setUseLocalFallback(false);
+        } else {
+          setApiKeyDetected(false);
+          setUseLocalFallback(true);
+        }
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setApiKeyDetected(false);
+        setUseLocalFallback(true);
+      });
+    return () => { isMounted = false; };
   }, []);
 
   // Sync scroll on chat updates
@@ -283,52 +293,29 @@ I suggest initiating one of the optimized automated scripts to analyze current V
           timestamp: new Date().toLocaleTimeString([], { hour12: false })
         }]);
       } else {
-        // Build real-time server-defined or client-safe configuration for Gemini API call
-        const key = process.env.GEMINI_API_KEY;
-        if (!key) {
-          throw new Error('GEMINI_API_KEY_MISSING');
+        // Secure server-side Gemini API call via /api/chat proxy
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            prompt: textToSend,
+            context,
+            telemetry,
+            isStealthMode,
+            isNeuralCleaning,
+            isDecoyActive,
+            isZPEActive
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server returned HTTP ${response.status}`);
         }
 
-        const ai = new GoogleGenAI({
-          apiKey: key,
-          httpOptions: {
-            headers: {
-              'User-Agent': 'aistudio-build',
-            }
-          }
-        });
-
-        const systemPrompt = `You are the SatExpert TSI Tactical AI Technician (Unit Designation: SAT-TECH-9000).
-Your job is to provide tactical VSAT satellite communications engineering analysis and advice.
-You operate on an interactive portable SatCom terminal dashboard.
-Current real-time system context:
-- Base Coordinates: Latitude ${context.lat.toFixed(4)}, Longitude ${context.lng.toFixed(4)}
-- Target Satellite: ${context.satName}
-- Alert Status: DEFCON ${context.defcon}
-- Local Weather Condition: ${context.weather}
-- Active Jamming Interference: ${context.isJamming ? 'YES' : 'NO'}
-- Signal Quality: SNR ${telemetry.snr} dB, Rx Power ${telemetry.rxPower} dBm, Packet Loss ${telemetry.packetLoss}%
-- BUC Temperature: ${telemetry.bucTemp} °C
-- Stealth Mode Status: ${isStealthMode ? 'ACTIVE (LOW OBSERVABILITY SIGNATURE)' : 'INACTIVE (FULL CARRIER BROADCAST)'}
-- Neural Processing Cleaning: ${isNeuralCleaning ? 'ACTIVE' : 'INACTIVE'}
-- Decoy Transmitter: ${isDecoyActive ? 'DEPLOYED' : 'STANDBY'}
-- Zero-Point Energy Grounding: ${isZPEActive ? 'ENGAGED' : 'OFFLINE'}
-
-Keep your responses highly concise, extremely technical, professional, and formatted in clean markdown. 
-Use bullet points and bold headings. Give precise physical/mathematical advice (like Rain Fade attenuation in dB, modulation switching, Polarization Skew angle adjustments, or RF Shielding checks). 
-If Stealth Mode is active, prepend your responses with "[ENC_MASKED] Tactical signature low-visibility log:" and keep the advice even more concise and command-focused.`;
-
-        const response = await ai.models.generateContent({
-          model: 'gemini-3.5-flash',
-          contents: textToSend,
-          config: {
-            systemInstruction: systemPrompt,
-            temperature: 0.7,
-            topP: 0.9,
-          }
-        });
-
-        const replyText = response.text || "No response received. Hardware interface error.";
+        const data = await response.json();
+        const replyText = data.text || "Tactical telemetry received from server model.";
 
         setMessages(prev => [...prev, {
           id: Math.random().toString(36).substr(2, 9),

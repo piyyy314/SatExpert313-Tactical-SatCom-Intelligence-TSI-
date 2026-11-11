@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Target, RefreshCw, Cpu, FastForward, Play, Pause, ShieldCheck, KeyRound } from 'lucide-react';
+import { QuantumEntropyWidget } from './QuantumEntropyWidget.tsx';
 
 interface DefenseProps {
   isStealthMode: boolean;
@@ -120,6 +121,9 @@ export const QuantumDefense: React.FC<DefenseProps> = ({ isStealthMode, addMissi
         </div>
 
       </div>
+
+      {/* Real-Time Quantum Entropy Recharts Trendline Visualizer */}
+      <QuantumEntropyWidget onAlert={(msg) => addMissionLog(msg, 'success')} />
     </div>
   );
 };

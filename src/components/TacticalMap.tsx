@@ -96,6 +96,23 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
   const [nasaMeta, setNasaMeta] = useState(nasaFirmsService.getLiveMetadata(DETECTED_FIRES));
   const [isSyncingNasa, setIsSyncingNasa] = useState(false);
 
+  // Real-time ticking UTC timestamp and radar sweep angle
+  const [liveUtcTime, setLiveUtcTime] = useState(() => new Date().toISOString().slice(11, 19) + ' UTC');
+  const [sweepAngle, setSweepAngle] = useState(0);
+
+  useEffect(() => {
+    const clockTimer = setInterval(() => {
+      setLiveUtcTime(new Date().toISOString().slice(11, 19) + ' UTC');
+    }, 1000);
+    const sweepTimer = setInterval(() => {
+      setSweepAngle(prev => (prev + 3) % 360);
+    }, 45);
+    return () => {
+      clearInterval(clockTimer);
+      clearInterval(sweepTimer);
+    };
+  }, []);
+
   useEffect(() => {
     const unsubscribe = nasaFirmsService.subscribe(() => {
       setNasaMeta(nasaFirmsService.getLiveMetadata(DETECTED_FIRES));
@@ -589,12 +606,11 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
               <stop offset="100%" stopColor="#a855f7" stopOpacity="0.0" />
             </radialGradient>
 
-            {/* Land Thermal Fire Heatmap Radial Gradient */}
+            {/* Land Thermal Fire Heatmap Radial Gradient (Refined tactical military aura, non-blinding) */}
             <radialGradient id="thermal-fire-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
-              <stop offset="25%" stopColor="#fef08a" stopOpacity="0.85" />
-              <stop offset="55%" stopColor="#f97316" stopOpacity="0.6" />
-              <stop offset="85%" stopColor="#dc2626" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#fef08a" stopOpacity="0.45" />
+              <stop offset="35%" stopColor="#f97316" stopOpacity="0.22" />
+              <stop offset="70%" stopColor="#ef4444" stopOpacity="0.08" />
               <stop offset="100%" stopColor="#7f1d1d" stopOpacity="0.0" />
             </radialGradient>
 
@@ -754,7 +770,8 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
               );
             }
 
-            // Land Fire Rendering (Middle East & Global)
+            // Land Fire Rendering (Middle East & Global - Crisp Tactical Target Reticle)
+            const landRadius = Math.max(0.65, Math.min(1.3, (fire.frp / 600) * 0.9)) * zoomScale;
             return (
               <g 
                 key={fire.id}
@@ -763,29 +780,27 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                 onMouseEnter={() => setHoveredHeatItem({ type: 'fire', data: fire })}
                 onMouseLeave={() => setHoveredHeatItem(null)}
               >
+                {/* Refined thermal aura halo (clean tactical dissipation) */}
                 <circle 
                   cx={svgPos.x} 
                   cy={svgPos.y} 
-                  r={heatRadius} 
+                  r={landRadius} 
                   fill="url(#thermal-fire-glow)" 
-                  className="animate-pulse"
-                  style={{ transformOrigin: `${svgPos.x}px ${svgPos.y}px` }}
                 />
 
+                {/* Tactical target reticle ring */}
                 <circle 
                   cx={svgPos.x} 
                   cy={svgPos.y} 
-                  r={heatRadius * (isSelected || isHovered ? 1.4 : 1.15)} 
+                  r={0.42 * zoomScale} 
                   fill="none" 
-                  stroke="#f97316" 
-                  strokeWidth={strokeW} 
-                  strokeDasharray={`${0.6 * zoomScale},${0.4 * zoomScale}`}
+                  stroke={isSelected || isHovered ? "#fbbf24" : "#f97316"} 
+                  strokeWidth={0.08 * zoomScale} 
                   className={isSelected ? 'animate-ping' : ''}
-                  style={{ transformOrigin: `${svgPos.x}px ${svgPos.y}px` }}
                 />
 
-                <circle cx={svgPos.x} cy={svgPos.y} r={0.35 * zoomScale} fill="#ffffff" />
-                <circle cx={svgPos.x} cy={svgPos.y} r={0.2 * zoomScale} fill="#fef08a" />
+                {/* Sharp core target pip */}
+                <circle cx={svgPos.x} cy={svgPos.y} r={0.22 * zoomScale} fill={isSelected || isHovered ? "#ffffff" : "#f59e0b"} />
 
                 {/* Land Fire Label (Only shown on hover or selection to prevent overlapping cluster clutter) */}
                 {(isSelected || isHovered) && (
@@ -942,27 +957,34 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
           </g>
         </svg>
 
-        {/* Floating telemetry, slot, & Heatmap Legend */}
-        <div className="absolute left-2.5 bottom-2.5 pointer-events-none font-mono text-[7px] text-slate-300 uppercase space-y-0.5 z-20 bg-slate-950/85 backdrop-blur-sm border border-slate-800/80 px-2 py-1.5 rounded-xl shadow-lg">
-          <div className="text-cyan-400 font-bold">SAT ORBITAL SLOT: {satellite.orbitalSlot}</div>
-          <div className="text-slate-400">EST_RADIAL: {(Math.abs(userLoc.lng - satellite.longitude)).toFixed(1)}° Offset</div>
-          {isHeatmapEnabled && (
-            <div className="flex items-center space-x-2 text-cyan-300 font-bold pt-0.5 border-t border-slate-800/60 mt-1">
-              <span>NASA FIRMS: {HORMUZ_MARITIME_FIRES.length} HORMUZ SHIPS</span>
-              <span>•</span>
-              <span className="text-amber-400">{MIDDLE_EAST_LAND_FIRES.length} MIDEAST LAND</span>
-              <span>•</span>
-              <span className="text-red-400">{visibleC2Nodes.length} C2 NODES</span>
-            </div>
+        {/* Top-Right Tactical Radar Telemetry & Live Clock */}
+        <div className="absolute right-2.5 top-2.5 flex items-center space-x-2 bg-slate-950/90 border border-slate-800/80 px-2 py-1 rounded-lg text-[7.5px] font-mono text-cyan-400 pointer-events-none z-20">
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>LIVE RADAR // {liveUtcTime}</span>
+          {hoverCoord && (
+            <span className="text-slate-300 border-l border-slate-800 pl-1.5">
+              LOC: {hoverCoord.lat.toFixed(2)}°N, {hoverCoord.lng.toFixed(2)}°E
+            </span>
           )}
         </div>
 
-        {/* Hover coordinate label */}
-        {hoverCoord && (
-          <div className="absolute right-2.5 top-2.5 bg-slate-950/90 border border-slate-800/80 px-2 py-1 rounded text-[7.5px] font-mono text-cyan-400 pointer-events-none z-20 animate-in fade-in duration-100">
-            LOC: {hoverCoord.lat.toFixed(2)}N, {hoverCoord.lng.toFixed(2)}E
+        {/* Clean Docked Legend Bar */}
+        <div className="absolute left-2.5 bottom-2.5 pointer-events-none font-mono text-[7px] text-slate-300 uppercase space-y-0.5 z-20 bg-slate-950/90 backdrop-blur-md border border-slate-800/90 px-2.5 py-1.5 rounded-xl shadow-xl">
+          <div className="flex items-center space-x-2 text-cyan-400 font-bold">
+            <span>SLOT: {satellite.orbitalSlot}</span>
+            <span className="text-slate-600">|</span>
+            <span className="text-slate-400">RADIAL: {(Math.abs(userLoc.lng - satellite.longitude)).toFixed(1)}° OFFSET</span>
           </div>
-        )}
+          {isHeatmapEnabled && (
+            <div className="flex items-center space-x-2 text-[6.5px] text-cyan-300 font-bold pt-0.5 border-t border-slate-800/80 mt-1">
+              <span>FIRMS: {HORMUZ_MARITIME_FIRES.length} SHIPS</span>
+              <span>•</span>
+              <span className="text-amber-400">{MIDDLE_EAST_LAND_FIRES.length} LAND</span>
+              <span>•</span>
+              <span className="text-red-400">{visibleC2Nodes.length} C2</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* STRATEGIC ZONE INSPECTOR PANEL */}

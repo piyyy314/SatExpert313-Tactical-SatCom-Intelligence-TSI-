@@ -35,6 +35,7 @@ import { AegisC2 } from './components/AegisC2.tsx';
 import { GroverVisualizer } from './components/GroverVisualizer.tsx';
 import { VSATConfig } from './components/VSATConfig.tsx';
 import { QuantumEntropy } from './components/QuantumEntropy.tsx';
+import { QuantumEntropyWidget } from './components/QuantumEntropyWidget.tsx';
 import { SitrepBoard } from './components/SitrepBoard.tsx';
 import { TacticalReportModal } from './components/TacticalReportModal.tsx';
 import { SpectralCanary } from './components/SpectralCanary.tsx';
@@ -766,13 +767,15 @@ export const App: React.FC = () => {
                       }}
                     />
 
+                    {/* Quantum Entropy & Key Stability Recharts Live Widget */}
+                    <QuantumEntropyWidget onAlert={(msg) => addMissionLog(msg, 'success')} />
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
                       <SitrepBoard 
                         selectedSatellite={selectedSat} 
                         defcon={defcon} 
                         onOpenReport={() => setIsReportModalOpen(true)}
                       />
-                      <QuantumEntropy />
                     </div>
 
                     <WeatherDashboard weather={weather} loc={userLoc} satName={selectedSat.name} />

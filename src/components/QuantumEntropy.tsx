@@ -1,90 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { Shield, KeyRound, RefreshCw, Zap } from 'lucide-react';
+import React from 'react';
+import { Shield, KeyRound, RefreshCw, Zap, Cpu, Lock } from 'lucide-react';
+import { QuantumEntropyWidget } from './QuantumEntropyWidget.tsx';
+import { ModuleExportToolbar } from './ModuleExportToolbar.tsx';
 
 export const QuantumEntropy: React.FC = () => {
-  const [entropyRate, setEntropyRate] = useState(7.984);
-  const [keyHash, setKeyHash] = useState('D5_E7a9f_9c0b..81fa');
-  const [isRotating, setIsRotating] = useState(false);
-
-  // Auto rotate hashes to simulate cryptographic channel sync
-  useEffect(() => {
-    const handle = setInterval(() => {
-      rotateKeys();
-    }, 4000);
-    return () => clearInterval(handle);
-  }, []);
-
-  const rotateKeys = () => {
-    setIsRotating(true);
-    // Mimic real-time computational cycle
-    setTimeout(() => {
-      const hexChars = '0123456789abcdef';
-      let randomPart1 = '';
-      let randomPart2 = '';
-      for (let i = 0; i < 5; i++) {
-        randomPart1 += hexChars[Math.floor(Math.random() * 16)];
-        randomPart2 += hexChars[Math.floor(Math.random() * 16)];
-      }
-      setKeyHash(`D5_${randomPart1.toUpperCase()}_${randomPart2.toUpperCase()}..${Math.floor(Math.random() * 90 + 10)}X1`);
-      // Simulative jitter to entropy level showing dynamic temperature shifts
-      setEntropyRate(7.98 + (Math.random() - 0.5) * 0.03);
-      setIsRotating(false);
-    }, 450);
-  };
-
   return (
-    <div className="p-4 bg-slate-950/90 border-2 border-slate-800 rounded-3xl flex flex-col space-y-3 select-none shadow-lg">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
-        <label className="text-[8px] font-black uppercase tracking-widest text-slate-500 flex items-center space-x-1.5">
-          <Shield className="w-3.5 h-3.5 text-slate-650" />
-          <span>Post-Quantum Channel Lock</span>
-        </label>
-        <span className="text-[7.5px] font-mono uppercase bg-purple-950/40 text-purple-400 border border-purple-900/40 px-1 py-0.5 rounded">
-          Dilithium-5
-        </span>
+    <div className="space-y-6 max-w-6xl mx-auto">
+      {/* Module Title and Export Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-950/80 border border-slate-800 p-4 rounded-2xl">
+        <div>
+          <div className="flex items-center space-x-2">
+            <Shield className="w-5 h-5 text-purple-400" />
+            <h2 className="text-sm font-black uppercase tracking-wider text-slate-100">
+              Quantum Entropy & Post-Quantum Cryptographic Stability
+            </h2>
+          </div>
+          <p className="text-[10px] font-mono text-slate-400 mt-1">
+            Real-time True Random Number Generator (TRNG) entropy trends & FIPS 203/204 key health monitoring
+          </p>
+        </div>
+
+        <ModuleExportToolbar
+          compact={false}
+          moduleTitle="QUANTUM ENTROPY & KEY STABILITY"
+          moduleSubtitle="FIPS 203 ML-KEM-768 / FIPS 204 ML-DSA-65 TRNG Stream"
+          classification="TOP SECRET // SCI // POST-QUANTUM"
+          metadata={{
+            'Entropy Engine': 'Hardware TRNG + Von Neumann Extractor',
+            'Current Shannon Metric': '7.9842 bits/byte (99.80% Max)',
+            'Min-Entropy H_inf': '7.9380 bits',
+            'Key Encapsulation': 'ML-KEM-768 (Kyber768 NIST FIPS 203)',
+            'Digital Signature': 'ML-DSA-65 (Dilithium3 NIST FIPS 204)',
+            'Compliance Standard': 'NIST SP 800-90B & FIPS 140-3 Cryptographic Core',
+            'Quantum Bit Error Rate': '0.18% (Safe, Threshold < 11.0%)',
+            'Key Refresh Cycle': '60-second Ephemeral Ratchet'
+          }}
+          summaryText="Cryptographic entropy evaluation report confirms TRNG physical source integrity with zero deterministic bias detected across 1,000,000 continuous sample bits."
+        />
       </div>
 
-      {/* Key Rotate Box */}
-      <div className="bg-slate-950 border border-slate-900 rounded-2xl p-3 flex flex-col space-y-2">
-        <div className="flex items-center justify-between">
-          <span className="text-[7.5px] font-mono text-slate-500 uppercase tracking-widest flex items-center space-x-1">
-            <KeyRound className="w-3 h-3 text-slate-600" />
-            <span>Active Payload Key-ID</span>
-          </span>
-          <button
-            onClick={rotateKeys}
-            disabled={isRotating}
-            className="p-1 rounded bg-slate-900 hover:bg-slate-850 text-slate-450 hover:text-cyan-400 transition"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${isRotating ? 'animate-spin text-cyan-405' : ''}`} />
-          </button>
+      {/* Primary Dashboard Widget */}
+      <QuantumEntropyWidget />
+
+      {/* Deep Cryptographic Architectural Breakdown */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
+          <div className="flex items-center space-x-2 text-cyan-400 text-xs font-mono font-bold uppercase">
+            <Cpu className="w-4 h-4" />
+            <span>Entropy Harvesting Core</span>
+          </div>
+          <p className="text-[10px] font-mono text-slate-400 leading-relaxed">
+            Continuous quantum phase noise sampling across dual ring oscillators. Raw physical entropy is conditioned through a SHA3-512 cryptographic sponge function to eliminate correlation attacks.
+          </p>
+          <div className="text-[8px] font-mono text-slate-500 pt-2 border-t border-slate-900">
+            NIST SP 800-90B IID Test: <span className="text-emerald-400 font-bold">PASSED</span>
+          </div>
         </div>
 
-        <div className="font-mono text-[10px] bg-black/50 p-2 border border-slate-900 rounded-xl flex items-center justify-between select-all leading-none text-slate-200">
-          <span>{keyHash}</span>
-          <span className="text-[7px] text-slate-600 uppercase font-black tracking-widest pl-2">SECURE</span>
-        </div>
-      </div>
-
-      {/* Entropy Scale Meter */}
-      <div className="bg-slate-950 border border-slate-900 rounded-2xl p-3 flex flex-col space-y-2">
-        <div className="flex items-center justify-between text-[7px] font-mono text-slate-500 uppercase tracking-widest">
-          <span>Shannons Entropy Metric</span>
-          <span className="text-cyan-400 font-extrabold">{entropyRate.toFixed(4)} bits/byte</span>
-        </div>
-
-        {/* Small horizontal gauge slider */}
-        <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-900">
-          <div 
-            className="h-full bg-gradient-to-r from-cyan-600 via-sky-500 to-purple-505 rounded-full transition-all duration-500"
-            style={{ width: `${(entropyRate / 8) * 100}%` }}
-          />
+        <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
+          <div className="flex items-center space-x-2 text-purple-400 text-xs font-mono font-bold uppercase">
+            <Lock className="w-4 h-4" />
+            <span>Post-Quantum KEM Ratchet</span>
+          </div>
+          <p className="text-[10px] font-mono text-slate-400 leading-relaxed">
+            Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM-768) provides 128-bit quantum security against Grover and Shor quantum algorithms with zero classical performance penalty.
+          </p>
+          <div className="text-[8px] font-mono text-slate-500 pt-2 border-t border-slate-900">
+            Security Category: <span className="text-purple-400 font-bold">NIST Security Level 3</span>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between text-[6.5px] font-mono text-slate-500 uppercase tracking-widest leading-none pt-0.5">
-          <span>MIN_RATED: 7.95</span>
-          <span className="text-emerald-450 font-bold">STATE: MAX_RANDOM_LOCKED</span>
+        <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
+          <div className="flex items-center space-x-2 text-emerald-400 text-xs font-mono font-bold uppercase">
+            <Zap className="w-4 h-4" />
+            <span>Anti-Eavesdropping QBER</span>
+          </div>
+          <p className="text-[10px] font-mono text-slate-400 leading-relaxed">
+            Quantum Bit Error Rate (QBER) monitoring validates channel purity. Any passive optical tap or satellite transponder intercept induces measurable state collapse, instantly flagging key discard.
+          </p>
+          <div className="text-[8px] font-mono text-slate-500 pt-2 border-t border-slate-900">
+            Abort Threshold: <span className="text-amber-400 font-bold">&gt; 11.0% QBER</span>
+          </div>
         </div>
       </div>
     </div>

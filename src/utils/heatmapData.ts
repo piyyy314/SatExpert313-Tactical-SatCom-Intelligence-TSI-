@@ -8,6 +8,10 @@ export const getLiveAcqTime = (minsAgo = 4): string => {
   const d = new Date(Date.now() - minsAgo * 60000);
   return `${d.getUTCHours().toString().padStart(2, '0')}:${d.getUTCMinutes().toString().padStart(2, '0')} UTC`;
 };
+export const getLiveEta = (daysAhead = 2, timeStr = '18:00'): string => {
+  const d = new Date(Date.now() + daysAhead * 86400000);
+  return `${d.toISOString().slice(0, 10)} ${timeStr}`;
+};
 
 export interface FireDetection {
   id: string;
@@ -1489,7 +1493,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 4.8,
     navStatus: 'Restricted Manoeuvrability',
     destination: 'Singapore Port',
-    eta: '2026-10-24 18:00',
+    eta: getLiveEta(4, '18:00'),
     assignedLaneId: 'lane-fujairah-anchorage',
     activeFireIncidentId: 'fire-hormuz-ship-04',
     proximityToNearestFireKm: 0.4,
@@ -1510,7 +1514,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 7.4,
     navStatus: 'Restricted Manoeuvrability',
     destination: 'Ras Laffan (QAT)',
-    eta: '2026-10-20 22:30',
+    eta: getLiveEta(1, '22:30'),
     assignedLaneId: 'lane-hormuz-inbound',
     activeFireIncidentId: 'fire-hormuz-ship-07',
     proximityToNearestFireKm: 0.3,
@@ -1531,7 +1535,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 3.2,
     navStatus: 'Not Under Command',
     destination: 'Ningbo (CHN)',
-    eta: '2026-10-28 08:00',
+    eta: getLiveEta(7, '08:00'),
     assignedLaneId: 'lane-hormuz-outbound',
     activeFireIncidentId: 'fire-hormuz-ship-08',
     proximityToNearestFireKm: 0.2,
@@ -1552,7 +1556,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 16.4,
     navStatus: 'Underway Using Engine',
     destination: 'Jebel Ali (UAE)',
-    eta: '2026-10-20 14:00',
+    eta: getLiveEta(1, '14:00'),
     assignedLaneId: 'lane-hormuz-inbound',
     proximityToNearestFireKm: 8.5,
     threatLevel: 'HIGH_HAZARD',
@@ -1572,7 +1576,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 14.8,
     navStatus: 'Underway Using Engine',
     destination: 'Port Klang (MYS)',
-    eta: '2026-10-26 12:00',
+    eta: getLiveEta(5, '12:00'),
     assignedLaneId: 'lane-hormuz-outbound',
     proximityToNearestFireKm: 11.2,
     threatLevel: 'HIGH_HAZARD',
@@ -1592,7 +1596,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 12.6,
     navStatus: 'Underway Using Engine',
     destination: 'Ulsan (KOR)',
-    eta: '2026-10-29 06:00',
+    eta: getLiveEta(8, '06:00'),
     assignedLaneId: 'lane-hormuz-outbound',
     proximityToNearestFireKm: 14.1,
     threatLevel: 'ADVISORY',
@@ -1612,7 +1616,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 15.2,
     navStatus: 'Underway Using Engine',
     destination: 'Mina Al-Ahmadi (KWT)',
-    eta: '2026-10-21 19:30',
+    eta: getLiveEta(2, '19:30'),
     assignedLaneId: 'lane-fujairah-anchorage',
     proximityToNearestFireKm: 9.8,
     threatLevel: 'HIGH_HAZARD',
@@ -1632,7 +1636,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 17.1,
     navStatus: 'Underway Using Engine',
     destination: 'Dammam (KSA)',
-    eta: '2026-10-21 04:00',
+    eta: getLiveEta(2, '04:00'),
     assignedLaneId: 'lane-persian-gulf-central',
     proximityToNearestFireKm: 18.4,
     threatLevel: 'NOMINAL',
@@ -1652,7 +1656,7 @@ export const LIVE_AIS_FLEET: MaritimeAisVessel[] = [
     sog: 16.0,
     navStatus: 'Underway Using Engine',
     destination: 'Tokyo Bay (JPN)',
-    eta: '2026-10-31 10:00',
+    eta: getLiveEta(10, '10:00'),
     assignedLaneId: 'lane-persian-gulf-central',
     proximityToNearestFireKm: 22.0,
     threatLevel: 'NOMINAL',
