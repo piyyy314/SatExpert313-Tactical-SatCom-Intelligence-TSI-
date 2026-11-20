@@ -59,7 +59,7 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
             <p className="text-[10px] text-slate-500 font-mono">Tuning, demodulating, and passively listening in on analog/digital tactical radio transmission waves</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-purple-405 border border-purple-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-purple-400 border border-purple-900/40 px-2 py-0.5 rounded">
           SIG_INT_RF
         </span>
       </div>
@@ -69,7 +69,7 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
         {/* Signal parameters select left */}
         <div className="md:col-span-5 space-y-4">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-3">
-            <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest font-mono">Radio targets directory</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest font-mono">Radio targets directory</span>
 
             <div className="grid grid-cols-1 gap-2 font-mono">
               {CONST_CHANNELS.map(ch => (
@@ -84,11 +84,11 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
                   className={`text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                     activeCh.id === ch.id
                       ? 'bg-purple-950/40 border-purple-500 text-purple-400 font-bold'
-                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-355'
+                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-400'
                   }`}
                 >
                   <label className="text-[9.5px] uppercase tracking-wide">{ch.name}</label>
-                  <div className="text-[7.5px] text-slate-550 flex justify-between">
+                  <div className="text-[7.5px] text-slate-500 flex justify-between">
                     <span>FREQ: {ch.frequency} MHz</span>
                     <span>DEMOD: {ch.demodulation}</span>
                   </div>
@@ -101,8 +101,8 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
                 onClick={handleToggleListening}
                 className={`flex-grow py-2 rounded-xl border text-[9px] font-mono font-black uppercase tracking-wider transition ${
                   isIntercepting
-                    ? 'bg-purple-955 border-purple-500 text-slate-205 animate-pulse'
-                    : 'bg-slate-900 hover:bg-slate-850 border-slate-850 text-slate-400 hover:text-purple-404'
+                    ? 'bg-purple-950 border-purple-500 text-slate-200 animate-pulse'
+                    : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-purple-400'
                 }`}
               >
                 {isIntercepting ? 'Stop Intercept' : 'Tune & Sniff'}
@@ -110,7 +110,7 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
 
               <button
                 onClick={cleanSignalNoise}
-                className="bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-400 font-mono text-[9px] uppercase tracking-wider font-extrabold px-3 py-2 rounded-xl transition"
+                className="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 font-mono text-[9px] uppercase tracking-wider font-extrabold px-3 py-2 rounded-xl transition"
               >
                 Clean Static
               </button>
@@ -118,11 +118,11 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Listening Activity Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Listening Activity Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-purple-504 pr-1">▶</span> {log}
+                  <span className="text-purple-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -134,14 +134,14 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl">
               <span className="text-[7.5px] font-mono text-slate-500 block">CARRIER DEMODULATOR LOCK</span>
-              <span className={`text-xs font-mono font-black ${isIntercepting ? 'text-cyan-405 animate-pulse' : 'text-slate-500'}`}>
+              <span className={`text-xs font-mono font-black ${isIntercepting ? 'text-cyan-400 animate-pulse' : 'text-slate-500'}`}>
                 {isIntercepting ? `LOCKED_${activeCh.demodulation}` : 'STANDBY_AWAIT_FREQUENCY_TUNING'}
               </span>
             </div>
 
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl">
               <span className="text-[7.5px] font-mono text-slate-500 block">SIGNAL RECON CLARITY</span>
-              <span className="text-xs font-mono font-black text-cyan-405">{clarity}%</span>
+              <span className="text-xs font-mono font-black text-cyan-400">{clarity}%</span>
             </div>
           </div>
 
@@ -149,16 +149,16 @@ export const RadioInterceptSuite: React.FC<RadioProps> = ({ addMissionLog }) => 
           <div className="bg-black border border-slate-900 p-3 h-32 rounded-xl flex flex-col justify-between relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:10px_10px] opacity-35"></div>
             <span className="text-[7px] font-mono text-slate-500 block">Decoded Telemetry Frame Payload</span>
-            <div className="flex-grow font-mono text-[9px] py-2 text-cyan-405 break-all select-all select-none leading-relaxed tracking-wider">
+            <div className="flex-grow font-mono text-[9px] py-2 text-cyan-400 break-all select-all select-none leading-relaxed tracking-wider">
               {isIntercepting 
                 ? (clarity > 60 ? 'DECODED_VOICE: "TACTICAL TEAM ENGAGING PATTERNS APEX LOCK"' : 'RAW_HEX: 7F 4E AA DE DD 12 CF ["Static Interference - low snr clarity"]') 
                 : 'Awaiting intercept tuner lock...'}
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-650 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Interception systems aligned with NSA space security policy limits</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SEAL OK
             </span>
           </div>

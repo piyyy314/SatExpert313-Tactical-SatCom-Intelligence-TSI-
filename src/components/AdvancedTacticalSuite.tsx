@@ -32,7 +32,7 @@ export const AdvancedTacticalSuite: React.FC = () => {
             <p className="text-[10px] text-slate-500 font-mono font-mono">Centralized operator layout providing complete oversight of satellite configurations, orbital tracking mounts, and cryptographic handshakes</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded">
           TACT_MASTER
         </span>
       </div>
@@ -59,7 +59,7 @@ export const AdvancedTacticalSuite: React.FC = () => {
                         : m === 'DEFND'
                         ? 'bg-amber-950/40 border-amber-500 text-amber-400'
                         : 'bg-red-950/40 border-red-500 text-red-400 animate-pulse'
-                      : 'bg-slate-950 border-slate-900 text-slate-505 hover:text-slate-350'
+                      : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   {m}
@@ -70,7 +70,7 @@ export const AdvancedTacticalSuite: React.FC = () => {
             <div className="space-y-1.5 pt-1">
               <span className="text-[7.5px] font-mono text-slate-500 uppercase block">Active Operator Payload Certificate</span>
               <div className="bg-black border border-slate-900 p-2.5 rounded-xl flex items-center justify-between">
-                <span className="text-xs font-mono font-semibold text-cyan-405 select-all">{operatorKey}</span>
+                <span className="text-xs font-mono font-semibold text-cyan-400 select-all">{operatorKey}</span>
                 <button
                   onClick={rotateOperatorKey}
                   className="p-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition"
@@ -82,11 +82,11 @@ export const AdvancedTacticalSuite: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-32 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Unified Suite Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Unified Suite Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-cyan-505 pr-1">▶</span> {log}
+                  <span className="text-cyan-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -100,7 +100,7 @@ export const AdvancedTacticalSuite: React.FC = () => {
               <Compass className="w-5 h-5 text-cyan-400" />
               <div>
                 <span className="text-[7px] font-mono text-slate-500 block">DISH AZIMUTH LOCK</span>
-                <span className="text-xs font-mono font-bold text-slate-205">241.52° APEX OK</span>
+                <span className="text-xs font-mono font-bold text-slate-200">241.52° APEX OK</span>
               </div>
             </div>
 
@@ -108,7 +108,7 @@ export const AdvancedTacticalSuite: React.FC = () => {
               <Wifi className="w-5 h-5 text-cyan-400" />
               <div>
                 <span className="text-[7px] font-mono text-slate-500 block">W-IF MULTICAST ADAPTER</span>
-                <span className="text-xs font-mono font-bold text-slate-205">MEMBER_ACTIVE_OK</span>
+                <span className="text-xs font-mono font-bold text-slate-200">MEMBER_ACTIVE_OK</span>
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ export const AdvancedTacticalSuite: React.FC = () => {
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:12px_12px] opacity-45"></div>
 
             <div className="relative z-10 flex flex-col items-center select-none text-center space-y-1">
-              <div className="text-[9.5px] font-mono font-black text-cyan-405 tracking-widest uppercase">
+              <div className="text-[9.5px] font-mono font-black text-cyan-400 tracking-widest uppercase">
                 INTELL_TACTICAL_CENTERLOCK
               </div>
               <p className="text-[7px] font-mono text-slate-500 uppercase max-w-xs">
@@ -126,14 +126,14 @@ export const AdvancedTacticalSuite: React.FC = () => {
               </p>
             </div>
 
-            <div className="absolute bottom-2 right-2 text-[6.5px] font-mono text-slate-655 uppercase">
+            <div className="absolute bottom-2 right-2 text-[6.5px] font-mono text-slate-700 uppercase">
               STATUS SYSTEM LEVEL LOCK
             </div>
           </div>
 
           <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7.5px] font-mono text-slate-600 uppercase">
             <span>MASTER DEFEN BLOCK</span>
-            <span className="text-emerald-450 font-black flex items-center space-x-1">
+            <span className="text-emerald-400 font-black flex items-center space-x-1">
               <ShieldCheck className="w-4 h-4" /> <span>SECURE INTEGRITY SEAL COMPLETE</span>
             </span>
           </div>

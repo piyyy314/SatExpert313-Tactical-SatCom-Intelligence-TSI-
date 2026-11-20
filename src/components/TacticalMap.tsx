@@ -359,7 +359,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
               onClick={() => { setTheaterView('GLOBAL'); audioController.playBeep(800, 'sine', 0.04); }}
               className={`px-1.5 py-0.5 rounded text-[7px] font-mono uppercase transition-all ${
                 theaterView === 'GLOBAL'
-                  ? 'bg-slate-750 text-cyan-300 font-bold border border-cyan-500/30'
+                  ? 'bg-slate-700 text-cyan-300 font-bold border border-cyan-500/30'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
               title="Full Planetary Orbit Projection (1.0x)"
@@ -419,7 +419,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
             className={`px-2 py-1 rounded-md text-[8px] font-mono font-bold tracking-wider uppercase transition-all duration-200 flex items-center space-x-1.5 border shadow-sm ${
               isHeatmapEnabled
                 ? 'bg-amber-950/60 border-amber-500/70 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
-                : 'bg-slate-900/80 border-slate-750 text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-600'
             }`}
             title="Toggle Geospatial Heatmap displaying detected thermal fires (FIRMS) and cyber malware/C2 beacons"
           >
@@ -476,7 +476,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                 onClick={() => setFireScopeFilter('ALL_GLOBAL')}
                 className={`px-1.5 py-0.5 rounded text-[7px] font-mono uppercase transition-all ${
                   fireScopeFilter === 'ALL_GLOBAL'
-                    ? 'bg-slate-750 text-cyan-300 font-bold border border-cyan-500/30'
+                    ? 'bg-slate-700 text-cyan-300 font-bold border border-cyan-500/30'
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
                 title="Show all planetary detected fires"
@@ -505,7 +505,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
             className={`px-2 py-1 rounded-md text-[8px] font-mono font-bold tracking-wider uppercase transition-all duration-200 flex items-center space-x-1.5 border shadow-sm ${
               isOverlayEnabled
                 ? 'bg-red-950/50 border-red-500/60 text-red-300 shadow-[0_0_12px_rgba(239,68,68,0.2)]'
-                : 'bg-slate-900/80 border-slate-750 text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-600'
             }`}
             title="Toggle Strategic Overlay displaying restricted airspace, EW jamming zones, and high-risk interference areas"
           >
@@ -989,7 +989,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
 
       {/* STRATEGIC ZONE INSPECTOR PANEL */}
       {isOverlayEnabled && activeInspectorZone && (
-        <div className="p-3 rounded-2xl bg-slate-900/95 border border-slate-750 shadow-xl text-[8px] font-mono space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-150">
+        <div className="p-3 rounded-2xl bg-slate-900/95 border border-slate-700 shadow-xl text-[8px] font-mono space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-150">
           <div className="flex items-center justify-between border-b border-slate-800 pb-1.5">
             <div className="flex items-center space-x-2">
               <span className={`px-1.5 py-0.5 rounded text-[7px] font-black uppercase ${
@@ -1057,7 +1057,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                 <span className="text-slate-500">RECOMMENDED ACTION: </span>
                 {activeInspectorZone.recommendedAction}
               </div>
-              <div className="text-slate-400 pt-0.5 border-t border-slate-850 flex justify-between items-center">
+              <div className="text-slate-400 pt-0.5 border-t border-slate-800 flex justify-between items-center">
                 <span>DISTANCE TO OPERATOR: {calculateDistanceKm(userLoc, activeInspectorZone.center)} km</span>
                 <button
                   onClick={() => {
@@ -1144,7 +1144,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                   VSAT IMPACT: {activeFire.vesselDetails.vsatCommsImpact}
                 </div>
               )}
-              <div className="text-slate-400 pt-1 flex justify-between items-center border-t border-slate-850">
+              <div className="text-slate-400 pt-1 flex justify-between items-center border-t border-slate-800">
                 <span>DISTANCE TO TARGET: {calculateDistanceKm(userLoc, { lat: activeFire.lat, lng: activeFire.lng })} km</span>
                 <div className="flex items-center space-x-1">
                   <button
@@ -1287,7 +1287,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                 placeholder="Search ships, MMSI, oilfields, refineries, or countries..."
                 value={dossierSearch}
                 onChange={(e) => setDossierSearch(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-750 rounded-lg pl-7 pr-2 py-1.5 text-[8px] text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-7 pr-2 py-1.5 text-[8px] text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
               />
             </div>
             {dossierSearch && (
@@ -1329,7 +1329,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                     <div className="text-slate-400 text-[7px] truncate">
                       {vessel.vesselDetails?.incidentType}
                     </div>
-                    <div className="flex justify-between items-center pt-1 border-t border-slate-850">
+                    <div className="flex justify-between items-center pt-1 border-t border-slate-800">
                       <span className="text-slate-500 text-[6.5px]">{vessel.clusterRegion}</span>
                       <button
                         onClick={() => {
@@ -1374,7 +1374,7 @@ export const TacticalMap: React.FC<TacticalMapProps> = ({
                     <div className="text-slate-400 text-[7px] truncate">
                       {landFire.landFacilityDetails?.facilityType}: {landFire.landFacilityDetails?.fuelSource}
                     </div>
-                    <div className="flex justify-between items-center pt-1 border-t border-slate-850">
+                    <div className="flex justify-between items-center pt-1 border-t border-slate-800">
                       <span className="text-slate-500 text-[6.5px]">{landFire.landFacilityDetails?.operatorOrSector || 'Regional Sector'}</span>
                       <button
                         onClick={() => {

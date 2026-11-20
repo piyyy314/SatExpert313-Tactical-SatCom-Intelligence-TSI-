@@ -137,7 +137,7 @@ export const VSATConfig: React.FC = () => {
               className={`flex-grow py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 calibrating
                   ? 'bg-purple-950/40 border-purple-500 text-purple-400 animate-pulse'
-                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405'
+                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400'
               }`}
             >
               {calibrating ? 'Autotuning mount motor...' : 'Peak Auto-Align Antenna'}
@@ -156,7 +156,7 @@ export const VSATConfig: React.FC = () => {
                   setConfig(p => ({ ...p, frequencyBand: e.target.value as any }));
                   addLog(`VSAT Frequency band configured to: ${e.target.value}`);
                 }}
-                className="w-full bg-slate-950 border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-350 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-950 border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-300 focus:outline-none focus:border-cyan-500"
               >
                 <option value="KU_BAND">Ku-Band (12-18 GHz)</option>
                 <option value="KA_BAND">Ka-Band (26-40 GHz)</option>
@@ -190,7 +190,7 @@ export const VSATConfig: React.FC = () => {
 
           <div className="bg-black/60 border border-slate-900 p-3 rounded-2xl flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-[7.5px] font-mono text-slate-550 uppercase">Calculated Local Carrier SNR</span>
+              <span className="text-[7.5px] font-mono text-slate-500 uppercase">Calculated Local Carrier SNR</span>
               <div className="text-xl font-mono font-black text-cyan-400 flex items-baseline">
                 {calculatedSnr} <span className="text-xs pl-1 font-normal select-none">dB</span>
               </div>
@@ -203,7 +203,7 @@ export const VSATConfig: React.FC = () => {
                   <span>BEACON_LOCK_OPTIMAL</span>
                 </div>
               ) : (
-                <div className="inline-flex items-center space-x-1.5 bg-red-955 text-red-400 border border-red-900 px-2.5 py-1 rounded-xl text-[8px] font-mono font-bold">
+                <div className="inline-flex items-center space-x-1.5 bg-red-950 text-red-400 border border-red-900 px-2.5 py-1 rounded-xl text-[8px] font-mono font-bold">
                   <AlertCircle className="w-3.5 h-3.5" />
                   <span>MISALIGNED_DRIFT</span>
                 </div>
@@ -212,7 +212,7 @@ export const VSATConfig: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-24 overflow-y-auto scrollbar-none flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 flex justify-between">
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 flex justify-between">
               <span>Feedhorn Telemetry Streams</span>
               <RefreshCw className={`w-3.5 h-3.5 text-slate-600 ${calibrating ? 'animate-spin' : ''}`} />
             </span>

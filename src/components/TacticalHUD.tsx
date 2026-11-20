@@ -249,7 +249,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
           className={`w-full bg-slate-950 text-xs font-mono px-3.5 py-2.5 rounded-xl border appearance-none cursor-pointer focus:outline-none transition ${
             isStealthMode 
               ? 'border-purple-950 text-purple-300 focus:border-purple-500' 
-              : 'border-slate-850 text-slate-200 focus:border-cyan-500'
+              : 'border-slate-800 text-slate-200 focus:border-cyan-500'
           }`}
         >
           {satellites.map((s) => (
@@ -273,13 +273,13 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
             <span className="text-[7px] text-cyan-500 font-mono">[{isCoordinatesExpanded ? "HIDE" : "MANUAL_INPUT"}]</span>
           </button>
           
-          <span className="text-[9px] font-mono font-bold text-slate-300 bg-slate-900/60 border border-slate-850 px-2 py-0.5 rounded-lg">
+          <span className="text-[9px] font-mono font-bold text-slate-300 bg-slate-900/60 border border-slate-800 px-2 py-0.5 rounded-lg">
             {loc.lat.toFixed(4)}°N, {loc.lng.toFixed(4)}°E
           </span>
         </div>
 
         {isCoordinatesExpanded ? (
-          <form onSubmit={handleCoordinatesSubmit} className="bg-slate-950/40 p-3.5 border border-slate-850 rounded-2xl space-y-3.5 mt-1.5 animate-in fade-in slide-in-from-top-2">
+          <form onSubmit={handleCoordinatesSubmit} className="bg-slate-950/40 p-3.5 border border-slate-800 rounded-2xl space-y-3.5 mt-1.5 animate-in fade-in slide-in-from-top-2">
             <div className="grid grid-cols-2 gap-3">
               <div className="flex flex-col space-y-1">
                 <span className="text-[7px] font-mono text-slate-500 uppercase tracking-wider">Latitude [-90 to 90]</span>
@@ -287,7 +287,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
                   type="text" 
                   value={latInput} 
                   onChange={(e) => setLatInput(e.target.value)}
-                  className="bg-slate-950 text-[10px] font-mono px-2.5 py-1.5 rounded-lg border border-slate-850 text-slate-300 focus:outline-none focus:border-cyan-500"
+                  className="bg-slate-950 text-[10px] font-mono px-2.5 py-1.5 rounded-lg border border-slate-800 text-slate-300 focus:outline-none focus:border-cyan-500"
                 />
               </div>
               <div className="flex flex-col space-y-1">
@@ -296,7 +296,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
                   type="text" 
                   value={lngInput} 
                   onChange={(e) => setLngInput(e.target.value)}
-                  className="bg-slate-950 text-[10px] font-mono px-2.5 py-1.5 rounded-lg border border-slate-850 text-slate-300 focus:outline-none focus:border-cyan-500"
+                  className="bg-slate-950 text-[10px] font-mono px-2.5 py-1.5 rounded-lg border border-slate-800 text-slate-300 focus:outline-none focus:border-cyan-500"
                 />
               </div>
             </div>
@@ -365,7 +365,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
             >
               {wCond === 'CLEAR' && <Sun className="w-3.5 h-3.5" />}
               {wCond === 'OVERCAST' && <CloudRain className="w-3.5 h-3.5 text-slate-400" />}
-              {wCond === 'LIGHT_RAIN' && <CloudRain className="w-3.5 h-3.5 text-cyan-450" />}
+              {wCond === 'LIGHT_RAIN' && <CloudRain className="w-3.5 h-3.5 text-cyan-400" />}
               {wCond === 'HEAVY_STORM' && <CloudAlert className="w-3.5 h-3.5 text-red-500 animate-pulse" />}
               <span className="text-[6.5px] font-mono tracking-wider font-extrabold">{wCond}</span>
             </button>
@@ -392,7 +392,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
             className={`px-3 py-1 text-[8px] font-mono rounded border uppercase transition font-black ${
               isJamming 
                 ? 'bg-red-500 text-white border-red-400 shadow-[0_0_8px_rgba(239,68,68,0.2)]' 
-                : 'bg-slate-900 border-slate-800 text-slate-450 hover:text-slate-200'
+                : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
             }`}
           >
             {isJamming ? "ACTIVE" : "OFFLINE"}
@@ -482,7 +482,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
       <div className="flex flex-col space-y-1 mx-0.5">
         <div className="flex items-center justify-between text-[8px] font-black text-slate-500 uppercase tracking-widest">
           <div className="flex items-center space-x-1">
-            <Clock className="w-3 h-3 text-slate-650" />
+            <Clock className="w-3 h-3 text-slate-600" />
             <span>Station Command Event Logs</span>
           </div>
           <span>REALTIME</span>
@@ -502,7 +502,7 @@ export const TacticalHUD: React.FC<TacticalHUDProps> = ({
                     ? 'bg-red-950 border border-red-900 text-red-500'
                     : log.status === 'warning'
                     ? 'bg-purple-950 border border-purple-900 text-purple-400'
-                    : 'bg-slate-900 border border-slate-850 text-cyan-400'
+                    : 'bg-slate-900 border border-slate-800 text-cyan-400'
                 }`}>
                   {log.status}
                 </span>

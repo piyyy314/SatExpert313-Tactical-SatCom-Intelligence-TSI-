@@ -93,7 +93,7 @@ export const NeuralProcessor: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl flex flex-col justify-between">
                 <span className="text-[7px] font-mono text-slate-500 uppercase block">Convergence Epochs</span>
-                <span className="text-sm font-mono font-black text-slate-205">{epoch}</span>
+                <span className="text-sm font-mono font-black text-slate-200">{epoch}</span>
               </div>
               <div className="bg-slate-950 border border-slate-950 p-3 rounded-xl flex flex-col justify-between">
                 <span className="text-[7px] font-mono text-slate-500 uppercase block">Model L2 Loss</span>
@@ -107,7 +107,7 @@ export const NeuralProcessor: React.FC = () => {
               className={`w-full py-2.5 rounded-xl border font-mono text-[9px] uppercase tracking-widest font-black transition ${
                 isTraining
                   ? 'bg-purple-950/40 border-purple-500 text-purple-400 animate-pulse'
-                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405'
+                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400'
               }`}
             >
               {isTraining ? 'Propagating Weights...' : 'Trigger Backprop Cycle'}
@@ -115,7 +115,7 @@ export const NeuralProcessor: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-2xl p-3 h-28 overflow-y-auto scrollbar-none flex flex-col justify-between">
-            <span className="text-[7px] font-mono text-slate-650 uppercase tracking-widest border-b border-slate-900 pb-1 block">Telemetry Clean-Up Log</span>
+            <span className="text-[7px] font-mono text-slate-600 uppercase tracking-widest border-b border-slate-900 pb-1 block">Telemetry Clean-Up Log</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
@@ -129,7 +129,7 @@ export const NeuralProcessor: React.FC = () => {
         {/* Network Weights Table */}
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl space-y-3 flex flex-col justify-between">
           <div className="flex items-center justify-between border-b border-slate-900 pb-1.5">
-            <span className="text-[8px] font-black uppercase text-slate-550 tracking-wider">Scrubber Layers Coefficients</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 tracking-wider">Scrubber Layers Coefficients</span>
             <Activity className={`w-3.5 h-3.5 text-cyan-400 ${isTraining ? 'animate-bounce' : ''}`} />
           </div>
 
@@ -137,7 +137,7 @@ export const NeuralProcessor: React.FC = () => {
             {layers.map((l, idx) => (
               <div key={idx} className="bg-black/40 border border-slate-900 p-2.5 rounded-xl flex items-center justify-between">
                 <div>
-                  <div className="text-[8.5px] font-mono font-bold text-slate-350">{l.name}</div>
+                  <div className="text-[8.5px] font-mono font-bold text-slate-300">{l.name}</div>
                   <div className="text-[7px] font-mono text-slate-600 space-x-2">
                     <span>WEIGHT: {l.weight}</span>
                     <span>BIAS: {l.bias}</span>
@@ -157,7 +157,7 @@ export const NeuralProcessor: React.FC = () => {
 
           <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7.5px] font-mono text-slate-600 uppercase">
             <span>MODEL COMPLIANCE</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <Check className="w-3 h-3" /> MODEL LOCK ATTAINED
             </span>
           </div>

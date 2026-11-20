@@ -53,7 +53,7 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
             <p className="text-[10px] text-slate-500 font-mono">Select, configure, and execute virtual scenarios to test transceiver resilience statistics in contested aerospace environments</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-405 border border-red-955 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-400 border border-red-950 px-2 py-0.5 rounded">
           WAR_SIM
         </span>
       </div>
@@ -63,7 +63,7 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
         {/* Settings options left */}
         <div className="md:col-span-5 space-y-4 font-mono">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-3.5">
-            <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest">Simulation Parameters</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest">Simulation Parameters</span>
 
             <div className="grid grid-cols-1 gap-2">
               {CONST_SCENARIOS.map(sc => (
@@ -77,12 +77,12 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
                   }}
                   className={`text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                     activeScen.name === sc.name
-                      ? 'bg-red-955 border-red-500 text-red-400 font-black'
-                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-355'
+                      ? 'bg-red-950 border-red-500 text-red-400 font-black'
+                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-400'
                   }`}
                 >
                   <span className="text-[9.5px] uppercase">{sc.name.split(' ')[0]} Scenario</span>
-                  <span className="text-[6.5px] text-slate-550 italic font-medium">THREAT CLASS: {sc.threatLevel}</span>
+                  <span className="text-[6.5px] text-slate-500 italic font-medium">THREAT CLASS: {sc.threatLevel}</span>
                 </button>
               ))}
             </div>
@@ -92,8 +92,8 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
               disabled={isSimulating}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 isSimulating
-                  ? 'bg-red-955 border-red-500 text-slate-201 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-400 hover:text-red-405'
+                  ? 'bg-red-950 border-red-500 text-slate-200 animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-red-400'
               }`}
             >
               {isSimulating ? 'Processing Matrix Strategy...' : 'Execute Simulation Run'}
@@ -101,11 +101,11 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Strategy Matrix Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Strategy Matrix Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto index-10 scrollbar-none">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -117,12 +117,12 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
           <div className="grid grid-cols-2 gap-4 font-mono">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl">
               <span className="text-[7.5px] text-slate-500 block">STRATEGY THREAT CLASS</span>
-              <span className="text-xs font-mono font-black text-slate-205">{activeScen.threatLevel}</span>
+              <span className="text-xs font-mono font-black text-slate-200">{activeScen.threatLevel}</span>
             </div>
 
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex flex-col justify-between">
               <span className="text-[7.5px] text-slate-500 block">EVALUATED SUCCESS COHERENCE</span>
-              <span className="text-xs font-mono font-black text-red-505">{pctSuccess}%</span>
+              <span className="text-xs font-mono font-black text-red-500">{pctSuccess}%</span>
             </div>
           </div>
 
@@ -133,9 +133,9 @@ export const WarGamesSimulator: React.FC<WarProps> = ({ satName }) => {
             </p>
           </div>
 
-          <div className="border-t border-slate-905 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-650 uppercase">
+          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Simulation sweeps compliant with defense aerospace model grids</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SECURE SHIELDS COMPLETE
             </span>
           </div>

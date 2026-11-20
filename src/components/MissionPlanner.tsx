@@ -36,13 +36,13 @@ export const MissionPlanner: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <ListTodo className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <ListTodo className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">Mission Control Objectives & Target Planner</h3>
             <p className="text-[10px] text-slate-500 font-mono font-mono">Define, organize, and execute strategic target objectives to secure cross-link satellite coverage parameters</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-val px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-val px-2 py-0.5 rounded">
           MISSION_GRID
         </span>
       </div>
@@ -51,7 +51,7 @@ export const MissionPlanner: React.FC = () => {
         
         {/* Goals checklist left */}
         <div className="md:col-span-8 space-y-4 font-mono">
-          <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest">Active Operations Checklist</span>
+          <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest">Active Operations Checklist</span>
 
           <div className="space-y-3">
             {goals.map((g) => (
@@ -60,7 +60,7 @@ export const MissionPlanner: React.FC = () => {
                 onClick={() => toggleGoal(g.id)}
                 className={`p-3.5 border rounded-2xl flex items-center justify-between gap-4 cursor-pointer select-none transition ${
                   g.done 
-                    ? 'bg-emerald-955/15 border-emerald-900/50 text-emerald-450' 
+                    ? 'bg-emerald-950/15 border-emerald-900/50 text-emerald-400' 
                     : 'bg-slate-950 border-slate-900 text-slate-500 hover:border-slate-800'
                 }`}
               >
@@ -77,7 +77,7 @@ export const MissionPlanner: React.FC = () => {
                 </div>
 
                 <span className={`text-[7px] px-2 py-0.5 border rounded font-semibold ${
-                  g.priority === 'CRITICAL' ? 'border-red-950 text-red-500 bg-red-955/5' : 'border-slate-800 text-slate-501'
+                  g.priority === 'CRITICAL' ? 'border-red-950 text-red-500 bg-red-950/5' : 'border-slate-800 text-slate-500'
                 }`}>
                   {g.priority}
                 </span>
@@ -94,15 +94,15 @@ export const MissionPlanner: React.FC = () => {
             <div className="bg-black border border-slate-900 p-3 h-44 rounded-xl overflow-y-auto scrollbar-none text-[7px] text-slate-400 space-y-1">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-cyan-502 pr-1">▶</span> {log}
+                  <span className="text-cyan-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-655 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-700 uppercase">
             <span>Objectives verified and synced</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> CONFIRMED
             </span>
           </div>

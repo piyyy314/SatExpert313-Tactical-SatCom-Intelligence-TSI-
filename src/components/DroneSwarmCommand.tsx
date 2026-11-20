@@ -55,7 +55,7 @@ export const DroneSwarmCommand: React.FC<SwarmProps> = ({ addMissionLog }) => {
             <p className="text-[10px] text-slate-500 font-mono">Deploy, coordinate, and monitor localized micro-drone grids to establish line-of-sight RF bridges in obstructed terrain</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded">
           DRONE_C2
         </span>
       </div>
@@ -70,11 +70,11 @@ export const DroneSwarmCommand: React.FC<SwarmProps> = ({ addMissionLog }) => {
             {drones.map((dr) => (
               <div key={dr.id} className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="space-y-1 font-mono">
-                  <div className="text-[10.5px] font-black text-slate-205 uppercase flex items-center space-x-2">
-                    <Wifi className="w-4 h-4 text-cyan-453" />
+                  <div className="text-[10.5px] font-black text-slate-200 uppercase flex items-center space-x-2">
+                    <Wifi className="w-4 h-4 text-cyan-500" />
                     <span>{dr.name}</span>
                   </div>
-                  <div className="text-[7.5px] text-slate-455 uppercase flex flex-wrap gap-4">
+                  <div className="text-[7.5px] text-slate-500 uppercase flex flex-wrap gap-4">
                     <span>Altitude: {dr.altitude}m</span>
                     <span>Battery Status: {dr.battery}%</span>
                     <span>RSSI: {dr.signalStrength} dBm</span>
@@ -94,7 +94,7 @@ export const DroneSwarmCommand: React.FC<SwarmProps> = ({ addMissionLog }) => {
                         setDrones(prev => prev.map(d => d.id === dr.id ? { ...d, status: 'LAUNCHED' } : d));
                         addLog(`Instructed ${dr.name} to ignite motors and climb to transceive cell altitude.`);
                       }}
-                      className="bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 px-2.5 py-1 rounded-xl text-[8.5px] font-mono uppercase font-black transition"
+                      className="bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 px-2.5 py-1 rounded-xl text-[8.5px] font-mono uppercase font-black transition"
                     >
                       Ignite Launch
                     </button>
@@ -155,7 +155,7 @@ export const DroneSwarmCommand: React.FC<SwarmProps> = ({ addMissionLog }) => {
 
           <button
             onClick={triggerCalibrationSweep}
-            className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 py-2.5 rounded-xl text-[9px] font-black font-mono uppercase tracking-wider transition"
+            className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 py-2.5 rounded-xl text-[9px] font-black font-mono uppercase tracking-wider transition"
           >
             Calibrate Swarm Positions
           </button>

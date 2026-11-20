@@ -65,7 +65,7 @@ export const SpoofTracer: React.FC = () => {
   return (
     <div className={`p-6 bg-slate-950 border-2 rounded-3xl text-slate-100 flex flex-col space-y-6 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 relative transition-all duration-500 ${
       spoofRisk === 'CRITICAL'
-        ? 'border-red-650 shadow-[0_0_35px_rgba(239,68,68,0.35)] lg:animate-none animate-pulse'
+        ? 'border-red-600 shadow-[0_0_35px_rgba(239,68,68,0.35)] lg:animate-none animate-pulse'
         : spoofRisk === 'HIGH'
           ? 'border-amber-600 shadow-[0_0_20px_rgba(217,119,6,0.2)]'
           : 'border-slate-900'
@@ -99,7 +99,7 @@ export const SpoofTracer: React.FC = () => {
                 <div>DETECTED RISK LEVEL: <span className={alertLevel === 'CRITICAL' ? 'text-red-400 font-bold' : 'text-amber-400 font-bold'}>{alertLevel}</span></div>
                 <div>X-AXIS DEVIATION: <span className="text-cyan-400 font-bold">{driftX}°</span></div>
                 <div>Y-AXIS DEVIATION: <span className="text-cyan-400 font-bold">{driftY}°</span></div>
-                <div>TOTAL DELTA RADIUS: <span className="text-red-405 font-bold">{(Math.abs(driftX) + Math.abs(driftY)).toFixed(4)}° / THRESHOLD</span></div>
+                <div>TOTAL DELTA RADIUS: <span className="text-red-400 font-bold">{(Math.abs(driftX) + Math.abs(driftY)).toFixed(4)}° / THRESHOLD</span></div>
               </div>
               <p className="text-xs text-red-400 font-bold animate-pulse text-center pt-1 tracking-wider">
                 [COORDINATES UNRELIABLE - ACTIVE JAMMING IMPLICATED]
@@ -112,7 +112,7 @@ export const SpoofTracer: React.FC = () => {
                   setIsAlertOpen(false);
                   addLog('ALERT OVERRIDE: Warning dialog acknowledged manually.');
                 }}
-                className="bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-400 hover:text-white py-2 rounded-xl text-[9px] uppercase tracking-wider transition font-medium"
+                className="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white py-2 rounded-xl text-[9px] uppercase tracking-wider transition font-medium"
               >
                 Mute Warning
               </button>
@@ -152,7 +152,7 @@ export const SpoofTracer: React.FC = () => {
         {/* Settings column */}
         <div className="md:col-span-5 space-y-4">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 tracking-widest block font-mono">Antidote Filters</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest block font-mono">Antidote Filters</span>
 
             <div className="space-y-2">
               <label className="text-[7px] font-black uppercase text-slate-500 tracking-wider block font-mono">GPS Multi-Path Filter Mode</label>
@@ -181,8 +181,8 @@ export const SpoofTracer: React.FC = () => {
               disabled={isCalibrating}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 isCalibrating
-                  ? 'bg-purple-955 border-purple-500 text-purple-400 animate-pulse'
-                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405'
+                  ? 'bg-purple-950 border-purple-500 text-purple-400 animate-pulse'
+                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400'
               }`}
             >
               {isCalibrating ? 'Autotuning carrier delays...' : 'Recalibrate GPS Reference'}
@@ -190,11 +190,11 @@ export const SpoofTracer: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 overflow-y-auto scrollbar-none flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Spoofing Audit logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Spoofing Audit logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-cyan-505 pr-1">▶</span> {log}
+                  <span className="text-cyan-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -233,7 +233,7 @@ export const SpoofTracer: React.FC = () => {
               <div className="absolute w-12 h-12 border border-red-500/30 border-dashed rounded-full animate-spin"></div>
             </div>
 
-            <div className="absolute bottom-2 right-2 text-[6.5px] font-mono text-slate-605 uppercase">
+            <div className="absolute bottom-2 right-2 text-[6.5px] font-mono text-slate-600 uppercase">
               GRID RESO: 0.001° DEVIATION SCALE
             </div>
           </div>
@@ -242,7 +242,7 @@ export const SpoofTracer: React.FC = () => {
             <div className="space-y-0.5">
               <span className="text-[7px] font-mono text-slate-500 uppercase block">Threat Level Audit</span>
               <span className={`text-xs font-mono font-black ${
-                spoofRisk === 'CRITICAL' ? 'text-red-505 animate-bounce' : spoofRisk === 'HIGH' ? 'text-amber-500' : 'text-emerald-450'
+                spoofRisk === 'CRITICAL' ? 'text-red-500 animate-bounce' : spoofRisk === 'HIGH' ? 'text-amber-500' : 'text-emerald-400'
               }`}>
                 {spoofRisk === 'CRITICAL' ? 'CRITICAL_SPOOF_RISK' : spoofRisk === 'HIGH' ? 'HIGH_CARRIER_DRIFT' : 'NOMINAL_CLOCK_ALIGNED'}
               </span>
@@ -255,7 +255,7 @@ export const SpoofTracer: React.FC = () => {
                   <span>SECURE_ALIGNED</span>
                 </div>
               ) : (
-                <div className="inline-flex items-center space-x-1.5 bg-red-955 text-red-400 border border-red-900 px-2 py-0.5 rounded text-[8px] font-mono font-bold animate-pulse">
+                <div className="inline-flex items-center space-x-1.5 bg-red-950 text-red-400 border border-red-900 px-2 py-0.5 rounded text-[8px] font-mono font-bold animate-pulse">
                   <ShieldAlert className="w-3.5 h-3.5" />
                   <span>SPOOF_DETECTOR_TRIGGER</span>
                 </div>

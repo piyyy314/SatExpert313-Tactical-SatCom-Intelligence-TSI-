@@ -1,4 +1,26 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+const { saveMock } = vi.hoisted(() => ({
+  saveMock: vi.fn()
+}));
+
+vi.mock('jspdf', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('jspdf')>();
+  const OriginalJsPDF = actual.default || (actual as any).jsPDF;
+  const WrappedJsPDF = function (...args: any[]) {
+    const instance = new OriginalJsPDF(...args);
+    instance.save = saveMock;
+    return instance;
+  } as any;
+  WrappedJsPDF.API = OriginalJsPDF.API;
+  WrappedJsPDF.prototype = OriginalJsPDF.prototype;
+  return {
+    ...actual,
+    default: WrappedJsPDF,
+    jsPDF: WrappedJsPDF
+  };
+});
+
 import { 
   exportModuleToPDF, 
   exportModuleToDocs, 
@@ -10,6 +32,7 @@ describe('Universal Export Service', () => {
   let fakeElement: any;
 
   beforeEach(() => {
+    saveMock.mockClear();
     fakeElement = {
       href: '',
       download: '',
@@ -59,6 +82,7 @@ describe('Universal Export Service', () => {
     const filename = exportModuleToPDF(data);
     expect(filename).toContain('Drone_Swarm_Command');
     expect(filename).toContain('.pdf');
+    expect(saveMock).toHaveBeenCalledWith(filename);
   });
 
   it('generates a Word (.doc) formatted blob link for module export', () => {

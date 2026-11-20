@@ -11,7 +11,7 @@ interface SitrepProps {
 export const SitrepBoard: React.FC<SitrepProps> = ({ selectedSatellite, defcon, onOpenReport }) => {
   // Map DEFCON levels to specific threat ratings and operational procedures
   let alertName = 'NOMINAL_READINESS_DECLARED';
-  let levelColor = 'text-emerald-450 border-emerald-900/40 bg-emerald-950/10';
+  let levelColor = 'text-emerald-400 border-emerald-900/40 bg-emerald-950/10';
   let directive = 'Execute generic diagnostic sweeps. Log orbital ephemeris metadata at regular intervals.';
   let advisoryStr = 'All spectrum indices are within standard ITU boundaries.';
 
@@ -42,7 +42,7 @@ export const SitrepBoard: React.FC<SitrepProps> = ({ selectedSatellite, defcon, 
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
         <label className="text-[8px] font-black uppercase tracking-widest text-slate-500 flex items-center space-x-1.5">
-          <Terminal className="w-3.5 h-3.5 text-slate-650" />
+          <Terminal className="w-3.5 h-3.5 text-slate-600" />
           <span>Tactical Sitrep Assessment</span>
         </label>
         <span className="text-[7.5px] font-mono uppercase text-slate-500">

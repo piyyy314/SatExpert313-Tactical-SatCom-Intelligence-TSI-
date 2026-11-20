@@ -180,7 +180,7 @@ export const SignalInterceptor: React.FC<SignalInterceptorProps> = ({
             <div className="bg-slate-950/60 border border-slate-900 p-4 rounded-2xl flex-grow flex flex-col justify-between h-40">
               <div className="flex items-center justify-between border-b border-slate-900 pb-1.5">
                 <span className="text-[7.5px] font-black uppercase text-slate-500 tracking-wider flex items-center space-x-1">
-                  <Shield className="w-3.5 h-3.5 text-slate-650" />
+                  <Shield className="w-3.5 h-3.5 text-slate-600" />
                   <span>Carrier Wave Modulation Parameters</span>
                 </span>
                 <span className="text-[7.5px] font-mono text-cyan-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded">
@@ -190,26 +190,26 @@ export const SignalInterceptor: React.FC<SignalInterceptorProps> = ({
 
               <div className="space-y-2 py-2">
                 <div className="text-[8px] font-mono text-slate-500 uppercase">Active Logged Lockout ID</div>
-                <div className="font-mono text-xs bg-black/60 p-2.5 rounded-xl border border-slate-900 text-cyan-405 leading-relaxed font-bold break-words select-all uppercase">
+                <div className="font-mono text-xs bg-black/60 p-2.5 rounded-xl border border-slate-900 text-cyan-400 leading-relaxed font-bold break-words select-all uppercase">
                   {selectedPreset.decrypted}
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-center text-[7px] font-mono">
                 <div className="bg-slate-950 p-1.5 rounded-lg border border-slate-900">
-                  <span className="text-slate-550 block">MODULATION</span>
+                  <span className="text-slate-500 block">MODULATION</span>
                   <span className="text-slate-300 font-black">QPSK - 128S</span>
                 </div>
                 <div className="bg-slate-950 p-1.5 rounded-lg border border-slate-900">
-                  <span className="text-slate-550 block">FRAME PROTECTION</span>
-                  <span className="text-emerald-450 font-black">BCH CODE LOCK</span>
+                  <span className="text-slate-500 block">FRAME PROTECTION</span>
+                  <span className="text-emerald-400 font-black">BCH CODE LOCK</span>
                 </div>
               </div>
             </div>
 
             {/* General Log terminal bottom */}
             <div className="bg-black border border-slate-900 rounded-2xl p-3 h-24 overflow-y-auto scrollbar-none flex flex-col justify-between">
-              <span className="text-[7px] font-mono text-slate-650 uppercase tracking-widest border-b border-slate-900 pb-1 block">Demodulator System Logs</span>
+              <span className="text-[7px] font-mono text-slate-600 uppercase tracking-widest border-b border-slate-900 pb-1 block">Demodulator System Logs</span>
               <div ref={terminalRef} className="flex-grow font-mono text-[7.5px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
                 {logs.map((log, idx) => (
                   <div key={idx} className="truncate">

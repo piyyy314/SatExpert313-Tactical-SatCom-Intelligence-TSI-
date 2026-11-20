@@ -66,7 +66,7 @@ export const IPGeolocator: React.FC = () => {
             <p className="text-[10px] text-slate-500 font-mono">Resolve terrestrial nodes, carrier routing, and satellite beam locks</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-slate-400 border border-slate-850 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-slate-400 border border-slate-800 px-2 py-0.5 rounded">
           TS_MAP_UPLINK
         </span>
       </div>
@@ -105,7 +105,7 @@ export const IPGeolocator: React.FC = () => {
                   className={`text-[8.5px] font-mono px-2 py-1 rounded border transition ${
                     activeGeo.ip === d.ip
                       ? 'bg-cyan-950/40 border-cyan-500 text-cyan-400 font-bold'
-                      : 'bg-slate-900/40 border-slate-850 text-slate-500 hover:text-white'
+                      : 'bg-slate-900/40 border-slate-800 text-slate-500 hover:text-white'
                   }`}
                 >
                   {d.ip} ({d.city})
@@ -178,15 +178,15 @@ export const IPGeolocator: React.FC = () => {
           <div className="grid grid-cols-3 gap-2 text-center pt-2 border-t border-slate-900">
             <div className="bg-slate-950 p-2 rounded-xl border border-slate-900/60">
               <span className="text-[6.5px] font-mono text-slate-500 uppercase block">AS Number</span>
-              <span className="text-[10px] font-mono font-black text-slate-350">{activeGeo.asn}</span>
+              <span className="text-[10px] font-mono font-black text-slate-300">{activeGeo.asn}</span>
             </div>
             <div className="bg-slate-950 p-2 rounded-xl border border-slate-900/60">
               <span className="text-[6.5px] font-mono text-slate-500 uppercase block">Uplink Latency</span>
-              <span className="text-[10px] font-mono font-black text-cyan-405">{activeGeo.latency} ms</span>
+              <span className="text-[10px] font-mono font-black text-cyan-400">{activeGeo.latency} ms</span>
             </div>
             <div className="bg-slate-950 p-2 rounded-xl border border-slate-900/60">
               <span className="text-[6.5px] font-mono text-slate-500 uppercase block">Sat Spot Lock</span>
-              <span className="text-[10px] font-mono font-black text-emerald-450">SECURE</span>
+              <span className="text-[10px] font-mono font-black text-emerald-400">SECURE</span>
             </div>
           </div>
         </div>

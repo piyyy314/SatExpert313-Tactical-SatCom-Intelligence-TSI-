@@ -52,7 +52,7 @@ export const LinkBudgetCalculator: React.FC<LinkBudgetProps> = ({ distance, isSt
         {/* Left variables input */}
         <div className="md:col-span-5 space-y-4">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 tracking-widest block font-mono">Antenna & Amplifier Inputs</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest block font-mono">Antenna & Amplifier Inputs</span>
 
             <div className="space-y-1">
               <div className="flex justify-between text-[7px] font-mono text-slate-500 uppercase">
@@ -109,11 +109,11 @@ export const LinkBudgetCalculator: React.FC<LinkBudgetProps> = ({ distance, isSt
           <div className="grid grid-cols-2 gap-4 text-xs font-mono font-bold uppercase">
             <div className="bg-slate-950 border border-slate-900 p-2.5 rounded-xl">
               <span className="text-[6.5px] text-slate-500 block">Atmospheric Path Distance</span>
-              <span className="text-slate-205">{distance.toFixed(2)} Km</span>
+              <span className="text-slate-200">{distance.toFixed(2)} Km</span>
             </div>
             <div className="bg-slate-950 border border-slate-900 p-2.5 rounded-xl">
               <span className="text-[6.5px] text-slate-500 block">Link Transmit Frequency</span>
-              <span className="text-slate-205">{carrierFreq} GHz</span>
+              <span className="text-slate-200">{carrierFreq} GHz</span>
             </div>
           </div>
 
@@ -123,12 +123,12 @@ export const LinkBudgetCalculator: React.FC<LinkBudgetProps> = ({ distance, isSt
               <span>Attenuation Unit</span>
             </div>
             
-            <div className="flex justify-between text-[8.5px] font-mono text-slate-350">
+            <div className="flex justify-between text-[8.5px] font-mono text-slate-300">
               <span>Broadband Free Space Attenuation (FSPL)</span>
               <span className="font-bold text-red-500">-{calculatedFspl} dB</span>
             </div>
 
-            <div className="flex justify-between text-[8.5px] font-mono text-slate-350">
+            <div className="flex justify-between text-[8.5px] font-mono text-slate-300">
               <span>Carrier power at receiver (C)</span>
               <span className="font-bold text-cyan-400">{receivedPower} dBW</span>
             </div>
@@ -136,8 +136,8 @@ export const LinkBudgetCalculator: React.FC<LinkBudgetProps> = ({ distance, isSt
 
           <div className="bg-black/60 border border-slate-900 p-3.5 rounded-2xl flex items-center justify-between">
             <div>
-              <span className="text-[7.5px] font-mono text-slate-550 block font-black">Coherent Link Margin Threshold</span>
-              <div className="text-xl font-mono font-black text-cyan-405 flex items-baseline">
+              <span className="text-[7.5px] font-mono text-slate-500 block font-black">Coherent Link Margin Threshold</span>
+              <div className="text-xl font-mono font-black text-cyan-400 flex items-baseline">
                 {margin} <span className="text-xs font-normal pl-0.5 select-none">dB</span>
               </div>
             </div>
@@ -148,7 +148,7 @@ export const LinkBudgetCalculator: React.FC<LinkBudgetProps> = ({ distance, isSt
                   LINK_LOCK: SECURED
                 </div>
               ) : (
-                <div className="bg-red-955 text-red-400 border border-red-900 px-3 py-1 rounded-xl text-[8.5px] font-mono font-black uppercase tracking-wider animate-pulse">
+                <div className="bg-red-950 text-red-400 border border-red-900 px-3 py-1 rounded-xl text-[8.5px] font-mono font-black uppercase tracking-wider animate-pulse">
                   SIGNAL_DEGRADED
                 </div>
               )}

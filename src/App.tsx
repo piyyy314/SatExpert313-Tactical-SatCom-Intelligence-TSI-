@@ -97,7 +97,6 @@ export const App: React.FC = () => {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
 
   const isFirstMount = useRef(true);
-  const [apiKeyError, setApiKeyError] = useState<string | null>(null);
 
   const addMissionLog = useCallback((detail: string, status: any = 'active') => {
     const newEvent: TacticalEvent = {
@@ -252,25 +251,37 @@ export const App: React.FC = () => {
   }, [weather, isJamming, jammingPower, defcon, isStealthMode, isNeuralCleaning, isDecoyActive, isZPEActive]);
 
   useEffect(() => {
-    if (!process.env.GEMINI_API_KEY) {
-      setApiKeyError("CRITICAL: GEMINI_API_KEY is not defined in environment.");
-    }
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.loc) setUserLoc(parsed.loc);
-      if (parsed.satId) {
-        const sat = satellites.find(s => s.id === parsed.satId);
-        if (sat) setSelectedSat(sat);
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed?.loc) setUserLoc(parsed.loc);
+        if (parsed?.satId) {
+          const sat = satellites.find(s => s.id === parsed.satId);
+          if (sat) setSelectedSat(sat);
+        }
+        if (parsed?.defcon) setDefcon(parsed.defcon);
       }
-      setDefcon(parsed.defcon || 5);
+    } catch {
+      // Ignore malformed persisted state
     }
-    const savedStealth = localStorage.getItem(STEALTH_STORAGE_KEY);
-    if (savedStealth !== null) setIsStealthMode(JSON.parse(savedStealth));
 
-    const savedLogs = localStorage.getItem(EVENT_LOG_STORAGE_KEY);
-    if (savedLogs) setEventLogs(JSON.parse(savedLogs));
+    try {
+      const savedStealth = localStorage.getItem(STEALTH_STORAGE_KEY);
+      if (savedStealth !== null) setIsStealthMode(Boolean(JSON.parse(savedStealth)));
+    } catch {
+      // Ignore malformed stealth preference
+    }
+
+    try {
+      const savedLogs = localStorage.getItem(EVENT_LOG_STORAGE_KEY);
+      if (savedLogs) {
+        const parsedLogs = JSON.parse(savedLogs);
+        if (Array.isArray(parsedLogs)) setEventLogs(parsedLogs);
+      }
+    } catch {
+      // Ignore malformed persisted event logs
+    }
 
     isFirstMount.current = false;
 
@@ -391,12 +402,6 @@ export const App: React.FC = () => {
       <div className="crt-overlay" />
       <div className="crt-vignette" />
       <div className="crt-flicker" />
-
-      {apiKeyError && (
-        <div className="bg-red-600 text-white py-2 px-4 text-center font-black text-[10px] tracking-[0.5em] uppercase animate-pulse z-[9999] relative">
-          [VOICE_UPLINK_FAILURE] {apiKeyError}
-        </div>
-      )}
       <Layout isStealthMode={isStealthMode} setIsStealthMode={setIsStealthMode}>
         <div className="flex flex-col space-y-6 max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 pb-12 transition-all duration-500">
           
@@ -514,7 +519,7 @@ export const App: React.FC = () => {
             {/* Middle: 5 Category Tabs + Module Filter Search */}
             <div className="pt-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
               {/* Category Tabs */}
-              <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-950/90 border border-slate-850 rounded-2xl">
+              <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-950/90 border border-slate-800 rounded-2xl">
                 {VIEW_CATEGORIES.map(cat => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.id && !searchQuery.trim();
@@ -533,7 +538,7 @@ export const App: React.FC = () => {
                     >
                       <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-slate-950' : 'text-slate-500'}`} />
                       <span>{cat.name}</span>
-                      <span className={`text-[8px] font-mono px-1.5 py-0.2 rounded-md ${
+                      <span className={`text-[8px] font-mono px-1.5 py-0.5 rounded-md ${
                         isActive ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-slate-900 text-slate-500'
                       }`}>
                         {cat.views.length}
@@ -543,12 +548,12 @@ export const App: React.FC = () => {
                 })}
               </div>
 
-              {/* Search Input for 43+ modules */}
+              {/* Search Input for all modules */}
               <div className="relative min-w-[260px] max-w-md">
                 <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
-                  placeholder="Search all 43 modules (e.g. quantum, warfare, strike)..."
+                  placeholder={`Search all ${allViewsList.length} modules (e.g. quantum, warfare, strike)...`}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-950/90 text-xs font-mono pl-9 pr-8 py-2 border border-slate-800 rounded-xl text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 transition-colors"

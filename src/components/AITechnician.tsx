@@ -402,13 +402,13 @@ I suggest initiating one of the optimized automated scripts to analyze current V
           {apiKeyDetected ? (
             <div className="flex items-center space-x-2 bg-slate-900/60 border border-slate-800 px-3 py-1.5 rounded-lg max-h-8">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-[8px] font-mono text-slate-400 uppercase tracking-wider">GEMINI FLASH ACTIVE</span>
+              <span className="text-[8px] font-mono text-slate-400 uppercase tracking-wider">GEMINI 4 HYDROGEN</span>
               <button
                 onClick={() => setUseLocalFallback(!useLocalFallback)}
                 className={`text-[8px] font-mono uppercase px-2 py-0.5 rounded border transition-all ${
                   useLocalFallback 
-                    ? 'bg-amber-950/60 border-amber-850 text-amber-500' 
-                    : 'bg-emerald-950/60 border-emerald-850 text-emerald-400'
+                    ? 'bg-amber-950/60 border-amber-800 text-amber-500' 
+                    : 'bg-emerald-950/60 border-emerald-800 text-emerald-400'
                 }`}
               >
                 {useLocalFallback ? "OFFLINE_CORE" : "ONLINE_API"}
@@ -540,7 +540,7 @@ I suggest initiating one of the optimized automated scripts to analyze current V
               msg.sender === 'user' 
                 ? isStealthMode 
                   ? 'bg-purple-950/30 border-purple-800/40 text-purple-200 rounded-tr-none'
-                  : 'bg-cyan-950/30 border-cyan-800/40 text-cyan-150 rounded-tr-none'
+                  : 'bg-cyan-950/30 border-cyan-800/40 text-cyan-100 rounded-tr-none'
                 : msg.sender === 'system'
                 ? 'bg-slate-950/80 border-slate-800/60 text-amber-500/80 font-mono text-[9px] mx-auto w-full py-2 px-3 border-dashed rounded-lg flex items-center space-x-2'
                 : isStealthMode

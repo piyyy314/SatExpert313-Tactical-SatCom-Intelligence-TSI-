@@ -320,8 +320,8 @@ export const YARAScanner: React.FC = () => {
 
         {/* Tactical YARA guide context info */}
         <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-2">
-          <span className="text-[8px] font-black uppercase tracking-wider text-slate-405 flex items-center space-x-1">
-            <Info className="w-3.5 h-3.5 text-slate-550" />
+          <span className="text-[8px] font-black uppercase tracking-wider text-slate-400 flex items-center space-x-1">
+            <Info className="w-3.5 h-3.5 text-slate-500" />
             <span>Tactical YARA Operations</span>
           </span>
           <p className="text-[7.5px] font-mono text-slate-400 leading-relaxed uppercase tracking-wider">
@@ -336,7 +336,7 @@ export const YARAScanner: React.FC = () => {
         {/* Memory Buffer Target Select */}
         <div className="bg-slate-950 border border-slate-900 rounded-2xl p-4 flex flex-col space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-[9px] font-black uppercase tracking-wider text-slate-450 flex items-center space-x-1.5">
+            <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 flex items-center space-x-1.5">
               <Binary className="w-4 h-4 text-cyan-400" />
               <span>Downlink Stream Buffer Target</span>
             </span>
@@ -437,8 +437,8 @@ export const YARAScanner: React.FC = () => {
         {scanResults && (
           <div className={`p-4 rounded-2xl border-2 transition-all duration-300 ${
             scanResults.tripped 
-              ? 'bg-red-950/20 border-red-900/60 shadow-[0_0_20px_rgba(239,68,68,0.15)] text-red-250' 
-              : 'bg-emerald-950/20 border-emerald-900/40 text-emerald-305'
+              ? 'bg-red-950/20 border-red-900/60 shadow-[0_0_20px_rgba(239,68,68,0.15)] text-red-200' 
+              : 'bg-emerald-950/20 border-emerald-900/40 text-emerald-300'
           } animate-in fade-in zoom-in-95`}>
             
             <div className="flex items-center justify-between border-b pb-2 mb-2 border-slate-900/60">
@@ -500,11 +500,11 @@ export const YARAScanner: React.FC = () => {
                       ? 'bg-emerald-950 border border-emerald-900 text-emerald-400'
                       : log.type === 'threat'
                       ? 'bg-red-950 border border-red-900 text-red-500'
-                      : 'bg-slate-900 border border-slate-850 text-cyan-400'
+                      : 'bg-slate-900 border border-slate-800 text-cyan-400'
                   }`}>
                     {log.type}
                   </span>
-                  <span className="text-slate-350 break-normal [letter-spacing:-0.01em]">
+                  <span className="text-slate-300 break-normal [letter-spacing:-0.01em]">
                     {log.msg}
                   </span>
                 </div>

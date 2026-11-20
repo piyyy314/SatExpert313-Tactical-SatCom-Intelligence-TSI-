@@ -67,7 +67,7 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
             <p className="text-[10px] text-slate-500 font-mono font-mono font-mono">Select, charge, and visually align space-borne kinetic defense vectors against verified satellite tracking jam structures</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-405 border border-red-955 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-400 border border-red-950 px-2 py-0.5 rounded">
           ORB_FIRE
         </span>
       </div>
@@ -77,7 +77,7 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
         {/* Left selector inputs */}
         <div className="md:col-span-5 space-y-4">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 block font-mono">Striking Configurations</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block font-mono">Striking Configurations</span>
 
             <div className="space-y-1">
               <label className="text-[7px] font-mono text-slate-500 uppercase">Target Strike Coordinates</label>
@@ -85,12 +85,12 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
                 type="text"
                 value={targetCoords}
                 onChange={(e) => setTargetCoords(e.target.value)}
-                className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-205 focus:outline-none focus:border-red-500"
+                className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-red-500"
               />
             </div>
 
             <div className="space-y-1 text-[8.5px] font-mono">
-              <label className="text-[7px] font-mono text-slate-505 uppercase">Select Space Weapon</label>
+              <label className="text-[7px] font-mono text-slate-500 uppercase">Select Space Weapon</label>
               <div className="grid grid-cols-1 gap-2">
                 {WEAPONS.map(w => (
                   <button
@@ -102,12 +102,12 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
                     }}
                     className={`text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                       selectedWep.id === w.id
-                        ? 'bg-red-955 border-red-500 text-red-400 font-bold'
-                        : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-355'
+                        ? 'bg-red-950 border-red-500 text-red-400 font-bold'
+                        : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-400'
                     }`}
                   >
                     <span>{w.name}</span>
-                    <span className="text-[6.5px] text-slate-550">CODENAME: {w.codename}</span>
+                    <span className="text-[6.5px] text-slate-500">CODENAME: {w.codename}</span>
                   </button>
                 ))}
               </div>
@@ -118,8 +118,8 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
               disabled={isCharging}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 isCharging
-                  ? 'bg-red-955 border-red-500 text-slate-200 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-400 hover:text-red-405'
+                  ? 'bg-red-950 border-red-500 text-slate-200 animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-red-400'
               }`}
             >
               {isCharging ? 'Charging Weapon Systems...' : 'Trigger Orbital Fire'}
@@ -127,11 +127,11 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Striker System Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Striker System Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto scrollbar-none">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -143,7 +143,7 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl">
               <span className="text-[7.5px] font-mono text-slate-500 block">WEAPON CODENAME</span>
-              <span className="text-xs font-mono font-black text-slate-205">{selectedWep.codename}</span>
+              <span className="text-xs font-mono font-black text-slate-200">{selectedWep.codename}</span>
             </div>
 
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl flex flex-col justify-between">
@@ -156,7 +156,7 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
           <div className="bg-black border border-slate-900 p-4 rounded-xl flex flex-col justify-between h-20">
             <div className="flex justify-between items-center text-[7.5px] font-mono text-slate-500 uppercase pb-1">
               <span>Capacitor Charge Bar Status</span>
-              <span className="text-cyan-405 font-bold">{chargeLevel}%</span>
+              <span className="text-cyan-400 font-bold">{chargeLevel}%</span>
             </div>
             <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-950">
               <div 
@@ -166,9 +166,9 @@ export const OrbitalStriker: React.FC<StrikerProps> = ({ addMissionLog }) => {
             </div>
           </div>
 
-          <div className="bg-black border border-slate-905 p-3 rounded-xl flex items-center space-x-2">
-            <AlertTriangle className={`w-4 h-4 ${isCharging ? 'text-red-505 animate-bounce' : 'text-slate-600'}`} />
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase font-medium leading-relaxed">
+          <div className="bg-black border border-slate-900 p-3 rounded-xl flex items-center space-x-2">
+            <AlertTriangle className={`w-4 h-4 ${isCharging ? 'text-red-500 animate-bounce' : 'text-slate-600'}`} />
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase font-medium leading-relaxed">
               Caution: Triggering kinetic strike requires formal clearance authority under international orbital treaties.
             </span>
           </div>

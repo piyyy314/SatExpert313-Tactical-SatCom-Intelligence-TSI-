@@ -75,7 +75,7 @@ export const AegisC2: React.FC = () => {
                     <Target className="w-4 h-4 animate-spin" />
                     <span>{th.source}</span>
                   </div>
-                  <div className="text-[7.5px] text-slate-450 uppercase flex flex-wrap gap-3">
+                  <div className="text-[7.5px] text-slate-400 uppercase flex flex-wrap gap-3">
                     <span>ALTITUDE: {th.altitude} Km</span>
                     <span>SPEED: Mach {th.speed}</span>
                     <span>ETA: {th.impactEta}s</span>
@@ -85,8 +85,8 @@ export const AegisC2: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <span className={`text-[7px] font-mono uppercase px-2 py-1 rounded border font-bold ${
                     th.status === 'INTERCEPTED'
-                      ? 'border-emerald-950 text-emerald-450 bg-emerald-950/15'
-                      : 'border-red-900 text-red-450 bg-red-950/15 animate-pulse'
+                      ? 'border-emerald-950 text-emerald-400 bg-emerald-950/15'
+                      : 'border-red-900 text-red-400 bg-red-950/15 animate-pulse'
                   }`}>
                     {th.status}
                   </span>
@@ -94,7 +94,7 @@ export const AegisC2: React.FC = () => {
                   {th.status !== 'INTERCEPTED' && (
                     <button
                       onClick={() => triggerIntercept(th.id)}
-                      className="bg-red-950/45 hover:bg-red-900 border border-red-800 text-red-405 px-3 py-1.5 rounded-xl font-mono text-[9px] uppercase font-black transition tracking-wider"
+                      className="bg-red-950/45 hover:bg-red-900 border border-red-800 text-red-400 px-3 py-1.5 rounded-xl font-mono text-[9px] uppercase font-black transition tracking-wider"
                     >
                       Fire Interceptor
                     </button>
@@ -109,13 +109,13 @@ export const AegisC2: React.FC = () => {
             {/* Grid */}
             <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
             <div className="absolute w-28 h-28 border border-cyan-800/25 rounded-full animate-ping" style={{ animationDuration: '4s' }}></div>
-            <div className="absolute w-44 h-44 border border-cyan-850/20 rounded-full"></div>
+            <div className="absolute w-44 h-44 border border-cyan-800/20 rounded-full"></div>
             
-            <div className="relative z-10 font-mono text-[8.5px] uppercase bg-black/85 border border-cyan-900/60 px-3 py-1.5 rounded-xl text-cyan-405 font-bold animate-pulse">
+            <div className="relative z-10 font-mono text-[8.5px] uppercase bg-black/85 border border-cyan-900/60 px-3 py-1.5 rounded-xl text-cyan-400 font-bold animate-pulse">
               AEGIS AIR SHIELD STATE CODE: ACTIVE_LOCKED
             </div>
 
-            <div className="absolute bottom-2 left-2 text-[6.5px] font-mono text-slate-655 uppercase">
+            <div className="absolute bottom-2 left-2 text-[6.5px] font-mono text-slate-700 uppercase">
               RADAR INTEGRATION SWEEP ONGOING
             </div>
           </div>
@@ -136,7 +136,7 @@ export const AegisC2: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-950 p-2.5 rounded-xl text-center text-[7.5px] font-mono text-slate-600 uppercase font-bold pr-2 flex items-center justify-center space-x-1.5">
-            <Shield className="w-3.5 h-3.5 text-emerald-450 animate-pulse" />
+            <Shield className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
             <span>TERMINAL PROTECTION FULLY UNLOCKED</span>
           </div>
         </div>

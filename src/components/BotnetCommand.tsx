@@ -60,7 +60,7 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
             <p className="text-[10px] text-slate-500 font-mono">Simulate coordinated satellite IP and ground transceiver traffic amplification attacks to stress test receivers</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-450 border border-red-950 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-400 border border-red-950 px-2 py-0.5 rounded">
           BOTNET_C2
         </span>
       </div>
@@ -79,12 +79,12 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
                 type="text"
                 value={targetIp}
                 onChange={(e) => setTargetIp(e.target.value)}
-                className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-red-505"
+                className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-red-500"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[7px] font-mono text-slate-505 uppercase">Flooding Model Select</label>
+              <label className="text-[7px] font-mono text-slate-500 uppercase">Flooding Model Select</label>
               <div className="grid grid-cols-1 gap-2 font-mono text-[8.5px]">
                 {['SATIP_AMP', 'TCP_SYN', 'UDP_FLOOD'].map((m) => (
                   <button
@@ -96,7 +96,7 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
                     className={`text-left p-2 rounded-xl border transition uppercase ${
                       method === m
                         ? 'bg-red-950/40 border-red-500 text-red-400 font-bold shadow-[0_0_8px_rgba(239,68,68,0.2)]'
-                        : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-350'
+                        : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-300'
                     }`}
                   >
                     {m.replace('_', ' ')} AMPLIFICATION
@@ -109,8 +109,8 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
               onClick={handleToggleAttack}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 isActive
-                  ? 'bg-red-955 border-red-500 text-white animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-400 hover:text-red-405'
+                  ? 'bg-red-950 border-red-500 text-white animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-red-400'
               }`}
             >
               {isActive ? 'Mute Attack Coordinator' : 'Ignite DDoS Coordination'}
@@ -118,11 +118,11 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 overflow-y-auto scrollbar-none flex flex-col justify-between">
-            <span className="text-[7px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">C2 Telemetries Logs</span>
+            <span className="text-[7px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">C2 Telemetries Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -134,12 +134,12 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl">
               <span className="text-[7.5px] font-mono text-slate-500 block">COORDINATED BOT NODES</span>
-              <span className="text-lg font-black font-mono text-slate-202">{totalBots} Slaves</span>
+              <span className="text-lg font-black font-mono text-slate-200">{totalBots} Slaves</span>
             </div>
 
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl flex flex-col justify-between">
               <span className="text-[7.5px] font-mono text-slate-500 block">VICTIM PING LATENCY</span>
-              <span className={`text-lg font-bold font-mono ${targetLatency > 500 ? 'text-red-500 animate-bounce' : 'text-cyan-405'}`}>
+              <span className={`text-lg font-bold font-mono ${targetLatency > 500 ? 'text-red-500 animate-bounce' : 'text-cyan-400'}`}>
                 {targetLatency} ms
               </span>
             </div>
@@ -168,9 +168,9 @@ export const BotnetCommand: React.FC<BotnetProps> = ({ addMissionLog }) => {
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7.5px] font-mono text-slate-650 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7.5px] font-mono text-slate-600 uppercase">
             <span>Security Countermeasures status</span>
-            <span className="text-red-450 font-black">WARNING: PACKET INJECTION COMPLETED</span>
+            <span className="text-red-400 font-black">WARNING: PACKET INJECTION COMPLETED</span>
           </div>
         </div>
 

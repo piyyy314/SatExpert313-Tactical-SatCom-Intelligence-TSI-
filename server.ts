@@ -16,20 +16,22 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
+const PRIMARY_MODEL = 'gemini-4-hydrogen';
+
 // Health and Capabilities endpoint
-app.get('/api/health', (req: Request, res: Response) => {
+app.get('/api/health', (_req: Request, res: Response) => {
   const apiKey = process.env.GEMINI_API_KEY;
   res.json({
     status: 'online',
     timestamp: new Date().toISOString(),
     capabilities: ['MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API'],
     hasGeminiKey: Boolean(apiKey && apiKey !== 'undefined' && apiKey !== ''),
-    model: 'gemini-3.8-flash'
+    model: PRIMARY_MODEL
   });
 });
 
 // Helper to initialize GoogleGenAI securely on the server
-function getGeminiClient(): GoogleGenAI | null {
+export function getGeminiClient(): GoogleGenAI | null {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey || apiKey === 'undefined' || apiKey === '') {
     return null;
@@ -38,13 +40,13 @@ function getGeminiClient(): GoogleGenAI | null {
     apiKey,
     httpOptions: {
       headers: {
-        'User-Agent': 'satexpert-tsi-server/1.0',
+        'User-Agent': 'aistudio-build',
       }
     }
   });
 }
 
-function buildSystemPrompt(context: any, telemetry: any, flags: any): string {
+export function buildSystemPrompt(context: any, telemetry: any, flags: any): string {
   const lat = context?.lat != null ? Number(context.lat).toFixed(4) : '26.4000';
   const lng = context?.lng != null ? Number(context.lng).toFixed(4) : '56.5000';
   const satName = context?.satName || 'Telstar 11N (37.5°W)';
@@ -84,8 +86,8 @@ If Stealth Mode is active, prepend your responses with "[ENC_MASKED] Tactical si
 // Server-side Gemini API Chat Endpoint (Non-streaming)
 app.post('/api/chat', async (req: Request, res: Response) => {
   try {
-    const { prompt, context, telemetry, isStealthMode, isNeuralCleaning, isDecoyActive, isZPEActive } = req.body;
-    if (!prompt || typeof prompt !== 'string') {
+    const { prompt, context, telemetry, isStealthMode, isNeuralCleaning, isDecoyActive, isZPEActive } = req.body ?? {};
+    if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
       res.status(400).json({ error: 'Prompt is required' });
       return;
     }
@@ -94,7 +96,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
     if (!ai) {
       res.status(503).json({ 
         error: 'GEMINI_API_KEY_UNAVAILABLE',
-        message: 'Server Gemini API key is not configured. Client fallback should be engaged.' 
+        message: 'Server Gemini API key is not configured in Settings > Secrets.' 
       });
       return;
     }
@@ -106,44 +108,26 @@ app.post('/api/chat', async (req: Request, res: Response) => {
       isZPEActive
     });
 
-    let replyText = '';
-    let usedModel = 'gemini-3.8-flash';
+    const response = await ai.models.generateContent({
+      model: PRIMARY_MODEL,
+      contents: prompt,
+      config: {
+        systemInstruction: systemPrompt,
+      }
+    });
 
-    try {
-      const response = await ai.models.generateContent({
-        model: 'gemini-3.8-flash',
-        contents: prompt,
-        config: {
-          systemInstruction: systemPrompt,
-          temperature: 0.7,
-          topP: 0.9,
-        }
-      });
-      replyText = response.text || 'No response returned from tactical model.';
-    } catch (primaryErr: any) {
-      console.warn('[Server Gemini primary model 3.8-flash busy/failed, falling back to gemini-2.5-flash]:', primaryErr?.message);
-      usedModel = 'gemini-2.5-flash';
-      const fallbackResponse = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
-        config: {
-          systemInstruction: systemPrompt,
-          temperature: 0.7,
-          topP: 0.9,
-        }
-      });
-      replyText = fallbackResponse.text || 'No response returned from fallback tactical model.';
-    }
+    const replyText = response.text || 'No response returned from tactical model.';
 
     res.json({
       status: 'success',
       text: replyText,
-      model: usedModel,
+      model: PRIMARY_MODEL,
       timestamp: new Date().toISOString()
     });
   } catch (error: any) {
     console.error('[Server Gemini Error]:', error);
-    res.status(500).json({
+    const statusCode = typeof error?.status === 'number' && error.status >= 400 ? error.status : 500;
+    res.status(statusCode).json({
       error: 'SERVER_GEMINI_ERROR',
       message: error?.message || 'Failed to generate response'
     });
@@ -153,8 +137,8 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 // Server-side Gemini API Streaming Endpoint (SSE)
 app.post('/api/chat/stream', async (req: Request, res: Response) => {
   try {
-    const { prompt, context, telemetry, isStealthMode, isNeuralCleaning, isDecoyActive, isZPEActive } = req.body;
-    if (!prompt || typeof prompt !== 'string') {
+    const { prompt, context, telemetry, isStealthMode, isNeuralCleaning, isDecoyActive, isZPEActive } = req.body ?? {};
+    if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
       res.status(400).json({ error: 'Prompt is required' });
       return;
     }
@@ -163,7 +147,7 @@ app.post('/api/chat/stream', async (req: Request, res: Response) => {
     if (!ai) {
       res.status(503).json({ 
         error: 'GEMINI_API_KEY_UNAVAILABLE',
-        message: 'Server Gemini API key is not configured.' 
+        message: 'Server Gemini API key is not configured in Settings > Secrets.' 
       });
       return;
     }
@@ -181,12 +165,10 @@ app.post('/api/chat/stream', async (req: Request, res: Response) => {
     res.flushHeaders();
 
     const responseStream = await ai.models.generateContentStream({
-      model: 'gemini-3.8-flash',
+      model: PRIMARY_MODEL,
       contents: prompt,
       config: {
         systemInstruction: systemPrompt,
-        temperature: 0.7,
-        topP: 0.9,
       }
     });
 
@@ -202,7 +184,8 @@ app.post('/api/chat/stream', async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error('[Server Gemini Stream Error]:', error);
     if (!res.headersSent) {
-      res.status(500).json({
+      const statusCode = typeof error?.status === 'number' && error.status >= 400 ? error.status : 500;
+      res.status(statusCode).json({
         error: 'SERVER_GEMINI_STREAM_ERROR',
         message: error?.message || 'Stream generation failed'
       });
@@ -212,6 +195,8 @@ app.post('/api/chat/stream', async (req: Request, res: Response) => {
     }
   }
 });
+
+export { app };
 
 // Full-Stack Dev / Prod mounting
 async function startServer() {
@@ -228,7 +213,7 @@ async function startServer() {
   } else {
     const distPath = path.resolve(__dirname, 'dist');
     app.use(express.static(distPath));
-    app.use((req: Request, res: Response) => {
+    app.use((_req: Request, res: Response) => {
       res.sendFile(path.resolve(distPath, 'index.html'));
     });
     console.log(`[SatExpert TSI] Serving production static files from ${distPath}`);
@@ -239,7 +224,9 @@ async function startServer() {
   });
 }
 
-startServer().catch((err) => {
-  console.error('[SatExpert TSI] Failed to start server:', err);
-  process.exit(1);
-});
+if (!process.env.VITEST) {
+  startServer().catch((err) => {
+    console.error('[SatExpert TSI] Failed to start server:', err);
+    process.exit(1);
+  });
+}

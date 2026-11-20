@@ -46,13 +46,13 @@ export const USBDeviceManager: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <HardDrive className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <HardDrive className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">USB Hardware & Malware Isolation manager</h3>
             <p className="text-[10px] text-slate-500 font-mono font-mono">Simulate connected flash partitions, analyze bootloader microcode, and perform raw storage sterilization wipes</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded">
           USB_SAN
         </span>
       </div>
@@ -62,29 +62,29 @@ export const USBDeviceManager: React.FC = () => {
         {/* Settings options left */}
         <div className="md:col-span-5 space-y-4 font-mono">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest">Sanitizer operations</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest">Sanitizer operations</span>
 
             <button
               onClick={startMalwareScan}
-              className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
+              className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
             >
               Analyze Partition Firmware
             </button>
 
             <button
               onClick={wipeHardwareStorage}
-              className="w-full bg-red-950/45 hover:bg-red-900 border border-red-800 text-red-105 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
+              className="w-full bg-red-950/45 hover:bg-red-900 border border-red-800 text-red-100 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
             >
               Sanitize NAND Storage Wipe
             </button>
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">USB Operations Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">USB Operations Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-cyan-505 pr-1">▶</span> {log}
+                  <span className="text-cyan-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -94,27 +94,27 @@ export const USBDeviceManager: React.FC = () => {
         {/* Dynamic displays right */}
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="space-y-3 flex-grow font-mono">
-            <span className="text-[8px] font-black uppercase text-slate-450 block">Detected Partition Clusters</span>
+            <span className="text-[8px] font-black uppercase text-slate-400 block">Detected Partition Clusters</span>
 
             {partitions.length === 0 ? (
-              <div className="bg-black/60 border border-slate-900/60 p-6 rounded-xl flex items-center justify-center text-slate-550 text-[10px] uppercase tracking-wider font-extrabold">
+              <div className="bg-black/60 border border-slate-900/60 p-6 rounded-xl flex items-center justify-center text-slate-500 text-[10px] uppercase tracking-wider font-extrabold">
                 Zero active partitions connected to sandbox.
               </div>
             ) : (
               <div className="space-y-2">
                 {partitions.map((part) => (
-                  <div key={part.id} className="bg-black/60 border border-slate-905 p-2.5 rounded-xl flex items-center justify-between">
+                  <div key={part.id} className="bg-black/60 border border-slate-900 p-2.5 rounded-xl flex items-center justify-between">
                     <div>
-                      <div className="text-[9.5px] font-bold text-slate-205">{part.name} ({part.size})</div>
+                      <div className="text-[9.5px] font-bold text-slate-200">{part.name} ({part.size})</div>
                       <div className="text-[7px] text-slate-500 uppercase">FS CAPACITY USED: {part.capacityUsed}%</div>
                     </div>
 
                     <span className={`text-[7px] px-2 py-0.5 rounded border font-semibold ${
                       part.firmwareScan === 'SAFE'
-                        ? 'border-emerald-950 text-emerald-450 bg-emerald-950/10'
+                        ? 'border-emerald-950 text-emerald-400 bg-emerald-950/10'
                         : part.firmwareScan === 'SUSPICIOUS'
                         ? 'border-amber-900 text-amber-500 animate-pulse'
-                        : 'border-red-900 text-red-500 bg-red-955/15 animate-bounce'
+                        : 'border-red-900 text-red-500 bg-red-950/15 animate-bounce'
                     }`}>
                       {part.firmwareScan}
                     </span>
@@ -124,9 +124,9 @@ export const USBDeviceManager: React.FC = () => {
             )}
           </div>
 
-          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-655 uppercase">
+          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-700 uppercase">
             <span>Hardware isolation sandboxing compliant with NIST-800 guidelines</span>
-            <span className="text-emerald-405 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SECURE HANDSHAKES COMPLETE
             </span>
           </div>

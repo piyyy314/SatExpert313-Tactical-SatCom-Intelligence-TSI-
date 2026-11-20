@@ -41,7 +41,7 @@ export const ConnectivityMesh: React.FC<MeshProps> = ({ satellites, selectedSat 
             <p className="text-[10px] text-slate-500 font-mono">Real-time status of cross-link routing, orbital backbones, and optical relay laser handshakes</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-purple-440 border border-purple-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-purple-400 border border-purple-900/40 px-2 py-0.5 rounded">
           OPT_MESH
         </span>
       </div>
@@ -64,7 +64,7 @@ export const ConnectivityMesh: React.FC<MeshProps> = ({ satellites, selectedSat 
                   className={`w-full text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                     selectedRelay.id === sat.id
                       ? 'bg-purple-950/40 border-purple-500 text-purple-400 font-bold'
-                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-350'
+                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   <div className="text-[9px] uppercase tracking-wide flex items-center justify-between">
@@ -73,7 +73,7 @@ export const ConnectivityMesh: React.FC<MeshProps> = ({ satellites, selectedSat 
                       ALT: {sat.altitude}Km
                     </span>
                   </div>
-                  <div className="text-[7.5px] text-slate-550 flex justify-between pr-2">
+                  <div className="text-[7.5px] text-slate-500 flex justify-between pr-2">
                     <span>Transponder: {sat.type}</span>
                     <span>Distance: {calculateRelayDistance(selectedSat, sat)} Km</span>
                   </div>
@@ -83,11 +83,11 @@ export const ConnectivityMesh: React.FC<MeshProps> = ({ satellites, selectedSat 
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Relay Mesh Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Relay Mesh Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-purple-505 pr-1">▶</span> {log}
+                  <span className="text-purple-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -98,18 +98,18 @@ export const ConnectivityMesh: React.FC<MeshProps> = ({ satellites, selectedSat 
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex items-center space-x-2.5">
-              <Globe className="w-5 h-5 text-cyan-405 animate-pulse" />
+              <Globe className="w-5 h-5 text-cyan-400 animate-pulse" />
               <div>
                 <span className="text-[7px] font-mono text-slate-500 block">SOURCE CONSTELLATION UPLINK</span>
-                <span className="text-xs font-mono font-bold text-slate-205 uppercase">{selectedSat.name}</span>
+                <span className="text-xs font-mono font-bold text-slate-200 uppercase">{selectedSat.name}</span>
               </div>
             </div>
 
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex items-center space-x-2.5">
-              <Network className="w-5 h-5 text-cyan-405 animate-pulse" />
+              <Network className="w-5 h-5 text-cyan-400 animate-pulse" />
               <div>
                 <span className="text-[7px] font-mono text-slate-500 block">TRANSIT BACKUP RELAY</span>
-                <span className="text-xs font-mono font-bold text-slate-205 uppercase">{selectedRelay.name}</span>
+                <span className="text-xs font-mono font-bold text-slate-200 uppercase">{selectedRelay.name}</span>
               </div>
             </div>
           </div>
@@ -135,30 +135,30 @@ export const ConnectivityMesh: React.FC<MeshProps> = ({ satellites, selectedSat 
 
             <div className="relative z-10 flex w-full justify-around items-center px-4 font-mono">
               <div className="flex flex-col items-center">
-                <div className="w-2.5 h-2.5 bg-cyan-505 rounded-full animate-ping mb-1"></div>
+                <div className="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-ping mb-1"></div>
                 <span className="text-[8.5px] text-cyan-400 font-bold bg-black/85 px-2 py-0.5 border border-cyan-900 rounded">{selectedSat.name}</span>
               </div>
 
               <div className="flex flex-col items-center">
-                <div className="w-2.5 h-2.5 bg-purple-504 rounded-full animate-ping mb-1"></div>
+                <div className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-ping mb-1"></div>
                 <span className="text-[8.5px] text-purple-400 font-bold bg-black/85 px-2 py-0.5 border border-purple-900 rounded">{selectedRelay.name}</span>
               </div>
             </div>
 
-            <div className="absolute bottom-2 right-2 text-[6.5px] font-mono text-slate-655 uppercase">
+            <div className="absolute bottom-2 right-2 text-[6.5px] font-mono text-slate-700 uppercase">
               LASER COUPLING STATE: COHERENT
             </div>
           </div>
 
           <div className="bg-black border border-slate-900 p-3.5 rounded-2xl flex items-center justify-between">
             <div className="space-y-0.5">
-              <span className="text-[7px] font-mono text-slate-505 block">Consolidated relay latency</span>
-              <span className="text-sm font-mono font-black text-cyan-405">{meshLatency} ms</span>
+              <span className="text-[7px] font-mono text-slate-500 block">Consolidated relay latency</span>
+              <span className="text-sm font-mono font-black text-cyan-400">{meshLatency} ms</span>
             </div>
 
             <button
               onClick={handleRecalculateRelay}
-              className="bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 px-3 py-1.5 rounded-xl font-mono text-[8.5px] font-black uppercase tracking-wider transition"
+              className="bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 px-3 py-1.5 rounded-xl font-mono text-[8.5px] font-black uppercase tracking-wider transition"
             >
               Optimize Mesh Routes
             </button>

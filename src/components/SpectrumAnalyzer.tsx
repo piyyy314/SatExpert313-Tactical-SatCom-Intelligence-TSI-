@@ -32,13 +32,13 @@ export const SpectrumAnalyzer: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <Radio className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <Radio className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">Digital RF Spectrum Analyzer Graph</h3>
             <p className="text-[10px] text-slate-500 font-mono">Real-time carrier waves visual analyzer showing thermal noise offsets and signal peak characteristics</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded">
           SPEC_ANL
         </span>
       </div>
@@ -55,7 +55,7 @@ export const SpectrumAnalyzer: React.FC = () => {
               <button
                 onClick={() => setIsRunning(!isRunning)}
                 className={`py-1 px-2.5 border rounded-lg text-[8px] font-black uppercase transition ${
-                  isRunning ? 'bg-cyan-955 border-cyan-500 text-cyan-400 animate-pulse' : 'bg-slate-950 border-slate-900 text-slate-651'
+                  isRunning ? 'bg-cyan-950 border-cyan-500 text-cyan-400 animate-pulse' : 'bg-slate-950 border-slate-900 text-slate-700'
                 }`}
               >
                 {isRunning ? 'RUNNING' : 'PAUSED'}
@@ -71,12 +71,12 @@ export const SpectrumAnalyzer: React.FC = () => {
         {/* Display visualizer right */}
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="space-y-3 font-mono">
-            <span className="text-[8px] font-black uppercase text-slate-450 block">Frequency Bin Amplitude Plots</span>
+            <span className="text-[8px] font-black uppercase text-slate-400 block">Frequency Bin Amplitude Plots</span>
 
             <div className="space-y-2.5">
               {bins.map((bin) => (
                 <div key={bin.bin} className="flex flex-col space-y-1">
-                  <div className="flex justify-between text-[8px] text-slate-350">
+                  <div className="flex justify-between text-[8px] text-slate-300">
                     <span>Bin #{bin.bin} ({bin.frequency} MHz)</span>
                     <span className="font-bold">{bin.amplitude} dBm</span>
                   </div>
@@ -92,9 +92,9 @@ export const SpectrumAnalyzer: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t border-slate-905 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-605 uppercase">
+          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Spectrum calibration accurate to ±0.2dBm range limit</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> CALIBRATED
             </span>
           </div>

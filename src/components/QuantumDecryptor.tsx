@@ -88,11 +88,11 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
                   className={`w-full text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                     activeRecord.id === ch.id
                       ? 'bg-purple-950/40 border-purple-500 text-purple-400 font-black'
-                      : 'bg-slate-950 border-slate-900/65 text-slate-500 hover:text-slate-350'
+                      : 'bg-slate-950 border-slate-900/65 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   <div className="text-[9.5px] uppercase tracking-wider">{ch.name}</div>
-                  <div className="text-[7.5px] text-slate-550 flex justify-between pr-2">
+                  <div className="text-[7.5px] text-slate-500 flex justify-between pr-2">
                     <span>Key length: {ch.bitLength} bits</span>
                     <span className="truncate max-w-[120px]">Cipher: {ch.cipher}</span>
                   </div>
@@ -104,7 +104,7 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
               <button
                 onClick={() => setCryptAlgorithm('SHOR')}
                 className={`flex-grow py-1.5 rounded-lg border text-[8px] font-bold uppercase transition font-mono ${
-                  cryptAlgorithm === 'SHOR' ? 'bg-cyan-950/40 border-cyan-500 text-cyan-405' : 'bg-slate-950 border-slate-900/60 text-slate-600 hover:text-slate-300'
+                  cryptAlgorithm === 'SHOR' ? 'bg-cyan-950/40 border-cyan-500 text-cyan-400' : 'bg-slate-950 border-slate-900/60 text-slate-600 hover:text-slate-300'
                 }`}
               >
                 Shor's Factoring
@@ -112,7 +112,7 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
               <button
                 onClick={() => setCryptAlgorithm('ANNEALING')}
                 className={`flex-grow py-1.5 rounded-lg border text-[8px] font-bold uppercase transition font-mono ${
-                  cryptAlgorithm === 'ANNEALING' ? 'bg-cyan-950/40 border-cyan-500 text-cyan-405' : 'bg-slate-950 border-slate-900/60 text-slate-600 hover:text-slate-300'
+                  cryptAlgorithm === 'ANNEALING' ? 'bg-cyan-950/40 border-cyan-500 text-cyan-400' : 'bg-slate-950 border-slate-900/60 text-slate-600 hover:text-slate-300'
                 }`}
               >
                 Quantum Anneal
@@ -122,7 +122,7 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
 
           {/* Core Telemetry logs */}
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-32 flex flex-col justify-between">
-            <span className="text-[7px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 flex justify-between">
+            <span className="text-[7px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 flex justify-between">
               <span>Decoder Hardware logs</span>
               <Terminal className="w-3.5 h-3.5 text-slate-600" />
             </span>
@@ -159,7 +159,7 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
                 <span>Intercepted Raw Ciphertext Packet</span>
                 <span className="text-purple-400 select-all font-bold">SHA-256</span>
               </div>
-              <div className="font-mono text-[8.5px] text-slate-450 leading-normal select-all select-all font-bold truncate">
+              <div className="font-mono text-[8.5px] text-slate-400 leading-normal select-all select-all font-bold truncate">
                 {activeRecord.cipher}
               </div>
             </div>
@@ -169,13 +169,13 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
                 <span>Decrypted ASCII Payload Outcome</span>
                 <span className="flex items-center space-x-1">
                   {success ? <Unlock className="w-3 h-3 text-emerald-400" /> : <Lock className="w-3 h-3 text-red-400" />}
-                  <span className={success ? 'text-emerald-440' : 'text-red-450'}>
+                  <span className={success ? 'text-emerald-400' : 'text-red-400'}>
                     {success ? 'UNLOCKED' : 'LOCKED'}
                   </span>
                 </span>
               </div>
               <div className={`font-mono text-[10px] leading-relaxed transition font-bold uppercase ${
-                success ? 'text-emerald-450 select-all' : 'text-slate-600 italic select-none'
+                success ? 'text-emerald-400 select-all' : 'text-slate-600 italic select-none'
               }`}>
                 {success ? activeRecord.decrypted : 'Awaiting decryption lock on transponder array...'}
               </div>
@@ -187,8 +187,8 @@ export const QuantumDecryptor: React.FC<QuantumDecryptorProps> = ({ addMissionLo
             disabled={isDecrypting}
             className={`w-full py-3 rounded-xl border font-mono text-[9px] uppercase tracking-widest font-black transition ${
               isDecrypting
-                ? 'bg-purple-955 border-purple-500 text-purple-440 animate-pulse'
-                : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405'
+                ? 'bg-purple-950 border-purple-500 text-purple-400 animate-pulse'
+                : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400'
             }`}
           >
             {isDecrypting ? 'Evaluating divisors...' : 'Run Cryptanalysis Decode'}

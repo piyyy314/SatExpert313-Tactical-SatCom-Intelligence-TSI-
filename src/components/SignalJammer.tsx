@@ -33,7 +33,7 @@ export const SignalJammer: React.FC<JammerProps> = ({ addMissionLog }) => {
             <p className="text-[10px] text-slate-500 font-mono">Tweak and broadcast high-power interference signals across localized frequencies to mask transponder signals or disrupt hostile tracking gear</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-405 border border-red-955 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-400 border border-red-950 px-2 py-0.5 rounded">
           JAM_RF
         </span>
       </div>
@@ -58,7 +58,7 @@ export const SignalJammer: React.FC<JammerProps> = ({ addMissionLog }) => {
                     className={`py-1.5 rounded-lg border transition ${
                       jammerWave === w
                         ? 'bg-red-950/40 border-red-500 text-red-400 font-bold'
-                        : 'bg-slate-950 border-slate-900 text-slate-505 hover:text-slate-350'
+                        : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
                     }`}
                   >
                     {w.replace('_', ' ')}
@@ -89,8 +89,8 @@ export const SignalJammer: React.FC<JammerProps> = ({ addMissionLog }) => {
               onClick={handleToggleEmission}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-wider transition ${
                 isEmitting
-                  ? 'bg-red-955 border-red-500 text-slate-205 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-401 hover:text-red-401'
+                  ? 'bg-red-950 border-red-500 text-slate-200 animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-red-400'
               }`}
             >
               {isEmitting ? 'Halt EM Emission Interference' : 'Ignit EM Interference'}
@@ -98,11 +98,11 @@ export const SignalJammer: React.FC<JammerProps> = ({ addMissionLog }) => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Tuner Assembly Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Tuner Assembly Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -114,14 +114,14 @@ export const SignalJammer: React.FC<JammerProps> = ({ addMissionLog }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex flex-col justify-between font-mono">
               <span className="text-[7.5px] font-mono text-slate-500 block">TRANSMITTER CARRIER STATUS</span>
-              <strong className={`text-xs ${isEmitting ? 'text-red-450 animate-pulse' : 'text-slate-505'}`}>
+              <strong className={`text-xs ${isEmitting ? 'text-red-400 animate-pulse' : 'text-slate-500'}`}>
                 {isEmitting ? 'EMITTING_NOISE_WAVE' : 'CARRIER_MUTED'}
               </strong>
             </div>
 
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex flex-col justify-between font-mono">
               <span className="text-[7.5px] font-mono text-slate-500 block">WAVE SYNTH TYPE</span>
-              <strong className="text-xs text-slate-205">{jammerWave} MOD</strong>
+              <strong className="text-xs text-slate-200">{jammerWave} MOD</strong>
             </div>
           </div>
 
@@ -136,13 +136,13 @@ export const SignalJammer: React.FC<JammerProps> = ({ addMissionLog }) => {
               <div className="text-[9.5px] font-black text-red-400 tracking-widest uppercase">
                 EMISS_AMP_LEVEL: {isEmitting ? 'EMISSION_ACTIVE' : 'MUTED'}
               </div>
-              <p className="text-[7px] text-slate-550 leading-relaxed uppercase tracking-wider max-w-sm">
+              <p className="text-[7px] text-slate-500 leading-relaxed uppercase tracking-wider max-w-sm">
                 Amplifier high bias active. Ensure emission output complies with localized regulatory boundaries unless tactical defense override codes are applied.
               </p>
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center gap-2 text-[7px] font-mono text-slate-655 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center gap-2 text-[7px] font-mono text-slate-700 uppercase">
             <AlertTriangle className={`w-3.5 h-3.5 ${isEmitting ? 'text-red-500 animate-bounce' : 'text-slate-600'}`} />
             <span>Caution: Sustained RF jamming blocks all close-range downlink tracking telemetry feeds.</span>
           </div>

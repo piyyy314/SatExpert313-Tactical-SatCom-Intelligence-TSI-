@@ -131,19 +131,19 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
 
   return (
     <div className={`p-6 bg-slate-950 border-2 rounded-3xl text-slate-100 flex flex-col space-y-6 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 ${
-      isStealthMode ? 'border-red-955' : 'border-slate-900'
+      isStealthMode ? 'border-red-950' : 'border-slate-900'
     }`}>
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <Cpu className={`w-5 h-5 ${isStealthMode ? 'text-red-500 animate-pulse' : 'text-cyan-405'}`} />
+          <Cpu className={`w-5 h-5 ${isStealthMode ? 'text-red-500 animate-pulse' : 'text-cyan-400'}`} />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">S-Bridge Core Hardware Infrastructure Supervisor</h3>
             <p className="text-[10px] text-slate-500 font-mono">Real-time health telemetry across ground parabolic transmitters, high-power BUC signal amplifiers, downconverters, and backplane DSPs</p>
           </div>
         </div>
         <span className={`text-[7.5px] font-mono uppercase bg-slate-900 px-2 py-0.5 rounded ${
-          isStealthMode ? 'text-red-500 border border-red-955 animate-pulse' : 'text-cyan-401 border border-cyan-900/40'
+          isStealthMode ? 'text-red-500 border border-red-950 animate-pulse' : 'text-cyan-400 border border-cyan-900/40'
         }`}>
           INFRA_GRID
         </span>
@@ -154,7 +154,7 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
         {/* Core Controls Column Left */}
         <div className="lg:col-span-5 space-y-4 font-mono">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest">Macro Diagnostic Routines</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest">Macro Diagnostic Routines</span>
 
             <div className="bg-black border border-slate-900 p-3 rounded-2xl text-[8px] text-slate-500 leading-relaxed uppercase tracking-wider">
               Optimize infrastructure telemetry registers routinely. High BUC temperatures above 80°C introduce signal distortion fading, which directly degrades the active transponder lock performance.
@@ -177,8 +177,8 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
               disabled={isRefreshing}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-widest transition ${
                 isRefreshing
-                  ? 'bg-red-955 border-red-500 text-slate-205 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-401 hover:text-cyan-401'
+                  ? 'bg-red-950 border-red-500 text-slate-200 animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-cyan-400'
               }`}
             >
               {isRefreshing ? 'Recycling hardware loops...' : 'Recycle Hardware Transceivers'}
@@ -186,7 +186,7 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-36 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-550 uppercase tracking-widest border-b border-slate-903 pb-1 block">Infrastructure Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-500 uppercase tracking-widest border-b border-slate-900 pb-1 block">Infrastructure Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1.5 overflow-y-auto scrollbar-thin">
               {activeLogs.map((log, idx) => (
                 <div key={idx} className="truncate">
@@ -215,10 +215,10 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
                   </div>
                   <span className={`text-[6px] px-1.5 py-0.5 font-bold uppercase rounded border ${
                     comp.status === 'NOMINAL'
-                      ? 'border-emerald-950 text-emerald-400 bg-emerald-955/10'
+                      ? 'border-emerald-950 text-emerald-400 bg-emerald-950/10'
                       : comp.status === 'CALIBRATING'
-                      ? 'border-cyan-900 text-cyan-400 bg-cyan-955/15 animate-pulse'
-                      : 'border-red-900 text-red-500 bg-red-955/15 animate-bounce'
+                      ? 'border-cyan-900 text-cyan-400 bg-cyan-950/15 animate-pulse'
+                      : 'border-red-900 text-red-500 bg-red-950/15 animate-bounce'
                   }`}>
                     {comp.status}
                   </span>
@@ -227,15 +227,15 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
                 {/* Sub meters */}
                 <div className="grid grid-cols-3 gap-2 text-[7.5px] border-t border-slate-900/60 pt-2 text-slate-400 bg-slate-950/20 p-1.5 rounded-lg">
                   <div>
-                    <span className="block text-slate-550 uppercase">Bias Pot</span>
+                    <span className="block text-slate-500 uppercase">Bias Pot</span>
                     <strong>{comp.voltage.toFixed(1)} V</strong>
                   </div>
                   <div>
-                    <span className="block text-slate-550 uppercase">Temp</span>
-                    <strong className={`${comp.status === 'OVERHEATED' ? 'text-red-405 animate-pulse font-black' : ''}`}>{comp.temperature}°C</strong>
+                    <span className="block text-slate-500 uppercase">Temp</span>
+                    <strong className={`${comp.status === 'OVERHEATED' ? 'text-red-400 animate-pulse font-black' : ''}`}>{comp.temperature}°C</strong>
                   </div>
                   <div>
-                    <span className="block text-slate-550 uppercase">Load</span>
+                    <span className="block text-slate-500 uppercase">Load</span>
                     <strong>{comp.load}%</strong>
                   </div>
                 </div>
@@ -244,14 +244,14 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
                   <button
                     onClick={() => triggerCooling(comp.id)}
                     disabled={comp.status === 'CALIBRATING'}
-                    className="bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-401 hover:text-cyan-401 py-1 rounded-lg text-[7px] uppercase tracking-wider transition font-black"
+                    className="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-cyan-400 py-1 rounded-lg text-[7px] uppercase tracking-wider transition font-black"
                   >
                     Cool Loop
                   </button>
                   <button
                     onClick={() => calibrateHardware(comp.id)}
                     disabled={comp.status === 'CALIBRATING'}
-                    className="bg-slate-900 hover:bg-slate-850 border border-slate-800 text-slate-401 hover:text-cyan-401 py-1 rounded-lg text-[7px] uppercase tracking-wider transition font-black"
+                    className="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-cyan-400 py-1 rounded-lg text-[7px] uppercase tracking-wider transition font-black"
                   >
                     Calibrate
                   </button>
@@ -260,9 +260,9 @@ export const Infrastructure: React.FC<InfrastructureProps> = ({ isStealthMode, a
             ))}
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] text-slate-650 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] text-slate-600 uppercase">
             <span>Hardware limits aligned with MIL-STD hardware specifications</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> HARDWARE OK
             </span>
           </div>

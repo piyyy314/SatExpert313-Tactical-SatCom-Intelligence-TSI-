@@ -38,13 +38,13 @@ export const TacticalScriptEnv: React.FC<ScriptProps> = ({ addMissionLog }) => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <Code className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <Code className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">Tactical Script Automation Studio</h3>
             <p className="text-[10px] text-slate-500 font-mono">Write, validate, and compile custom spectrum sweeps and telemetry automation scripts for local terminal controllers</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded">
           SCRIPT_V8
         </span>
       </div>
@@ -54,15 +54,15 @@ export const TacticalScriptEnv: React.FC<ScriptProps> = ({ addMissionLog }) => {
         {/* Editor window left */}
         <div className="lg:col-span-8 bg-black border border-slate-900 rounded-2xl p-4 flex flex-col justify-between h-96">
           <div className="flex justify-between items-center pb-2 border-b border-slate-900">
-            <span className="text-[8px] font-black uppercase text-slate-450 font-mono">TypeScript / ES6 Source Input</span>
-            <span className="text-[7.5px] font-mono text-slate-505">AUTOMATION_SANDBOX_V2</span>
+            <span className="text-[8px] font-black uppercase text-slate-400 font-mono">TypeScript / ES6 Source Input</span>
+            <span className="text-[7.5px] font-mono text-slate-500">AUTOMATION_SANDBOX_V2</span>
           </div>
 
           <textarea
             value={scriptText}
             onChange={(e) => setScriptText(e.target.value)}
             disabled={isBuilding}
-            className="flex-grow bg-slate-950 text-xs font-mono text-cyan-305 p-3 rounded-xl border border-slate-900 focus:outline-none focus:border-cyan-505 resize-none my-3 select-all leading-relaxed whitespace-pre"
+            className="flex-grow bg-slate-950 text-xs font-mono text-cyan-300 p-3 rounded-xl border border-slate-900 focus:outline-none focus:border-cyan-500 resize-none my-3 select-all leading-relaxed whitespace-pre"
           />
 
           <button
@@ -70,8 +70,8 @@ export const TacticalScriptEnv: React.FC<ScriptProps> = ({ addMissionLog }) => {
             disabled={isBuilding}
             className={`w-full py-2.5 rounded-xl border text-[9px] font-mono font-black uppercase tracking-widest transition ${
               isBuilding
-                ? 'bg-cyan-955 border-cyan-500 text-slate-201 animate-pulse'
-                : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-401 hover:text-cyan-401'
+                ? 'bg-cyan-950 border-cyan-500 text-slate-200 animate-pulse'
+                : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-cyan-400'
             }`}
           >
             {isBuilding ? 'Validating Abstract Syntax Trees...' : 'Compile and Load Code'}
@@ -92,9 +92,9 @@ export const TacticalScriptEnv: React.FC<ScriptProps> = ({ addMissionLog }) => {
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-655 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-700 uppercase">
             <span>Sandboxed execution bounds active</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SECURE HANDSHAKES COMPLETE
             </span>
           </div>

@@ -65,7 +65,7 @@ export const LiveComms: React.FC<CommsProps> = ({ isStealthMode, addMissionLog }
             <p className="text-[10px] text-slate-500 font-mono">Establish point-to-point secure laser link communication channels with operating command cells and orbital operators</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-purple-405 border border-purple-900/40 px-2 py-0.5 rounded animate-pulse">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-purple-400 border border-purple-900/40 px-2 py-0.5 rounded animate-pulse">
           {encryptionKey}
         </span>
       </div>
@@ -78,7 +78,7 @@ export const LiveComms: React.FC<CommsProps> = ({ isStealthMode, addMissionLog }
             {messages.map((m) => (
               <div key={m.id} className="space-y-1 bg-slate-950/40 border border-slate-900 p-2.5 rounded-xl">
                 <div className="flex justify-between items-center text-[7.5px] text-slate-500 font-black">
-                  <span className={m.sender === 'TACTICAL_OPERATOR' ? 'text-cyan-400' : 'text-purple-405'}>
+                  <span className={m.sender === 'TACTICAL_OPERATOR' ? 'text-cyan-400' : 'text-purple-400'}>
                     {m.sender}
                   </span>
                   <span>{m.time} UTC</span>
@@ -119,13 +119,13 @@ export const LiveComms: React.FC<CommsProps> = ({ isStealthMode, addMissionLog }
 
             <div className="bg-black p-3 border border-slate-900 rounded-xl space-y-1.5 text-[8.5px]">
               <span className="text-slate-500 block uppercase text-[7px]">Decryption state status</span>
-              <span className="text-emerald-450 font-extrabold block">ENCRYPTED SHIELDS ENGAGED</span>
+              <span className="text-emerald-400 font-extrabold block">ENCRYPTED SHIELDS ENGAGED</span>
             </div>
           </div>
 
           <div className="border-t border-slate-100/5 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Laser alignment locked</span>
-            <span className="text-emerald-455 font-black">REF_OK</span>
+            <span className="text-emerald-500 font-black">REF_OK</span>
           </div>
         </div>
 

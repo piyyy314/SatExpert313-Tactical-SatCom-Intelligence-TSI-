@@ -46,7 +46,7 @@ export const SpectralCanary: React.FC = () => {
             <p className="text-[10px] text-slate-500 font-mono">Observe ambient RF carriers across satellite telemetry channels; triggers immediate warning on signal anomalies or malicious injections</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-405 border border-red-955 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-400 border border-red-950 px-2 py-0.5 rounded">
           SPEC_CANARY
         </span>
       </div>
@@ -56,7 +56,7 @@ export const SpectralCanary: React.FC = () => {
         {/* Settings options left */}
         <div className="md:col-span-5 space-y-4 font-mono">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest">Canary Status Indicators</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest">Canary Status Indicators</span>
 
             <div className="bg-black border border-slate-900 p-3 rounded-2xl flex items-center justify-center space-x-2">
               <span className={`w-3.5 h-3.5 rounded-full animate-ping ${
@@ -69,18 +69,18 @@ export const SpectralCanary: React.FC = () => {
 
             <button
               onClick={handleSweepSpectrum}
-              className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
+              className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
             >
               Force Ambient Sweep Probe
             </button>
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Canary Audit Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Canary Audit Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -90,13 +90,13 @@ export const SpectralCanary: React.FC = () => {
         {/* Display right */}
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="space-y-3 flex-grow font-mono">
-            <span className="text-[8px] font-black uppercase text-slate-450 block">Monitored Frequencies Peak Array</span>
+            <span className="text-[8px] font-black uppercase text-slate-400 block">Monitored Frequencies Peak Array</span>
 
             <div className="space-y-2">
               {channels.map((chan) => (
-                <div key={chan.frequency} className="bg-black/60 border border-slate-905 p-2.5 rounded-xl flex items-center justify-between">
+                <div key={chan.frequency} className="bg-black/60 border border-slate-900 p-2.5 rounded-xl flex items-center justify-between">
                   <div>
-                    <div className="text-[9.5px] font-bold text-slate-205">Frequency {chan.frequency} GHz</div>
+                    <div className="text-[9.5px] font-bold text-slate-200">Frequency {chan.frequency} GHz</div>
                     <div className="text-[7.5px] text-slate-500">PEAK AMPLITUDE: {chan.peakValue} dBm</div>
                   </div>
 
@@ -114,9 +114,9 @@ export const SpectralCanary: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-605 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Spectrum shield sweeps verified</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SWEEP NOMINAL OK
             </span>
           </div>

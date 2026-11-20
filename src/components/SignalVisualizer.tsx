@@ -643,7 +643,7 @@ export const SignalVisualizer: React.FC<SignalVisualizerProps> = ({
           {/* Live frequency labels at bottom */}
           <div className="flex items-center justify-between text-[6.5px] font-mono text-slate-500 uppercase tracking-wider relative z-20">
             <span>U_FC: 14.00 GHz</span>
-            <span className={`font-extrabold ${isCriticalDegradation ? 'text-red-400' : 'text-slate-350'}`}>
+            <span className={`font-extrabold ${isCriticalDegradation ? 'text-red-400' : 'text-slate-300'}`}>
               {isCriticalDegradation ? 'CARRIER LOCK DEGRADED' : 'Uplink Peak Center'}
             </span>
             <span>U_FC: 14.50 GHz</span>

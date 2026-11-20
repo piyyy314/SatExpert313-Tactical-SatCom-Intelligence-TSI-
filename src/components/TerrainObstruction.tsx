@@ -30,13 +30,13 @@ export const TerrainObstruction: React.FC<ObstructionProps> = ({ angles }) => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <Mountain className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <Mountain className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">Digital Elevation Model (DEM) & Fresnel Obstruction Analyzer</h3>
             <p className="text-[10px] text-slate-500 font-mono font-mono">Simulate path obstructions from local geographic relief contours and calculate line-of-sight link block ratios</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded">
           TERR_OBS
         </span>
       </div>
@@ -50,15 +50,15 @@ export const TerrainObstruction: React.FC<ObstructionProps> = ({ angles }) => {
 
             <div className="bg-black/60 border border-slate-900 p-3 rounded-xl text-[8.5px] space-y-2">
               <div>
-                <span className="text-slate-505 block">Dish Azimuth Angle</span>
+                <span className="text-slate-500 block">Dish Azimuth Angle</span>
                 <strong>{angles.azimuth.toFixed(2)}°</strong>
               </div>
               <div>
-                <span className="text-slate-505 block">Dish Elevation Angle</span>
+                <span className="text-slate-500 block">Dish Elevation Angle</span>
                 <strong>{angles.elevation.toFixed(2)}°</strong>
               </div>
               <div>
-                <span className="text-slate-505 block">Slant Range Distance</span>
+                <span className="text-slate-500 block">Slant Range Distance</span>
                 <strong>{angles.distance.toFixed(1)} Km</strong>
               </div>
             </div>
@@ -66,7 +66,7 @@ export const TerrainObstruction: React.FC<ObstructionProps> = ({ angles }) => {
 
           <button
             onClick={handleRecalculateTerrain}
-            className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
+            className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-wider transition"
           >
             Refresh DEM Coordinates
           </button>
@@ -76,13 +76,13 @@ export const TerrainObstruction: React.FC<ObstructionProps> = ({ angles }) => {
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl flex flex-col justify-between">
-              <span className="text-[7.5px] text-slate-550 block">FRESNEL OBSTACLE RATIO</span>
-              <strong className="text-xs text-red-405">{fresnelObstruction}%</strong>
+              <span className="text-[7.5px] text-slate-500 block">FRESNEL OBSTACLE RATIO</span>
+              <strong className="text-xs text-red-400">{fresnelObstruction}%</strong>
             </div>
 
-            <div className="bg-slate-950 border border-slate-905 p-3 rounded-xl flex flex-col justify-between">
-              <span className="text-[7.5px] text-slate-550 block">LINE-OF-SIGHT STATUS</span>
-              <span className="text-xs text-emerald-450 font-black">NOMINAL_PATH_OK</span>
+            <div className="bg-slate-950 border border-slate-900 p-3 rounded-xl flex flex-col justify-between">
+              <span className="text-[7.5px] text-slate-500 block">LINE-OF-SIGHT STATUS</span>
+              <span className="text-xs text-emerald-400 font-black">NOMINAL_PATH_OK</span>
             </div>
           </div>
 
@@ -91,16 +91,16 @@ export const TerrainObstruction: React.FC<ObstructionProps> = ({ angles }) => {
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:12px_12px] opacity-45"></div>
 
             <div className="relative z-10 space-y-1">
-              <div className="text-[9.5px] font-black text-cyan-405 tracking-widest uppercase">
+              <div className="text-[9.5px] font-black text-cyan-400 tracking-widest uppercase">
                 Fresnel Path Calculation Sweep
               </div>
-              <p className="text-[7px] text-slate-505 uppercase">
+              <p className="text-[7px] text-slate-500 uppercase">
                 Azimuth {angles.azimuth.toFixed(2)}° and elevation {angles.elevation.toFixed(2)}° confirm point-to-point coherence across regional topography contours without signal degradation.
               </p>
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-2 flex items-center gap-2 text-[7px] text-slate-655 uppercase">
+          <div className="border-t border-slate-900 pt-2 flex items-center gap-2 text-[7px] text-slate-700 uppercase">
             <AlertTriangle className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
             <span>Path loss measurements calibrated to ITU-R propagation standards</span>
           </div>

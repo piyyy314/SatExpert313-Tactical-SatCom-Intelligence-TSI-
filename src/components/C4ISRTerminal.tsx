@@ -225,7 +225,7 @@ export const C4ISRTerminal: React.FC<C4ISRTerminalProps> = ({
         : 'bg-slate-950 border-slate-900'
     }`}>
       {/* Top Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-850 pb-5">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div className="flex items-center space-x-3">
           <div className="p-2.5 rounded-2xl bg-cyan-950/60 border border-cyan-800/80 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
             <Radio className="w-6 h-6 text-cyan-400 animate-pulse" />
@@ -289,7 +289,7 @@ export const C4ISRTerminal: React.FC<C4ISRTerminalProps> = ({
       {activeTab === 'osint_telegram' && (
         <div className="space-y-5 animate-in fade-in duration-200">
           {/* Controls bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900/60 p-3 rounded-2xl border border-slate-850">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900/60 p-3 rounded-2xl border border-slate-800">
             <div className="flex items-center space-x-2 flex-1 min-w-[260px]">
               <div className="relative flex-1">
                 <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-500" />
@@ -382,12 +382,12 @@ export const C4ISRTerminal: React.FC<C4ISRTerminalProps> = ({
                   </div>
                 </div>
 
-                <p className="text-[10px] text-slate-200 font-mono leading-relaxed bg-slate-950/60 p-2.5 rounded-xl border border-slate-850">
+                <p className="text-[10px] text-slate-200 font-mono leading-relaxed bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
                   {msg.text}
                 </p>
 
                 {msg.geo && (
-                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-850/80 text-[7.5px] font-mono text-slate-400">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800/80 text-[7.5px] font-mono text-slate-400">
                     <div className="flex items-center space-x-2">
                       <span className="text-slate-500">EXTRACTED LOCATION:</span>
                       <span className="text-cyan-300 font-bold">{msg.geo.locationName}</span>
@@ -669,7 +669,7 @@ export const C4ISRTerminal: React.FC<C4ISRTerminalProps> = ({
       {/* TAB 3: HEATMAP CORRELATION (THERMAL FIRES & C2/MALWARE) */}
       {activeTab === 'heatmap_intel' && (
         <div className="space-y-5 animate-in fade-in duration-200">
-          <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-2xl border border-slate-850">
+          <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-2xl border border-slate-800">
             <div>
               <h3 className="text-xs font-mono font-bold text-slate-200 uppercase">
                 Geospatial Tactical Heatmap Correlation
@@ -757,7 +757,7 @@ export const C4ISRTerminal: React.FC<C4ISRTerminalProps> = ({
 
               <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
                 {displayedFires.map(fire => (
-                  <div key={fire.id} className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-850 space-y-1 text-[8px] font-mono">
+                  <div key={fire.id} className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1 text-[8px] font-mono">
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-slate-200 flex items-center space-x-1">
                         {fire.category === 'MARITIME_SHIP' ? <Ship className="w-2.5 h-2.5 text-cyan-400 shrink-0" /> : <Flame className="w-2.5 h-2.5 text-amber-400 shrink-0" />}
@@ -808,7 +808,7 @@ export const C4ISRTerminal: React.FC<C4ISRTerminalProps> = ({
 
               <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
                 {DETECTED_MALWARE_C2.map(c2 => (
-                  <div key={c2.id} className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-850 space-y-1 text-[8px] font-mono">
+                  <div key={c2.id} className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1 text-[8px] font-mono">
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-slate-200">{c2.name}</span>
                       <span className="px-1 py-0.2 rounded bg-red-950 text-red-300 border border-red-800 font-bold">

@@ -66,13 +66,13 @@ export const RemoteAccessTerminal: React.FC<TerminalProps> = ({ addMissionLog })
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <TermIcon className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <TermIcon className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">Secure Remote Access Terminal Console</h3>
             <p className="text-[10px] text-slate-500 font-mono">Establish encrypted SSH channels to target command centers and satellite receiver controllers globally</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded animate-pulse">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded animate-pulse">
           SSH_SHELL
         </span>
       </div>
@@ -99,12 +99,12 @@ export const RemoteAccessTerminal: React.FC<TerminalProps> = ({ addMissionLog })
                   }}
                   className={`w-full text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                     activeHost.id === host.id
-                      ? 'bg-cyan-950/40 border-cyan-500 text-cyan-405 font-bold'
-                      : 'bg-slate-950 border-slate-900/60 text-slate-505 hover:text-slate-350'
+                      ? 'bg-cyan-950/40 border-cyan-500 text-cyan-400 font-bold'
+                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   <label className="text-[9px] uppercase tracking-wide cursor-pointer">{host.name}</label>
-                  <div className="text-[7.5px] text-slate-550 flex justify-between pr-2">
+                  <div className="text-[7.5px] text-slate-500 flex justify-between pr-2">
                     <span>IP: {host.ip}</span>
                     <span>TYPE: {host.connectionType}</span>
                   </div>
@@ -123,7 +123,7 @@ export const RemoteAccessTerminal: React.FC<TerminalProps> = ({ addMissionLog })
 
         {/* Real-time interactive bash screen right */}
         <div className="lg:col-span-8 bg-black border border-slate-900 p-4 h-96 rounded-2xl flex flex-col justify-between">
-          <div className="flex-grow font-mono text-[9px] text-slate-205 py-2 overflow-y-auto space-y-1 scrollbar-thin max-h-72 select-text">
+          <div className="flex-grow font-mono text-[9px] text-slate-200 py-2 overflow-y-auto space-y-1 scrollbar-thin max-h-72 select-text">
             {cmdHistory.map((hist, idx) => (
               <div key={idx} className="whitespace-pre-wrap leading-relaxed tracking-wider">
                 {hist}
@@ -136,8 +136,8 @@ export const RemoteAccessTerminal: React.FC<TerminalProps> = ({ addMissionLog })
             )}
           </div>
 
-          <form onSubmit={handleCommandSubmit} className="flex items-center gap-2 pt-3 border-t border-slate-909">
-            <span className="text-[10px] font-mono font-bold text-cyan-455">
+          <form onSubmit={handleCommandSubmit} className="flex items-center gap-2 pt-3 border-t border-slate-900">
+            <span className="text-[10px] font-mono font-bold text-cyan-500">
               tsi_user@{activeHost.ip}:~$
             </span>
             <input
@@ -146,7 +146,7 @@ export const RemoteAccessTerminal: React.FC<TerminalProps> = ({ addMissionLog })
               value={cmdInput}
               onChange={(e) => setCmdInput(e.target.value)}
               disabled={!isConnected}
-              className="flex-grow bg-slate-950 text-xs font-mono text-cyan-305 border border-slate-900 rounded-xl px-3 py-1.5 focus:outline-none focus:border-cyan-500"
+              className="flex-grow bg-slate-950 text-xs font-mono text-cyan-300 border border-slate-900 rounded-xl px-3 py-1.5 focus:outline-none focus:border-cyan-500"
             />
           </form>
         </div>

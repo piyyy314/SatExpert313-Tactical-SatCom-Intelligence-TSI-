@@ -49,7 +49,7 @@ export const NodeScanner: React.FC = () => {
             <p className="text-[10px] text-slate-500 font-mono">Scan regional network grids to identify active S-band transceivers and command port configurations</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-405 border border-red-955 px-2 py-0.5 rounded">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-red-400 border border-red-950 px-2 py-0.5 rounded">
           SCAN_NET
         </span>
       </div>
@@ -59,7 +59,7 @@ export const NodeScanner: React.FC = () => {
         {/* Settings options left */}
         <div className="md:col-span-5 space-y-4">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 tracking-widest block font-mono">Scan parameters</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest block font-mono">Scan parameters</span>
 
             <div className="space-y-1">
               <label className="text-[7px] font-mono text-slate-500 uppercase">Subnet Range Target</label>
@@ -67,7 +67,7 @@ export const NodeScanner: React.FC = () => {
                 type="text"
                 value={targetSubnet}
                 onChange={(e) => setTargetSubnet(e.target.value)}
-                className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-205 focus:outline-none focus:border-red-500"
+                className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-red-500"
               />
             </div>
 
@@ -76,8 +76,8 @@ export const NodeScanner: React.FC = () => {
               disabled={isScanning}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 isScanning
-                  ? 'bg-red-955 border-red-500 text-slate-202 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-400 hover:text-red-405'
+                  ? 'bg-red-950 border-red-500 text-slate-200 animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-red-400'
               }`}
             >
               {isScanning ? 'Pinging hosts...' : 'Execute SYN Port Scan'}
@@ -85,11 +85,11 @@ export const NodeScanner: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Network Scan Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Network Scan Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -99,14 +99,14 @@ export const NodeScanner: React.FC = () => {
         {/* Display right */}
         <div className="md:col-span-7 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="space-y-3 flex-grow">
-            <span className="text-[8px] font-black uppercase text-slate-550 block font-mono">Identified Ports Status</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block font-mono">Identified Ports Status</span>
             
             <div className="space-y-2">
               {scannedPorts.map((node) => (
-                <div key={node.port} className="bg-black/60 border border-slate-905 p-2.5 rounded-xl flex items-center justify-between font-mono">
+                <div key={node.port} className="bg-black/60 border border-slate-900 p-2.5 rounded-xl flex items-center justify-between font-mono">
                   <div>
-                    <div className="text-[9.5px] font-bold text-slate-250">Port {node.port} - {node.service}</div>
-                    <div className="text-[7.5px] text-slate-550">BANNER: {node.banner}</div>
+                    <div className="text-[9.5px] font-bold text-slate-200">Port {node.port} - {node.service}</div>
+                    <div className="text-[7.5px] text-slate-500">BANNER: {node.banner}</div>
                   </div>
 
                   <span className={`text-[7px] px-2 py-0.5 rounded border ${
@@ -123,9 +123,9 @@ export const NodeScanner: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-605 uppercase">
+          <div className="border-t border-slate-900 pt-3 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Scan configurations verified</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SECURITY BENCHMARK NOMINAL
             </span>
           </div>

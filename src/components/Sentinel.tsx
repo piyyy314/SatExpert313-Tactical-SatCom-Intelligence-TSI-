@@ -94,7 +94,7 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
           </div>
         </div>
         <span className={`text-[7.5px] font-mono uppercase bg-slate-900 px-2 py-0.5 rounded ${
-          isStealthMode ? 'text-red-500 border border-red-950/70 animate-pulse' : 'text-cyan-404 border border-cyan-950/70'
+          isStealthMode ? 'text-red-500 border border-red-950/70 animate-pulse' : 'text-cyan-400 border border-cyan-950/70'
         }`}>
           SENTRY_CTRL
         </span>
@@ -108,7 +108,7 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
             <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest block">Watchdog Operational Profile</span>
 
             <div className="space-y-1">
-              <label className="text-[7.5px] text-slate-450 uppercase block">Sentinel Protection Mode</label>
+              <label className="text-[7.5px] text-slate-400 uppercase block">Sentinel Protection Mode</label>
               <div className="grid grid-cols-3 gap-1.5 text-[7.5px] font-black uppercase">
                 {(['PASSIVE', 'WAR_GUARD', 'HYPER_SECURE'] as const).map(m => (
                   <button
@@ -123,8 +123,8 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
                     className={`py-1.5 rounded-lg border transition ${
                       activeMode === m
                         ? isStealthMode
-                          ? 'bg-red-955 border-red-500 text-red-400 font-bold'
-                          : 'bg-cyan-955 border-cyan-500 text-cyan-400 font-bold'
+                          ? 'bg-red-950 border-red-500 text-red-400 font-bold'
+                          : 'bg-cyan-950 border-cyan-500 text-cyan-400 font-bold'
                         : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
                     }`}
                   >
@@ -139,8 +139,8 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
               disabled={isAuditing}
               className={`w-full py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-wider transition ${
                 isAuditing
-                  ? 'bg-cyan-955 border-cyan-500 text-slate-200 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-850 border-slate-800 text-slate-400 hover:text-cyan-400'
+                  ? 'bg-cyan-950 border-cyan-500 text-slate-200 animate-pulse'
+                  : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-cyan-400'
               }`}
             >
               {isAuditing ? 'Auditing Constellation Nodes...' : 'Execute Automated Sentry Sweep'}
@@ -148,7 +148,7 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-36 flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-550 uppercase tracking-widest border-b border-slate-900 pb-1 block">Sentinel Watchdog Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-500 uppercase tracking-widest border-b border-slate-900 pb-1 block">Sentinel Watchdog Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1.5 overflow-y-auto scrollbar-thin">
               {sentinelLogs.map((log, idx) => (
                 <div key={idx} className="truncate">
@@ -182,17 +182,17 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
               {nodes.map((node) => (
                 <div key={node.id} className="bg-black/60 border border-slate-900/80 p-3 rounded-xl flex items-center justify-between gap-4">
                   <div className="space-y-0.5">
-                    <div className="text-[9.5px] font-bold text-slate-205">{node.name} ({node.frequency})</div>
+                    <div className="text-[9.5px] font-bold text-slate-200">{node.name} ({node.frequency})</div>
                     <div className="text-[7px] text-slate-500 uppercase">Threat Footprint: <span className="text-red-400">{node.threatLevel}%</span></div>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <span className={`text-[7px] px-2 py-0.5 rounded border font-semibold ${
                       node.status === 'SECURED'
-                        ? 'border-emerald-950 text-emerald-450 bg-emerald-950/15'
+                        ? 'border-emerald-950 text-emerald-400 bg-emerald-950/15'
                         : node.status === 'MONITORED'
-                        ? 'border-amber-900 text-amber-500 bg-amber-955/10 animate-pulse'
-                        : 'border-red-900 text-red-500 bg-red-955/15 animate-bounce'
+                        ? 'border-amber-900 text-amber-500 bg-amber-950/10 animate-pulse'
+                        : 'border-red-900 text-red-500 bg-red-950/15 animate-bounce'
                     }`}>
                       {node.status}
                     </span>
@@ -211,7 +211,7 @@ export const Sentinel: React.FC<SentinelProps> = ({ isStealthMode, addMissionLog
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] text-slate-650 uppercase">
+          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] text-slate-600 uppercase">
             <span>Systems secure with post-quantum anti-jam handshakes</span>
             <span className="text-emerald-400 font-black flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5" /> SENTINEL ACTIVE

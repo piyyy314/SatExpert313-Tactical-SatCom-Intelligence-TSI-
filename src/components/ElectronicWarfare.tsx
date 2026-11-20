@@ -109,7 +109,7 @@ export const ElectronicWarfare: React.FC<ElectronicWarfareProps> = ({
               className={`w-full py-2.5 rounded-xl border text-[9px] font-mono uppercase tracking-widest font-black transition ${
                 isJamming
                   ? 'bg-red-950/40 border-red-500 text-red-500 animate-pulse font-extrabold'
-                  : 'bg-emerald-950/40 border-emerald-500 text-emerald-405'
+                  : 'bg-emerald-950/40 border-emerald-500 text-emerald-400'
               }`}
             >
               {isJamming ? 'DISENGAGE ACTIVE JAMMING' : 'IGNITE BROADCAST JAMMING'}
@@ -117,11 +117,11 @@ export const ElectronicWarfare: React.FC<ElectronicWarfareProps> = ({
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-28 overflow-y-auto scrollbar-none flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">ECCM Combat Log</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">ECCM Combat Log</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -145,7 +145,7 @@ export const ElectronicWarfare: React.FC<ElectronicWarfareProps> = ({
           </div>
 
           {/* Active Jammer Wave Animation container */}
-          <div className="bg-black/90 border border-slate-900 hover:border-slate-850 p-4 rounded-xl flex flex-col justify-center items-center h-32 relative overflow-hidden">
+          <div className="bg-black/90 border border-slate-900 hover:border-slate-800 p-4 rounded-xl flex flex-col justify-center items-center h-32 relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:12px_12px] opacity-40"></div>
             
             {/* Thematic signal waves */}
@@ -182,11 +182,11 @@ export const ElectronicWarfare: React.FC<ElectronicWarfareProps> = ({
           <div className="grid grid-cols-2 gap-2 text-center text-[7.5px] font-mono">
             <button
               onClick={triggerFrequencySweep}
-              className="bg-slate-900 hover:bg-slate-800 border border-slate-850 py-2 rounded-xl text-slate-400 hover:text-white transition font-black"
+              className="bg-slate-900 hover:bg-slate-800 border border-slate-800 py-2 rounded-xl text-slate-400 hover:text-white transition font-black"
             >
               Run Frequency Sweep
             </button>
-            <div className="bg-slate-950 py-2.5 rounded-xl border border-slate-900 text-slate-550 flex items-center justify-center space-x-1.5 font-bold">
+            <div className="bg-slate-950 py-2.5 rounded-xl border border-slate-900 text-slate-500 flex items-center justify-center space-x-1.5 font-bold">
               <AlertTriangle className={`w-3.5 h-3.5 ${isJamming ? 'text-red-500 animate-bounce' : 'text-slate-600'}`} />
               <span>{isJamming ? 'EW_ALERT_TRANSMITTING' : 'NOMINAL_COHERENCE'}</span>
             </div>

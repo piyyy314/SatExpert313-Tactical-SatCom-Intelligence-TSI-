@@ -37,10 +37,10 @@ export const WeatherDashboard: React.FC<WeatherProps> = ({ weather, loc, satName
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
         <label className="text-[8px] font-black uppercase tracking-widest text-slate-500 flex items-center space-x-1.5">
-          <CloudFog className="w-3.5 h-3.5 text-slate-650" />
+          <CloudFog className="w-3.5 h-3.5 text-slate-600" />
           <span>Local Atmospheric Analysis</span>
         </label>
-        <span className="text-[7.5px] font-mono uppercase tracking-widest text-slate-550">
+        <span className="text-[7.5px] font-mono uppercase tracking-widest text-slate-500">
           ITU_KU_MODEL
         </span>
       </div>
@@ -49,9 +49,9 @@ export const WeatherDashboard: React.FC<WeatherProps> = ({ weather, loc, satName
       <div className="grid grid-cols-2 gap-3">
         {/* Weather status block */}
         <div className="bg-slate-950 border border-slate-900 rounded-2xl p-3 flex space-x-3 items-center justify-start">
-          <div className="p-2 rounded-xl bg-slate-900 border border-slate-850">
+          <div className="p-2 rounded-xl bg-slate-900 border border-slate-800">
             {weather === 'CLEAR' && <Sun className="w-5 h-5 text-amber-400 animate-pulse" />}
-            {weather === 'OVERCAST' && <Cloud className="w-5 h-5 text-slate-450" />}
+            {weather === 'OVERCAST' && <Cloud className="w-5 h-5 text-slate-400" />}
             {weather === 'LIGHT_RAIN' && <Cloud className="w-5 h-5 text-cyan-400 animate-bounce" />}
             {weather === 'HEAVY_STORM' && <CloudLightning className="w-5 h-5 text-red-500 animate-pulse" />}
           </div>
@@ -65,7 +65,7 @@ export const WeatherDashboard: React.FC<WeatherProps> = ({ weather, loc, satName
         <div className="bg-slate-950 border border-slate-900 rounded-2xl p-3 flex flex-col justify-between">
           <span className="text-[7px] font-mono text-slate-500 uppercase tracking-widest">Est. Path Loss</span>
           <span className={`text-[12px] font-black font-mono tracking-tight ${
-            weather === 'HEAVY_STORM' ? 'text-red-405' : (weather === 'LIGHT_RAIN' ? 'text-amber-405' : 'text-emerald-450')
+            weather === 'HEAVY_STORM' ? 'text-red-400' : (weather === 'LIGHT_RAIN' ? 'text-amber-400' : 'text-emerald-400')
           }`}>
             +{attenuation.toFixed(1)} <span className="text-[8px] font-normal text-slate-500">dB</span>
           </span>
@@ -76,14 +76,14 @@ export const WeatherDashboard: React.FC<WeatherProps> = ({ weather, loc, satName
       <div className="bg-slate-950 border border-slate-900 rounded-2xl p-3 space-y-2">
         <div className="flex items-center justify-between text-[8px] font-mono text-slate-500">
           <span className="uppercase">Link Transmittance Grid:</span>
-          <span className="text-slate-350 font-bold">{transmittance}%</span>
+          <span className="text-slate-300 font-bold">{transmittance}%</span>
         </div>
         
         {/* Simple Progress Bar */}
         <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-900">
           <div 
             className={`h-full rounded-full transition-all duration-700 ease-out ${
-              weather === 'HEAVY_STORM' ? 'bg-red-550' : (weather === 'LIGHT_RAIN' ? 'bg-amber-400' : 'bg-cyan-500')
+              weather === 'HEAVY_STORM' ? 'bg-red-500' : (weather === 'LIGHT_RAIN' ? 'bg-amber-400' : 'bg-cyan-500')
             }`}
             style={{ width: `${transmittance}%` }}
           />

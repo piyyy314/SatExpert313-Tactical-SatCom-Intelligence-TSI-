@@ -85,11 +85,11 @@ export const BiometricScanner: React.FC<BiometricScannerProps> = ({ addMissionLo
                   className={`w-full text-left p-2.5 rounded-xl border flex flex-col space-y-1 transition ${
                     activeOperator.id === op.id
                       ? 'bg-purple-950/40 border-purple-400/80 text-purple-400'
-                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-350'
+                      : 'bg-slate-950 border-slate-900/60 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   <div className="text-[9.5px] font-black font-mono leading-none">{op.name.toUpperCase()}</div>
-                  <div className="text-[7.5px] font-mono text-slate-550 flex justify-between pr-2">
+                  <div className="text-[7.5px] font-mono text-slate-500 flex justify-between pr-2">
                     <span>Rank: {op.rank}</span>
                     <span>Clearance: {op.clearance}</span>
                   </div>
@@ -99,11 +99,11 @@ export const BiometricScanner: React.FC<BiometricScannerProps> = ({ addMissionLo
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-32 flex flex-col justify-between">
-            <span className="text-[7px] font-mono text-slate-650 uppercase tracking-widest border-b border-slate-900 pb-1 block">Biometric System Logs</span>
+            <span className="text-[7px] font-mono text-slate-600 uppercase tracking-widest border-b border-slate-900 pb-1 block">Biometric System Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-purple-505 pr-1">▶</span> {log}
+                  <span className="text-purple-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -160,7 +160,7 @@ export const BiometricScanner: React.FC<BiometricScannerProps> = ({ addMissionLo
           <div className="grid grid-cols-3 gap-2 text-center pt-2 border-t border-slate-900 items-center">
             <div className="bg-slate-950 p-2 rounded-xl border border-slate-900/40">
               <span className="text-[6.5px] font-mono text-slate-500 uppercase block">Operator Heartbeat</span>
-              <div className="flex items-center justify-center space-x-1 text-slate-205 font-mono">
+              <div className="flex items-center justify-center space-x-1 text-slate-200 font-mono">
                 <Heart className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
                 <span className="font-bold">{activeOperator.pulse} BPM</span>
               </div>
@@ -177,7 +177,7 @@ export const BiometricScanner: React.FC<BiometricScannerProps> = ({ addMissionLo
               className={`py-2 px-3 rounded-xl border font-mono text-[9px] uppercase tracking-wider font-extrabold transition ${
                 isScanning
                   ? 'bg-slate-900 border-slate-800 text-slate-500 cursor-not-allowed'
-                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405'
+                  : 'bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400'
               }`}
             >
               Start Scan

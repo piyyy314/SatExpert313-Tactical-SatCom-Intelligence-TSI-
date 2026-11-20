@@ -66,7 +66,7 @@ export const CyberKillChain: React.FC<CyberKillChainProps> = ({ addMissionLog })
                   0{st.phase}
                 </div>
                 <div>
-                  <div className="text-[9.5px] font-mono font-black text-slate-205 flex items-center gap-1.5 uppercase">
+                  <div className="text-[9.5px] font-mono font-black text-slate-200 flex items-center gap-1.5 uppercase">
                     <span>{st.name}</span>
                     <span className={`text-[6.5px] px-1.5 py-0.5 border rounded uppercase font-bold ${
                       st.status === 'MITIGATED'
@@ -85,7 +85,7 @@ export const CyberKillChain: React.FC<CyberKillChainProps> = ({ addMissionLog })
               {st.status !== 'MITIGATED' && (
                 <button
                   onClick={() => handleMitigateStage(st.phase)}
-                  className="bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 px-2.5 py-1.5 rounded-xl font-mono text-[8px] font-black uppercase tracking-wider transition font-medium"
+                  className="bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 px-2.5 py-1.5 rounded-xl font-mono text-[8px] font-black uppercase tracking-wider transition font-medium"
                 >
                   Mitigate Phase
                 </button>
@@ -98,7 +98,7 @@ export const CyberKillChain: React.FC<CyberKillChainProps> = ({ addMissionLog })
         <div className="lg:col-span-4 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="space-y-4">
             <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest block font-mono flex items-center gap-1.5">
-              <Shield className="w-3.5 h-3.5 text-slate-650" />
+              <Shield className="w-3.5 h-3.5 text-slate-600" />
               <span>Kill-Chain Mitigation Log</span>
             </span>
 
@@ -112,8 +112,8 @@ export const CyberKillChain: React.FC<CyberKillChainProps> = ({ addMissionLog })
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-3 flex items-center gap-2 text-[7px] font-mono text-slate-650 uppercase">
-            <CheckCircle className="w-4 h-4 text-emerald-450" />
+          <div className="border-t border-slate-900 pt-3 flex items-center gap-2 text-[7px] font-mono text-slate-600 uppercase">
+            <CheckCircle className="w-4 h-4 text-emerald-400" />
             <span>Ensure real-time defenses are loaded under high threat alarms</span>
           </div>
         </div>

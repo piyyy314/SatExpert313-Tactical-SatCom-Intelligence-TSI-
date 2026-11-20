@@ -48,13 +48,13 @@ export const TrafficSniffer: React.FC<SnifferProps> = ({ isStealthMode }) => {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-4">
         <div className="flex items-center space-x-3">
-          <Binary className="w-5 h-5 text-cyan-405 animate-pulse" />
+          <Binary className="w-5 h-5 text-cyan-400 animate-pulse" />
           <div>
             <h3 className="text-sm font-black uppercase tracking-wider font-mono">Real-time Satcom Baseband Packet Sniffer</h3>
             <p className="text-[10px] text-slate-500 font-mono">Observe live socket frames, TCP/UDP port streams, and hex payload headers routed over baseband transceiver channels</p>
           </div>
         </div>
-        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-405 border border-cyan-900/40 px-2 py-0.5 rounded animate-pulse">
+        <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-cyan-400 border border-cyan-900/40 px-2 py-0.5 rounded animate-pulse">
           SNIFF_CORE
         </span>
       </div>
@@ -64,14 +64,14 @@ export const TrafficSniffer: React.FC<SnifferProps> = ({ isStealthMode }) => {
         {/* Left configurations */}
         <div className="md:col-span-4 space-y-4 font-mono">
           <div className="bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 block tracking-widest">Sniffer operations</span>
+            <span className="text-[8px] font-black uppercase text-slate-500 block tracking-widest">Sniffer operations</span>
 
-            <div className="bg-black border border-slate-909 p-3 rounded-xl flex items-center justify-between text-[8px]">
+            <div className="bg-black border border-slate-900 p-3 rounded-xl flex items-center justify-between text-[8px]">
               <span className="text-slate-500 uppercase">Caputre status</span>
               <button
                 onClick={() => setIsRunning(!isRunning)}
                 className={`py-1 px-2.5 border rounded-lg font-black uppercase transition ${
-                  isRunning ? 'bg-cyan-955 border-cyan-500 text-cyan-400' : 'bg-slate-950 border-slate-900 text-slate-655'
+                  isRunning ? 'bg-cyan-950 border-cyan-500 text-cyan-400' : 'bg-slate-950 border-slate-900 text-slate-700'
                 }`}
               >
                 {isRunning ? 'RUNNING' : 'PAUSED'}
@@ -87,14 +87,14 @@ export const TrafficSniffer: React.FC<SnifferProps> = ({ isStealthMode }) => {
         {/* Right live dump visualization */}
         <div className="md:col-span-8 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between space-y-4">
           <div className="space-y-2 flex-grow">
-            <span className="text-[8px] font-black uppercase text-slate-450 block font-mono">Live Packet Dump Frame Receiver</span>
+            <span className="text-[8px] font-black uppercase text-slate-400 block font-mono">Live Packet Dump Frame Receiver</span>
             
             <div className="bg-black border border-slate-900 p-3.5 h-64 overflow-y-auto scrollbar-thin rounded-xl space-y-2 font-mono text-[7.5px]">
               {packets.map((pkt) => (
-                <div key={pkt.id} className="border-b border-slate-900 pb-1.5 flex justify-between items-center text-slate-350">
+                <div key={pkt.id} className="border-b border-slate-900 pb-1.5 flex justify-between items-center text-slate-300">
                   <div>
                     <span className="text-cyan-400 font-bold">[{pkt.protocol}]</span> {pkt.source} ➔ {pkt.destination}
-                    <div className="text-slate-505 font-mono text-[6.5px] uppercase">Payload Byte Headers: {pkt.payloadHex}...</div>
+                    <div className="text-slate-500 font-mono text-[6.5px] uppercase">Payload Byte Headers: {pkt.payloadHex}...</div>
                   </div>
                   <span className="text-slate-600">LEN: 42b</span>
                 </div>
@@ -102,9 +102,9 @@ export const TrafficSniffer: React.FC<SnifferProps> = ({ isStealthMode }) => {
             </div>
           </div>
 
-          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-650 uppercase">
+          <div className="border-t border-slate-900 pt-2 flex items-center justify-between text-[7px] font-mono text-slate-600 uppercase">
             <span>Interface capturing synchronized with libpcap frameworks</span>
-            <span className="text-emerald-450 font-black flex items-center gap-1">
+            <span className="text-emerald-400 font-black flex items-center gap-1">
               <Binary className="w-3.5 h-3.5 font-bold" /> REALTIME
             </span>
           </div>

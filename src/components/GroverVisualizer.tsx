@@ -169,8 +169,8 @@ export const GroverVisualizer: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <div className="text-[10px] font-mono text-right hidden sm:block">
-              <span className="text-slate-550">Ideal Steps:</span>{' '}
-              <span className="text-cyan-405 font-bold">{optimalSteps} iterations</span>
+              <span className="text-slate-500">Ideal Steps:</span>{' '}
+              <span className="text-cyan-400 font-bold">{optimalSteps} iterations</span>
             </div>
           </div>
         </div>
@@ -219,7 +219,7 @@ export const GroverVisualizer: React.FC = () => {
                   <div className="absolute bottom-full mb-2 bg-slate-900 border border-slate-800 p-2 rounded-xl text-[8px] font-mono text-slate-300 hidden group-hover:flex flex-col space-y-1 shadow-2xl z-20 pointer-events-none text-center min-w-[70px]">
                     <span className="text-white font-bold">|{getBinaryLabel(idx)}⟩</span>
                     <span>Amp: {val.toFixed(4)}</span>
-                    <span className="text-cyan-405 font-bold">P: {(prob*100).toFixed(1)}%</span>
+                    <span className="text-cyan-400 font-bold">P: {(prob*100).toFixed(1)}%</span>
                   </div>
 
                   {/* Active bar */}
@@ -233,7 +233,7 @@ export const GroverVisualizer: React.FC = () => {
                             : 'bg-gradient-to-t from-purple-600 via-indigo-500 to-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)] border border-cyan-300'
                           : isNegative 
                             ? 'bg-red-900/60 border border-red-800' 
-                            : 'bg-slate-800/80 hover:bg-slate-750 border border-slate-900'
+                            : 'bg-slate-800/80 hover:bg-slate-700 border border-slate-900'
                       }`}
                     >
                       {/* Interactive flare bar inside */}
@@ -264,7 +264,7 @@ export const GroverVisualizer: React.FC = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex flex-col justify-between">
             <span className="text-[7.5px] font-black text-slate-500 uppercase tracking-wider font-mono">Success Probability</span>
-            <span className={`text-lg font-black font-mono transition duration-300 ${successProb > 0.8 ? 'text-emerald-450' : 'text-cyan-405'}`}>
+            <span className={`text-lg font-black font-mono transition duration-300 ${successProb > 0.8 ? 'text-emerald-400' : 'text-cyan-400'}`}>
               {(successProb * 100).toFixed(2)}%
             </span>
           </div>
@@ -280,7 +280,7 @@ export const GroverVisualizer: React.FC = () => {
           <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex flex-col justify-between">
             <span className="text-[7.5px] font-black text-slate-500 uppercase tracking-wider font-mono">Next Circuit Stage</span>
             <span className={`text-[10px] font-black uppercase tracking-widest font-mono ${
-              phaseMode === 'ORACLE_PENDING' ? 'text-purple-400' : 'text-amber-450'
+              phaseMode === 'ORACLE_PENDING' ? 'text-purple-400' : 'text-amber-400'
             }`}>
               {phaseMode.replace('_', ' ')}
             </span>
@@ -288,7 +288,7 @@ export const GroverVisualizer: React.FC = () => {
 
           <div className="bg-slate-950 border border-slate-900 p-3 rounded-2xl flex flex-col justify-between">
             <span className="text-[7.5px] font-black text-slate-500 uppercase tracking-wider font-mono">Unstructured Speedup</span>
-            <span className="text-[10px] font-bold text-slate-350 font-mono">
+            <span className="text-[10px] font-bold text-slate-300 font-mono">
               O(√N) vs O(N) Classic
             </span>
           </div>
@@ -335,7 +335,7 @@ export const GroverVisualizer: React.FC = () => {
               <select
                 value={markedState}
                 onChange={(e) => handleSelectMarked(parseInt(e.target.value))}
-                className="w-full bg-slate-950 text-xs font-mono py-2 px-3 border border-slate-900 rounded-xl focus:outline-none focus:border-cyan-500 text-slate-205 cursor-pointer"
+                className="w-full bg-slate-950 text-xs font-mono py-2 px-3 border border-slate-900 rounded-xl focus:outline-none focus:border-cyan-500 text-slate-200 cursor-pointer"
               >
                 {[...Array(numStates)].map((_, idx) => (
                   <option key={idx} value={idx}>
@@ -365,7 +365,7 @@ export const GroverVisualizer: React.FC = () => {
               <button
                 onClick={applyDiffusion}
                 disabled={isPlaying}
-                className="py-2.5 px-3 bg-sky-950/45 hover:bg-sky-900 border border-sky-800 text-sky-450 rounded-xl font-mono text-[9px] font-black uppercase tracking-widest transition disabled:opacity-40"
+                className="py-2.5 px-3 bg-sky-950/45 hover:bg-sky-900 border border-sky-800 text-sky-400 rounded-xl font-mono text-[9px] font-black uppercase tracking-widest transition disabled:opacity-40"
                 title="Reflect amplitudes about the current mean"
               >
                 2. Apply Diffusion
@@ -394,7 +394,7 @@ export const GroverVisualizer: React.FC = () => {
 
             <button
               onClick={resetToSuperposition}
-              className="w-full py-2 bg-slate-900/60 hover:bg-slate-850 border border-slate-850 text-slate-400 hover:text-slate-200 rounded-xl font-mono text-[8px] font-black uppercase tracking-widest transition"
+              className="w-full py-2 bg-slate-900/60 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-slate-200 rounded-xl font-mono text-[8px] font-black uppercase tracking-widest transition"
             >
               Hadamard Reset (|s⟩)
             </button>
@@ -419,7 +419,7 @@ export const GroverVisualizer: React.FC = () => {
             ) : (
               logs.map((log) => (
                 <div key={log.id} className="text-[7.5px] font-mono flex items-start space-x-1.5 leading-snug">
-                  <span className="text-slate-650 font-bold whitespace-nowrap">{log.time}</span>
+                  <span className="text-slate-600 font-bold whitespace-nowrap">{log.time}</span>
                   <span className={`font-black uppercase text-[6px] px-1 py-[0.1px] rounded ${
                     log.type === 'warn'
                       ? 'bg-amber-950 border border-amber-900 text-amber-500'
@@ -427,7 +427,7 @@ export const GroverVisualizer: React.FC = () => {
                       ? 'bg-emerald-950 border border-emerald-900 text-emerald-400'
                       : log.type === 'quantum'
                       ? 'bg-purple-950 border border-purple-900 text-purple-400'
-                      : 'bg-slate-900 border border-slate-850 text-cyan-400'
+                      : 'bg-slate-900 border border-slate-800 text-cyan-400'
                   }`}>
                     {log.type}
                   </span>

@@ -40,7 +40,7 @@ export const SatelliteDetail: React.FC<DetailProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-900 pb-2">
         <label className="text-[8px] font-black uppercase tracking-widest text-slate-500 flex items-center space-x-1.5">
-          <Navigation className="w-3.5 h-3.5 text-cyan-405 animate-pulse" />
+          <Navigation className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
           <span>Orbital Tracking Specs Selector</span>
         </label>
         <span className="text-[7.5px] font-mono uppercase bg-slate-950 text-cyan-400 border border-slate-900 px-1 py-0.5 rounded">
@@ -77,26 +77,26 @@ export const SatelliteDetail: React.FC<DetailProps> = ({
       {/* Numerical Metrics Grid */}
       <div className="grid grid-cols-2 gap-2 text-[7.5px] font-mono leading-relaxed">
         <div className="bg-black/40 border border-slate-900/60 p-2 rounded-xl">
-          <span className="text-slate-505 uppercase block">Orbital Altitude</span>
-          <strong className="text-slate-205 text-[10px]">{activeSat.altitude ?? 35786} Km</strong>
+          <span className="text-slate-500 uppercase block">Orbital Altitude</span>
+          <strong className="text-slate-200 text-[10px]">{activeSat.altitude ?? 35786} Km</strong>
         </div>
 
         <div className="bg-black/40 border border-slate-900/60 p-2 rounded-xl">
-          <span className="text-slate-550 uppercase block">Transceiver Type</span>
-          <strong className="text-slate-205 text-[10px]">{activeSat.type || 'Ku'} Band</strong>
+          <span className="text-slate-500 uppercase block">Transceiver Type</span>
+          <strong className="text-slate-200 text-[10px]">{activeSat.type || 'Ku'} Band</strong>
         </div>
 
         <div className="bg-black/40 border border-slate-900/60 p-2 rounded-xl col-span-2">
-          <span className="text-slate-505 uppercase block">Active Satellite Name Tag</span>
-          <strong className="text-cyan-405 text-[10px]">{activeSat.name} OPERATIONAL</strong>
+          <span className="text-slate-500 uppercase block">Active Satellite Name Tag</span>
+          <strong className="text-cyan-400 text-[10px]">{activeSat.name} OPERATIONAL</strong>
         </div>
       </div>
 
       {/* Log ticker */}
-      <div className="bg-black border border-slate-900 p-2.5 rounded-xl h-16 overflow-y-auto scrollbar-none font-mono text-[6.5px] text-slate-505 space-y-0.5">
+      <div className="bg-black border border-slate-900 p-2.5 rounded-xl h-16 overflow-y-auto scrollbar-none font-mono text-[6.5px] text-slate-500 space-y-0.5">
         {operatorLogs.map((log, idx) => (
           <div key={idx} className="truncate">
-            <span className="text-cyan-505 pr-1">▶</span> {log}
+            <span className="text-cyan-500 pr-1">▶</span> {log}
           </div>
         ))}
       </div>

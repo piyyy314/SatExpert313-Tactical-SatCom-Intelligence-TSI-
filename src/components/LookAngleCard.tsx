@@ -21,14 +21,14 @@ export const LookAngleCard: React.FC<LookAngleCardProps> = ({ angles, satellite 
         <span className={`text-[7px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded ${
           isBeamVisible 
             ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-900/40' 
-            : 'bg-red-950/60 text-red-405 border border-red-900/40'
+            : 'bg-red-950/60 text-red-400 border border-red-900/40'
         }`}>
           {isBeamVisible ? "LINE_OF_SIGHT" : "BELOW_HORIZON_BLOCKED"}
         </span>
       </div>
 
       {/* Target and Slant Range */}
-      <div className="flex justify-between items-center text-[10px] font-mono text-slate-450 bg-slate-900/30 p-2 rounded-xl border border-slate-900">
+      <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 bg-slate-900/30 p-2 rounded-xl border border-slate-900">
         <span className="uppercase text-[8px] tracking-wider text-slate-500">Target Node:</span>
         <span className="font-bold text-slate-200">{satellite.name}</span>
         <span className="opacity-25">|</span>
@@ -80,7 +80,7 @@ export const LookAngleCard: React.FC<LookAngleCardProps> = ({ angles, satellite 
             </svg>
           </div>
           
-          <span className={`text-[11px] font-bold font-mono ${isBeamVisible ? 'text-slate-202' : 'text-red-405'}`}>
+          <span className={`text-[11px] font-bold font-mono ${isBeamVisible ? 'text-slate-200' : 'text-red-400'}`}>
             {angles.elevation.toFixed(1)}°
           </span>
         </div>

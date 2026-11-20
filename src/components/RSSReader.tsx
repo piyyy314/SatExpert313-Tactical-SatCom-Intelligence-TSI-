@@ -100,9 +100,9 @@ export const RSSReader: React.FC = () => {
         </div>
         <button
           onClick={handleAggregateFeed}
-          className="p-1.5 rounded bg-slate-900 hover:bg-slate-850 text-slate-450 hover:text-cyan-400 transition"
+          className="p-1.5 rounded bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-cyan-400 transition"
         >
-          <RefreshCw className={`w-4 h-4 ${isUpdating ? 'animate-spin text-cyan-405' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${isUpdating ? 'animate-spin text-cyan-400' : ''}`} />
         </button>
       </div>
 
@@ -121,7 +121,7 @@ export const RSSReader: React.FC = () => {
                   className={`px-2.5 py-1 rounded-lg border text-[8px] font-bold font-mono transition ${
                     filter === src
                       ? 'bg-purple-950/40 border-purple-500 text-purple-400'
-                      : 'bg-slate-950 border-slate-900 text-slate-505 hover:text-slate-300'
+                      : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   {src}
@@ -136,7 +136,7 @@ export const RSSReader: React.FC = () => {
                 placeholder="Search feeds..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="bg-black border border-slate-900 rounded-xl px-2.5 py-1 text-xs font-mono text-slate-350 focus:outline-none focus:border-cyan-500 w-full sm:w-40"
+                className="bg-black border border-slate-900 rounded-xl px-2.5 py-1 text-xs font-mono text-slate-300 focus:outline-none focus:border-cyan-500 w-full sm:w-40"
               />
               <Search className="w-3.5 h-3.5 text-slate-600 absolute right-2.5 top-2 pointer-events-none" />
             </div>
@@ -149,14 +149,14 @@ export const RSSReader: React.FC = () => {
               filteredItems.map((item) => (
                 <div key={item.id} className="bg-slate-950/45 border border-slate-900 p-4 rounded-2xl space-y-2 hover:border-slate-800 transition">
                   <div className="flex items-center justify-between">
-                    <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-slate-400 border border-slate-850 px-2 py-0.5 rounded">
+                    <span className="text-[7.5px] font-mono uppercase bg-slate-900 text-slate-400 border border-slate-800 px-2 py-0.5 rounded">
                       {item.source}
                     </span>
-                    <span className="text-[7.5px] font-mono text-slate-550 leading-none">{item.date}</span>
+                    <span className="text-[7.5px] font-mono text-slate-500 leading-none">{item.date}</span>
                   </div>
 
                   <h4 className="text-xs font-bold text-slate-200 uppercase">{item.title}</h4>
-                  <p className="text-[10px] text-slate-405 font-mono leading-relaxed">{item.summary}</p>
+                  <p className="text-[10px] text-slate-400 font-mono leading-relaxed">{item.summary}</p>
 
                   <div className="flex items-center justify-between text-[7px] font-mono pt-1">
                     <span className="text-slate-600">SEVERITY LEVEL</span>
@@ -175,8 +175,8 @@ export const RSSReader: React.FC = () => {
         {/* Dispatch center: post custom bulletin */}
         <div className="lg:col-span-5 bg-slate-950/40 border border-slate-900 p-4 rounded-2xl flex flex-col justify-between">
           <form onSubmit={handlePostBulletin} className="space-y-4">
-            <span className="text-[8px] font-black uppercase text-slate-505 tracking-widest block font-mono flex items-center space-x-1">
-              <ShieldAlert className="w-3.5 h-3.5 text-slate-650" />
+            <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest block font-mono flex items-center space-x-1">
+              <ShieldAlert className="w-3.5 h-3.5 text-slate-600" />
               <span>Broadcast Custom Warning</span>
             </span>
 
@@ -188,7 +188,7 @@ export const RSSReader: React.FC = () => {
                 value={customTitle}
                 onChange={(e) => setCustomTitle(e.target.value)}
                 required
-                className="bg-black border border-slate-900 rounded-xl px-3 py-1.5 text-xs font-mono text-slate-205 focus:outline-none focus:border-cyan-500"
+                className="bg-black border border-slate-900 rounded-xl px-3 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-cyan-500"
               />
             </div>
 
@@ -205,7 +205,7 @@ export const RSSReader: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-405 py-2 rounded-xl text-[9px] font-black font-mono uppercase tracking-wider transition flex items-center justify-center space-x-2"
+              className="w-full bg-cyan-950/50 hover:bg-cyan-900 border border-cyan-800 text-cyan-400 py-2 rounded-xl text-[9px] font-black font-mono uppercase tracking-wider transition flex items-center justify-center space-x-2"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Broadcast Bulletin</span>
@@ -213,7 +213,7 @@ export const RSSReader: React.FC = () => {
           </form>
 
           <div className="border-t border-slate-900 pt-3 flex items-center gap-2 text-[7.5px] font-mono text-slate-600 uppercase">
-            <Info className="w-3.5 h-3.5 text-slate-550" />
+            <Info className="w-3.5 h-3.5 text-slate-500" />
             <span>Feed locks secured over post-quantum Dilithium channels</span>
           </div>
         </div>

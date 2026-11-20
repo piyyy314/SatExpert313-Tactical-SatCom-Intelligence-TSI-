@@ -168,7 +168,7 @@ export const QuantumEntropyWidget: React.FC<QuantumEntropyWidgetProps> = ({
           <button
             onClick={triggerKeyRotation}
             disabled={isRotating}
-            className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-[8.5px] font-mono uppercase font-bold bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-cyan-500 text-slate-300 hover:text-cyan-300 transition-all active:scale-95 disabled:opacity-50"
+            className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-[8.5px] font-mono uppercase font-bold bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-cyan-500 text-slate-300 hover:text-cyan-300 transition-all active:scale-95 disabled:opacity-50"
             title="Re-seed Quantum Entropy Pool"
           >
             <RefreshCw className={`w-3 h-3 ${isRotating ? 'animate-spin text-cyan-400' : 'text-slate-400'}`} />
@@ -179,7 +179,7 @@ export const QuantumEntropyWidget: React.FC<QuantumEntropyWidgetProps> = ({
 
       {/* KPI Numerical Metrics Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-850 flex flex-col justify-between">
+        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between">
           <span className="text-[8px] font-mono uppercase text-slate-500 tracking-wider">Shannon Entropy</span>
           <div className="flex items-baseline space-x-1 mt-1">
             <span className="text-base font-mono font-black text-cyan-400">
@@ -195,7 +195,7 @@ export const QuantumEntropyWidget: React.FC<QuantumEntropyWidgetProps> = ({
           </div>
         </div>
 
-        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-850 flex flex-col justify-between">
+        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between">
           <span className="text-[8px] font-mono uppercase text-slate-500 tracking-wider">Min-Entropy (H_∞)</span>
           <div className="flex items-baseline space-x-1 mt-1">
             <span className="text-base font-mono font-black text-purple-400">
@@ -211,7 +211,7 @@ export const QuantumEntropyWidget: React.FC<QuantumEntropyWidgetProps> = ({
           </div>
         </div>
 
-        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-850 flex flex-col justify-between">
+        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between">
           <span className="text-[8px] font-mono uppercase text-slate-500 tracking-wider">Key Stability</span>
           <div className="flex items-baseline space-x-1 mt-1">
             <span className="text-base font-mono font-black text-emerald-400">
@@ -224,7 +224,7 @@ export const QuantumEntropyWidget: React.FC<QuantumEntropyWidgetProps> = ({
           </span>
         </div>
 
-        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-850 flex flex-col justify-between">
+        <div className="p-2.5 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between">
           <span className="text-[8px] font-mono uppercase text-slate-500 tracking-wider">Quantum Bit Error</span>
           <div className="flex items-baseline space-x-1 mt-1">
             <span className="text-base font-mono font-black text-amber-400">

@@ -87,7 +87,7 @@ export const ThreatDossier: React.FC = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full bg-black border border-slate-900 rounded-xl px-2.5 py-1.5 text-xs font-mono text-slate-300 focus:outline-none focus:border-red-500"
               />
-              <Search className="w-3.5 h-3.5 text-slate-650 absolute right-2.5 top-2.5 pointer-events-none" />
+              <Search className="w-3.5 h-3.5 text-slate-600 absolute right-2.5 top-2.5 pointer-events-none" />
             </div>
 
             <div className="space-y-1.5 font-mono">
@@ -101,11 +101,11 @@ export const ThreatDossier: React.FC = () => {
                   className={`w-full text-left p-2.5 rounded-xl border flex flex-col space-y-0.5 transition ${
                     selectedActor.id === actor.id
                       ? 'bg-red-950/40 border-red-500 text-red-400 font-black'
-                      : 'bg-slate-950 border-slate-900/65 text-slate-505 hover:text-slate-305'
+                      : 'bg-slate-950 border-slate-900/65 text-slate-500 hover:text-slate-300'
                   }`}
                 >
                   <div className="text-[9.5px] uppercase tracking-wider">{actor.codename}</div>
-                  <div className="text-[7px] text-slate-550 flex justify-between">
+                  <div className="text-[7px] text-slate-500 flex justify-between">
                     <span>{actor.origin}</span>
                     <span className={actor.status === 'ACTIVE' ? 'text-red-400 animate-pulse' : 'text-slate-600'}>
                       {actor.status}
@@ -117,11 +117,11 @@ export const ThreatDossier: React.FC = () => {
           </div>
 
           <div className="bg-black border border-slate-900 rounded-xl p-3 h-24 overflow-y-auto scrollbar-none flex flex-col justify-between">
-            <span className="text-[7.5px] font-mono text-slate-655 uppercase tracking-widest border-b border-slate-900 pb-1 block">Dossier Audit Logs</span>
+            <span className="text-[7.5px] font-mono text-slate-700 uppercase tracking-widest border-b border-slate-900 pb-1 block">Dossier Audit Logs</span>
             <div className="flex-grow font-mono text-[7px] text-slate-400 space-y-0.5 pt-1 overflow-y-auto">
               {logs.map((log, idx) => (
                 <div key={idx} className="truncate">
-                  <span className="text-red-505 pr-1">▶</span> {log}
+                  <span className="text-red-500 pr-1">▶</span> {log}
                 </div>
               ))}
             </div>
@@ -142,22 +142,22 @@ export const ThreatDossier: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-900/60">
-                <span className="text-[7px] font-mono text-slate-505 block">Codename</span>
-                <span className="text-xs font-mono font-black text-slate-205">{selectedActor.codename}</span>
+                <span className="text-[7px] font-mono text-slate-500 block">Codename</span>
+                <span className="text-xs font-mono font-black text-slate-200">{selectedActor.codename}</span>
               </div>
               <div className="bg-slate-950 p-2.5 rounded-xl border border-slate-900/60">
-                <span className="text-[7px] font-mono text-slate-505 block">Origin Vector</span>
-                <span className="text-xs font-mono font-bold text-slate-350">{selectedActor.origin}</span>
+                <span className="text-[7px] font-mono text-slate-500 block">Origin Vector</span>
+                <span className="text-xs font-mono font-bold text-slate-300">{selectedActor.origin}</span>
               </div>
             </div>
 
             <div className="space-y-1.5 bg-black border border-slate-950 p-3 rounded-xl">
               <span className="text-[7.5px] font-mono text-slate-500 uppercase block">Exploits Vulnerabilitiy Vectors</span>
-              <p className="text-[9px] font-mono text-red-405 leading-relaxed font-bold uppercase select-all">{selectedActor.exploitVulnerability}</p>
+              <p className="text-[9px] font-mono text-red-400 leading-relaxed font-bold uppercase select-all">{selectedActor.exploitVulnerability}</p>
             </div>
 
             <div className="space-y-1.5">
-              <span className="text-[7.5px] font-mono text-slate-550 uppercase block">Active Exploitation Tactics</span>
+              <span className="text-[7.5px] font-mono text-slate-500 uppercase block">Active Exploitation Tactics</span>
               <div className="flex flex-wrap gap-1.5">
                 {selectedActor.tactics.map((tac, idx) => (
                   <span key={idx} className="bg-red-950/20 border border-red-900/40 text-red-400 px-2.5 py-0.5 rounded-lg text-[8.5px] font-mono uppercase text-xs font-medium">
@@ -169,7 +169,7 @@ export const ThreatDossier: React.FC = () => {
           </div>
 
           <div className="border-t border-slate-900 pt-3 flex items-center gap-2 text-[7px] font-mono text-slate-600 uppercase">
-            <Info className="w-3.5 h-3.5 text-slate-550" />
+            <Info className="w-3.5 h-3.5 text-slate-500" />
             <span>Countermeasure: Build active YARA checks, and ensure Shor's proof lockouts on receivers</span>
           </div>
         </div>
